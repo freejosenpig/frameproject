@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.cost.CostOutstandingDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostOutstanding">
+    <id column="outstanding_Id" jdbcType="INTEGER" property="outstandingId" />
+    <result column="oldpeople_Id" jdbcType="INTEGER" property="oldpeopleId" />
+    <result column="outstanding_money" jdbcType="DECIMAL" property="outstandingMoney" />
+    <result column="out_prestore_money" jdbcType="DECIMAL" property="outPrestoreMoney" />
+    <result column="out_entryfees_money" jdbcType="DECIMAL" property="outEntryfeesMoney" />
+    <result column="outstanding_opId" jdbcType="INTEGER" property="outstandingOpid" />
+    <result column="outstanding_time" jdbcType="TIMESTAMP" property="outstandingTime" />
+    <result column="outstanding_TimeLiness" jdbcType="INTEGER" property="outstandingTimeliness" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    outstanding_Id, oldpeople_Id, outstanding_money, out_prestore_money, out_entryfees_money, 
+    outstanding_opId, outstanding_time, outstanding_TimeLiness
+  </sql>
+
+<!--  查询所有欠费信息-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from cost_outstanding
+  </select>
+
+<!--  根据老人编号查询欠费信息-->
+ <select id="selectByOldId" resultMap="BaseResultMap">
+   select <include refid="Base_Column_List"/> from  cost_outstanding
+   where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+ </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cost_outstanding
+    where outstanding_Id = #{outstandingId,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cost_outstanding
+    where outstanding_Id = #{outstandingId,jdbcType=INTEGER}
+  </delete>
+
+  <!--  新增欠费信息-->
+  <insert id="insert" keyColumn="outstanding_Id" keyProperty="outstandingId" parameterType="com.zktr.yuyi.entity.cost.CostOutstanding" useGeneratedKeys="true">
+    insert into cost_outstanding (oldpeople_Id, outstanding_money, out_prestore_money, 
+      out_entryfees_money, outstanding_opId)
+    values (#{oldpeopleId,jdbcType=INTEGER}, #{outstandingMoney,jdbcType=DECIMAL}, #{outPrestoreMoney,jdbcType=DECIMAL}, 
+      #{outEntryfeesMoney,jdbcType=DECIMAL}, #{outstandingOpid,jdbcType=INTEGER})
+  </insert>
+
+
+  <insert id="insertSelective" keyColumn="outstanding_Id" keyProperty="outstandingId" parameterType="com.zktr.yuyi.entity.cost.CostOutstanding" useGeneratedKeys="true">
+    insert into cost_outstanding
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        oldpeople_Id,
+      </if>
+      <if test="outstandingMoney != null">
+        outstanding_money,
+      </if>
+      <if test="outPrestoreMoney != null">
+        out_prestore_money,
+      </if>
+      <if test="outEntryfeesMoney != null">
+        out_entryfees_money,
+      </if>
+      <if test="outstandingOpid != null">
+        outstanding_opId,
+      </if>
+      <if test="outstandingTime != null">
+        outstanding_time,
+      </if>
+      <if test="outstandingTimeliness != null">
+        outstanding_TimeLiness,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="outstandingMoney != null">
+        #{outstandingMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outPrestoreMoney != null">
+        #{outPrestoreMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outEntryfeesMoney != null">
+        #{outEntryfeesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outstandingOpid != null">
+        #{outstandingOpid,jdbcType=INTEGER},
+      </if>
+      <if test="outstandingTime != null">
+        #{outstandingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outstandingTimeliness != null">
+        #{outstandingTimeliness,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--  根据编号修改欠费信息-->
+  <update id="updateByKey" parameterType="com.zktr.yuyi.entity.cost.CostOutstanding">
+    update cost_outstanding
+    <set>
+      <if test="oldpeopleId != null">
+        oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="outstandingMoney != null">
+        outstanding_money = #{outstandingMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outPrestoreMoney != null">
+        out_prestore_money = #{outPrestoreMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outEntryfeesMoney != null">
+        out_entryfees_money = #{outEntryfeesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outstandingOpid != null">
+        outstanding_opId = #{outstandingOpid,jdbcType=INTEGER},
+      </if>
+      <if test="outstandingTime != null">
+        outstanding_time = #{outstandingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outstandingTimeliness != null">
+        outstanding_TimeLiness = #{outstandingTimeliness,jdbcType=INTEGER},
+      </if>
+    </set>
+    where outstanding_Id = #{outstandingId,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostOutstanding">
+    update cost_outstanding
+    set oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      outstanding_money = #{outstandingMoney,jdbcType=DECIMAL},
+      out_prestore_money = #{outPrestoreMoney,jdbcType=DECIMAL},
+      out_entryfees_money = #{outEntryfeesMoney,jdbcType=DECIMAL},
+      outstanding_opId = #{outstandingOpid,jdbcType=INTEGER},
+      outstanding_time = #{outstandingTime,jdbcType=TIMESTAMP},
+      outstanding_TimeLiness = #{outstandingTimeliness,jdbcType=INTEGER}
+    where outstanding_Id = #{outstandingId,jdbcType=INTEGER}
+  </update>
+</mapper>

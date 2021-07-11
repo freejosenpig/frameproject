@@ -1,4 +1,4 @@
-package com.zktr.yuyi.service.cost.ipml;
+package com.zktr.yuyi.service.cost;
 
 import com.zktr.yuyi.dao.cost.CostTypeDao;
 import com.zktr.yuyi.dao.cost.CostTypedetailsDao;

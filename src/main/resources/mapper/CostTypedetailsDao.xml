@@ -33,7 +33,7 @@
   <select id="selectBytypeId" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from cost_typedetails
-    where item.type_Id=#{typeId,jdbc=INTEGER}
+    where item.type_Id=#{typeId,jdbcType=INTEGER}
   </select>
 
   <!--  查询所有费用详情-->
