@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.CostTypedetailsDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.CostTypedetails">
+    <id column="item_Id" jdbcType="INTEGER" property="itemId" />
+    <result column="type_Id" jdbcType="INTEGER" property="typeId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_price" jdbcType="DECIMAL" property="itemPrice" />
+    <result column="item_explain" jdbcType="VARCHAR" property="itemExplain" />
+    <result column="item_opId" jdbcType="INTEGER" property="itemOpid" />
+    <result column="item_time" jdbcType="TIMESTAMP" property="itemTime" />
+    <result column="item_TimeLiness" jdbcType="VARCHAR" property="itemTimeliness" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_Id, type_Id, item_name, item_price, item_explain, item_opId, item_time, item_TimeLiness
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cost_typedetails
+    where item_Id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cost_typedetails
+    where item_Id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.CostTypedetails" useGeneratedKeys="true">
+    insert into cost_typedetails (type_Id, item_name, item_price, 
+      item_explain, item_opId, item_time, 
+      item_TimeLiness)
+    values (#{typeId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemPrice,jdbcType=DECIMAL}, 
+      #{itemExplain,jdbcType=VARCHAR}, #{itemOpid,jdbcType=INTEGER}, #{itemTime,jdbcType=TIMESTAMP}, 
+      #{itemTimeliness,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.CostTypedetails" useGeneratedKeys="true">
+    insert into cost_typedetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_Id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemPrice != null">
+        item_price,
+      </if>
+      <if test="itemExplain != null">
+        item_explain,
+      </if>
+      <if test="itemOpid != null">
+        item_opId,
+      </if>
+      <if test="itemTime != null">
+        item_time,
+      </if>
+      <if test="itemTimeliness != null">
+        item_TimeLiness,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null">
+        #{itemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemExplain != null">
+        #{itemExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="itemOpid != null">
+        #{itemOpid,jdbcType=INTEGER},
+      </if>
+      <if test="itemTime != null">
+        #{itemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemTimeliness != null">
+        #{itemTimeliness,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.CostTypedetails">
+    update cost_typedetails
+    <set>
+      <if test="typeId != null">
+        type_Id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null">
+        item_price = #{itemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemExplain != null">
+        item_explain = #{itemExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="itemOpid != null">
+        item_opId = #{itemOpid,jdbcType=INTEGER},
+      </if>
+      <if test="itemTime != null">
+        item_time = #{itemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemTimeliness != null">
+        item_TimeLiness = #{itemTimeliness,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_Id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.CostTypedetails">
+    update cost_typedetails
+    set type_Id = #{typeId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_price = #{itemPrice,jdbcType=DECIMAL},
+      item_explain = #{itemExplain,jdbcType=VARCHAR},
+      item_opId = #{itemOpid,jdbcType=INTEGER},
+      item_time = #{itemTime,jdbcType=TIMESTAMP},
+      item_TimeLiness = #{itemTimeliness,jdbcType=VARCHAR}
+    where item_Id = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>
