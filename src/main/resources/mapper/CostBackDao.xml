@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.cost.CostBackDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostBack">
+    <id column="back_Id" jdbcType="INTEGER" property="backId" />
+    <result column="oldpeople_Id" jdbcType="INTEGER" property="oldpeopleId" />
+    <result column="istoback" jdbcType="INTEGER" property="istoback" />
+    <result column="back_money" jdbcType="DECIMAL" property="backMoney" />
+    <result column="back_entryfees_money" jdbcType="DECIMAL" property="backEntryfeesMoney" />
+    <result column="back_opId" jdbcType="INTEGER" property="backOpid" />
+    <result column="back_time" jdbcType="TIMESTAMP" property="backTime" />
+    <result column="entry_money" jdbcType="DECIMAL" property="entryMoney" />
+    <result column="out_money" jdbcType="DECIMAL" property="outMoney" />
+    <result column="back_TimeLiness" jdbcType="INTEGER" property="backTimeliness" />
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List">
+    back_Id, oldpeople_Id, istoback, back_money, back_entryfees_money, back_opId, back_time, 
+    entry_money, out_money, back_TimeLiness
+  </sql>
+
+  <!--根据老人编号查询退住信息-->
+  <select id="selectByoldId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from cost_back
+    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+  </select>
+
+  <!--查询所有退住信息-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from cost_back
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cost_back
+    where back_Id = #{backId,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cost_back
+    where back_Id = #{backId,jdbcType=INTEGER}
+  </delete>
+
+  <!--  新增退住-->
+  <insert id="insert" keyColumn="back_Id" keyProperty="backId" parameterType="com.zktr.yuyi.entity.cost.CostBack" useGeneratedKeys="true">
+    insert into cost_back (oldpeople_Id, istoback, back_money, 
+      back_entryfees_money, back_opId,entry_money, out_money)
+    values (#{oldpeopleId,jdbcType=INTEGER}, #{istoback,jdbcType=INTEGER}, #{backMoney,jdbcType=DECIMAL}, 
+      #{backEntryfeesMoney,jdbcType=DECIMAL}, #{backOpid,jdbcType=INTEGER},
+      #{entryMoney,jdbcType=DECIMAL}, #{outMoney,jdbcType=DECIMAL})
+  </insert>
+
+
+  <insert id="insertSelective" keyColumn="back_Id" keyProperty="backId" parameterType="com.zktr.yuyi.entity.cost.CostBack" useGeneratedKeys="true">
+    insert into cost_back
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        oldpeople_Id,
+      </if>
+      <if test="istoback != null">
+        istoback,
+      </if>
+      <if test="backMoney != null">
+        back_money,
+      </if>
+      <if test="backEntryfeesMoney != null">
+        back_entryfees_money,
+      </if>
+      <if test="backOpid != null">
+        back_opId,
+      </if>
+      <if test="backTime != null">
+        back_time,
+      </if>
+      <if test="entryMoney != null">
+        entry_money,
+      </if>
+      <if test="outMoney != null">
+        out_money,
+      </if>
+      <if test="backTimeliness != null">
+        back_TimeLiness,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="istoback != null">
+        #{istoback,jdbcType=INTEGER},
+      </if>
+      <if test="backMoney != null">
+        #{backMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backEntryfeesMoney != null">
+        #{backEntryfeesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backOpid != null">
+        #{backOpid,jdbcType=INTEGER},
+      </if>
+      <if test="backTime != null">
+        #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryMoney != null">
+        #{entryMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outMoney != null">
+        #{outMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backTimeliness != null">
+        #{backTimeliness,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--  根据编号修改退住信息-->
+  <update id="updateByKey" parameterType="com.zktr.yuyi.entity.cost.CostBack">
+    update cost_back
+    <set>
+      <if test="oldpeopleId != null">
+        oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="istoback != null">
+        istoback = #{istoback,jdbcType=INTEGER},
+      </if>
+      <if test="backMoney != null">
+        back_money = #{backMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backEntryfeesMoney != null">
+        back_entryfees_money = #{backEntryfeesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backOpid != null">
+        back_opId = #{backOpid,jdbcType=INTEGER},
+      </if>
+      <if test="backTime != null">
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryMoney != null">
+        entry_money = #{entryMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="outMoney != null">
+        out_money = #{outMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="backTimeliness != null">
+        back_TimeLiness = #{backTimeliness,jdbcType=INTEGER},
+      </if>
+    </set>
+    where back_Id = #{backId,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostBack">
+    update cost_back
+    set oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      istoback = #{istoback,jdbcType=INTEGER},
+      back_money = #{backMoney,jdbcType=DECIMAL},
+      back_entryfees_money = #{backEntryfeesMoney,jdbcType=DECIMAL},
+      back_opId = #{backOpid,jdbcType=INTEGER},
+      back_time = #{backTime,jdbcType=TIMESTAMP},
+      entry_money = #{entryMoney,jdbcType=DECIMAL},
+      out_money = #{outMoney,jdbcType=DECIMAL},
+      back_TimeLiness = #{backTimeliness,jdbcType=INTEGER}
+    where back_Id = #{backId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
