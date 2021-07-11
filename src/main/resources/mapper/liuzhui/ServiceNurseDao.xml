@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liuzhui.ServiceNurseDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+    <result column="n_sex" jdbcType="VARCHAR" property="nSex" />
+    <result column="n_age" jdbcType="INTEGER" property="nAge" />
+    <result column="n_nation" jdbcType="VARCHAR" property="nNation" />
+    <result column="n_phone" jdbcType="INTEGER" property="nPhone" />
+    <result column="n_card" jdbcType="INTEGER" property="nCard" />
+    <result column="n_address" jdbcType="VARCHAR" property="nAddress" />
+    <result column="n_ephone" jdbcType="INTEGER" property="nEphone" />
+    <result column="n_work" jdbcType="VARCHAR" property="nWork" />
+    <result column="n_type" jdbcType="VARCHAR" property="nType" />
+    <result column="n_dept" jdbcType="VARCHAR" property="nDept" />
+    <result column="n_img" jdbcType="VARCHAR" property="nImg" />
+    <result column="n_work_date" jdbcType="DATE" property="nWorkDate" />
+    <result column="n_money" jdbcType="INTEGER" property="nMoney" />
+    <result column="n_ann" jdbcType="VARCHAR" property="nAnn" />
+    <result column="create_people" jdbcType="VARCHAR" property="createPeople" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, plan_name, n_sex, n_age, n_nation, n_phone, n_card, n_address, n_ephone, n_work, 
+    n_type, n_dept, n_img, n_work_date, n_money, n_ann, create_people, create_time, team_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from service_nurse
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from service_nurse
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
+    insert into service_nurse (plan_name, n_sex, n_age, 
+      n_nation, n_phone, n_card, 
+      n_address, n_ephone, n_work, 
+      n_type, n_dept, n_img, 
+      n_work_date, n_money, n_ann, 
+      create_people, create_time, team_id
+      )
+    values (#{planName,jdbcType=VARCHAR}, #{nSex,jdbcType=VARCHAR}, #{nAge,jdbcType=INTEGER}, 
+      #{nNation,jdbcType=VARCHAR}, #{nPhone,jdbcType=INTEGER}, #{nCard,jdbcType=INTEGER}, 
+      #{nAddress,jdbcType=VARCHAR}, #{nEphone,jdbcType=INTEGER}, #{nWork,jdbcType=VARCHAR}, 
+      #{nType,jdbcType=VARCHAR}, #{nDept,jdbcType=VARCHAR}, #{nImg,jdbcType=VARCHAR}, 
+      #{nWorkDate,jdbcType=DATE}, #{nMoney,jdbcType=INTEGER}, #{nAnn,jdbcType=VARCHAR}, 
+      #{createPeople,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{teamId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
+    insert into service_nurse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="planName != null">
+        plan_name,
+      </if>
+      <if test="nSex != null">
+        n_sex,
+      </if>
+      <if test="nAge != null">
+        n_age,
+      </if>
+      <if test="nNation != null">
+        n_nation,
+      </if>
+      <if test="nPhone != null">
+        n_phone,
+      </if>
+      <if test="nCard != null">
+        n_card,
+      </if>
+      <if test="nAddress != null">
+        n_address,
+      </if>
+      <if test="nEphone != null">
+        n_ephone,
+      </if>
+      <if test="nWork != null">
+        n_work,
+      </if>
+      <if test="nType != null">
+        n_type,
+      </if>
+      <if test="nDept != null">
+        n_dept,
+      </if>
+      <if test="nImg != null">
+        n_img,
+      </if>
+      <if test="nWorkDate != null">
+        n_work_date,
+      </if>
+      <if test="nMoney != null">
+        n_money,
+      </if>
+      <if test="nAnn != null">
+        n_ann,
+      </if>
+      <if test="createPeople != null">
+        create_people,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="planName != null">
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="nSex != null">
+        #{nSex,jdbcType=VARCHAR},
+      </if>
+      <if test="nAge != null">
+        #{nAge,jdbcType=INTEGER},
+      </if>
+      <if test="nNation != null">
+        #{nNation,jdbcType=VARCHAR},
+      </if>
+      <if test="nPhone != null">
+        #{nPhone,jdbcType=INTEGER},
+      </if>
+      <if test="nCard != null">
+        #{nCard,jdbcType=INTEGER},
+      </if>
+      <if test="nAddress != null">
+        #{nAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nEphone != null">
+        #{nEphone,jdbcType=INTEGER},
+      </if>
+      <if test="nWork != null">
+        #{nWork,jdbcType=VARCHAR},
+      </if>
+      <if test="nType != null">
+        #{nType,jdbcType=VARCHAR},
+      </if>
+      <if test="nDept != null">
+        #{nDept,jdbcType=VARCHAR},
+      </if>
+      <if test="nImg != null">
+        #{nImg,jdbcType=VARCHAR},
+      </if>
+      <if test="nWorkDate != null">
+        #{nWorkDate,jdbcType=DATE},
+      </if>
+      <if test="nMoney != null">
+        #{nMoney,jdbcType=INTEGER},
+      </if>
+      <if test="nAnn != null">
+        #{nAnn,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+    update service_nurse
+    <set>
+      <if test="planName != null">
+        plan_name = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="nSex != null">
+        n_sex = #{nSex,jdbcType=VARCHAR},
+      </if>
+      <if test="nAge != null">
+        n_age = #{nAge,jdbcType=INTEGER},
+      </if>
+      <if test="nNation != null">
+        n_nation = #{nNation,jdbcType=VARCHAR},
+      </if>
+      <if test="nPhone != null">
+        n_phone = #{nPhone,jdbcType=INTEGER},
+      </if>
+      <if test="nCard != null">
+        n_card = #{nCard,jdbcType=INTEGER},
+      </if>
+      <if test="nAddress != null">
+        n_address = #{nAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nEphone != null">
+        n_ephone = #{nEphone,jdbcType=INTEGER},
+      </if>
+      <if test="nWork != null">
+        n_work = #{nWork,jdbcType=VARCHAR},
+      </if>
+      <if test="nType != null">
+        n_type = #{nType,jdbcType=VARCHAR},
+      </if>
+      <if test="nDept != null">
+        n_dept = #{nDept,jdbcType=VARCHAR},
+      </if>
+      <if test="nImg != null">
+        n_img = #{nImg,jdbcType=VARCHAR},
+      </if>
+      <if test="nWorkDate != null">
+        n_work_date = #{nWorkDate,jdbcType=DATE},
+      </if>
+      <if test="nMoney != null">
+        n_money = #{nMoney,jdbcType=INTEGER},
+      </if>
+      <if test="nAnn != null">
+        n_ann = #{nAnn,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        create_people = #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+    update service_nurse
+    set plan_name = #{planName,jdbcType=VARCHAR},
+      n_sex = #{nSex,jdbcType=VARCHAR},
+      n_age = #{nAge,jdbcType=INTEGER},
+      n_nation = #{nNation,jdbcType=VARCHAR},
+      n_phone = #{nPhone,jdbcType=INTEGER},
+      n_card = #{nCard,jdbcType=INTEGER},
+      n_address = #{nAddress,jdbcType=VARCHAR},
+      n_ephone = #{nEphone,jdbcType=INTEGER},
+      n_work = #{nWork,jdbcType=VARCHAR},
+      n_type = #{nType,jdbcType=VARCHAR},
+      n_dept = #{nDept,jdbcType=VARCHAR},
+      n_img = #{nImg,jdbcType=VARCHAR},
+      n_work_date = #{nWorkDate,jdbcType=DATE},
+      n_money = #{nMoney,jdbcType=INTEGER},
+      n_ann = #{nAnn,jdbcType=VARCHAR},
+      create_people = #{createPeople,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      team_id = #{teamId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

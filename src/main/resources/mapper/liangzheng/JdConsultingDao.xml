@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdConsultingDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdConsulting">
+    <id column="consulting_id" jdbcType="INTEGER" property="consultingId" />
+    <result column="consulting_name" jdbcType="VARCHAR" property="consultingName" />
+    <result column="consulting_time" jdbcType="TIMESTAMP" property="consultingTime" />
+    <result column="consulting_way" jdbcType="VARCHAR" property="consultingWay" />
+    <result column="consulting_content" jdbcType="VARCHAR" property="consultingContent" />
+    <result column="consulting_type" jdbcType="VARCHAR" property="consultingType" />
+    <result column="consulting_phone" jdbcType="VARCHAR" property="consultingPhone" />
+    <result column="consulting_relation" jdbcType="VARCHAR" property="consultingRelation" />
+    <result column="consulting_oldname" jdbcType="VARCHAR" property="consultingOldname" />
+    <result column="consulting_oldidcard" jdbcType="VARCHAR" property="consultingOldidcard" />
+    <result column="consulting_oldsex" jdbcType="VARCHAR" property="consultingOldsex" />
+    <result column="consulting_oldage" jdbcType="INTEGER" property="consultingOldage" />
+    <result column="consulting_selfcare" jdbcType="VARCHAR" property="consultingSelfcare" />
+    <result column="consulting_ordaddress" jdbcType="VARCHAR" property="consultingOrdaddress" />
+    <result column="consulting_service" jdbcType="INTEGER" property="consultingService" />
+    <result column="consulting_addname" jdbcType="INTEGER" property="consultingAddname" />
+    <result column="consulting_addtime" jdbcType="TIMESTAMP" property="consultingAddtime" />
+    <result column="consulting_registrant" jdbcType="INTEGER" property="consultingRegistrant" />
+    <result column="consulting_rtime" jdbcType="TIMESTAMP" property="consultingRtime" />
+    <result column="consulting_note" jdbcType="VARCHAR" property="consultingNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    consulting_id, consulting_name, consulting_time, consulting_way, consulting_content, 
+    consulting_type, consulting_phone, consulting_relation, consulting_oldname, consulting_oldidcard, 
+    consulting_oldsex, consulting_oldage, consulting_selfcare, consulting_ordaddress, 
+    consulting_service, consulting_addname, consulting_addtime, consulting_registrant, 
+    consulting_rtime, consulting_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_consulting
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_consulting
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="consulting_id" keyProperty="consultingId" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting" useGeneratedKeys="true">
+    insert into jd_consulting (consulting_name, consulting_time, 
+      consulting_way, consulting_content, consulting_type, 
+      consulting_phone, consulting_relation, consulting_oldname, 
+      consulting_oldidcard, consulting_oldsex, 
+      consulting_oldage, consulting_selfcare, consulting_ordaddress, 
+      consulting_service, consulting_addname, consulting_addtime, 
+      consulting_registrant, consulting_rtime, 
+      consulting_note)
+    values (#{consultingName,jdbcType=VARCHAR}, #{consultingTime,jdbcType=TIMESTAMP}, 
+      #{consultingWay,jdbcType=VARCHAR}, #{consultingContent,jdbcType=VARCHAR}, #{consultingType,jdbcType=VARCHAR}, 
+      #{consultingPhone,jdbcType=VARCHAR}, #{consultingRelation,jdbcType=VARCHAR}, #{consultingOldname,jdbcType=VARCHAR}, 
+      #{consultingOldidcard,jdbcType=VARCHAR}, #{consultingOldsex,jdbcType=VARCHAR}, 
+      #{consultingOldage,jdbcType=INTEGER}, #{consultingSelfcare,jdbcType=VARCHAR}, #{consultingOrdaddress,jdbcType=VARCHAR}, 
+      #{consultingService,jdbcType=INTEGER}, #{consultingAddname,jdbcType=INTEGER}, #{consultingAddtime,jdbcType=TIMESTAMP}, 
+      #{consultingRegistrant,jdbcType=INTEGER}, #{consultingRtime,jdbcType=TIMESTAMP}, 
+      #{consultingNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="consulting_id" keyProperty="consultingId" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting" useGeneratedKeys="true">
+    insert into jd_consulting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consultingName != null">
+        consulting_name,
+      </if>
+      <if test="consultingTime != null">
+        consulting_time,
+      </if>
+      <if test="consultingWay != null">
+        consulting_way,
+      </if>
+      <if test="consultingContent != null">
+        consulting_content,
+      </if>
+      <if test="consultingType != null">
+        consulting_type,
+      </if>
+      <if test="consultingPhone != null">
+        consulting_phone,
+      </if>
+      <if test="consultingRelation != null">
+        consulting_relation,
+      </if>
+      <if test="consultingOldname != null">
+        consulting_oldname,
+      </if>
+      <if test="consultingOldidcard != null">
+        consulting_oldidcard,
+      </if>
+      <if test="consultingOldsex != null">
+        consulting_oldsex,
+      </if>
+      <if test="consultingOldage != null">
+        consulting_oldage,
+      </if>
+      <if test="consultingSelfcare != null">
+        consulting_selfcare,
+      </if>
+      <if test="consultingOrdaddress != null">
+        consulting_ordaddress,
+      </if>
+      <if test="consultingService != null">
+        consulting_service,
+      </if>
+      <if test="consultingAddname != null">
+        consulting_addname,
+      </if>
+      <if test="consultingAddtime != null">
+        consulting_addtime,
+      </if>
+      <if test="consultingRegistrant != null">
+        consulting_registrant,
+      </if>
+      <if test="consultingRtime != null">
+        consulting_rtime,
+      </if>
+      <if test="consultingNote != null">
+        consulting_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consultingName != null">
+        #{consultingName,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingTime != null">
+        #{consultingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingWay != null">
+        #{consultingWay,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingContent != null">
+        #{consultingContent,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingType != null">
+        #{consultingType,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingPhone != null">
+        #{consultingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingRelation != null">
+        #{consultingRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldname != null">
+        #{consultingOldname,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldidcard != null">
+        #{consultingOldidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldsex != null">
+        #{consultingOldsex,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldage != null">
+        #{consultingOldage,jdbcType=INTEGER},
+      </if>
+      <if test="consultingSelfcare != null">
+        #{consultingSelfcare,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOrdaddress != null">
+        #{consultingOrdaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingService != null">
+        #{consultingService,jdbcType=INTEGER},
+      </if>
+      <if test="consultingAddname != null">
+        #{consultingAddname,jdbcType=INTEGER},
+      </if>
+      <if test="consultingAddtime != null">
+        #{consultingAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingRegistrant != null">
+        #{consultingRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="consultingRtime != null">
+        #{consultingRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingNote != null">
+        #{consultingNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting">
+    update jd_consulting
+    <set>
+      <if test="consultingName != null">
+        consulting_name = #{consultingName,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingTime != null">
+        consulting_time = #{consultingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingWay != null">
+        consulting_way = #{consultingWay,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingContent != null">
+        consulting_content = #{consultingContent,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingType != null">
+        consulting_type = #{consultingType,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingPhone != null">
+        consulting_phone = #{consultingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingRelation != null">
+        consulting_relation = #{consultingRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldname != null">
+        consulting_oldname = #{consultingOldname,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldidcard != null">
+        consulting_oldidcard = #{consultingOldidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldsex != null">
+        consulting_oldsex = #{consultingOldsex,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOldage != null">
+        consulting_oldage = #{consultingOldage,jdbcType=INTEGER},
+      </if>
+      <if test="consultingSelfcare != null">
+        consulting_selfcare = #{consultingSelfcare,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingOrdaddress != null">
+        consulting_ordaddress = #{consultingOrdaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingService != null">
+        consulting_service = #{consultingService,jdbcType=INTEGER},
+      </if>
+      <if test="consultingAddname != null">
+        consulting_addname = #{consultingAddname,jdbcType=INTEGER},
+      </if>
+      <if test="consultingAddtime != null">
+        consulting_addtime = #{consultingAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingRegistrant != null">
+        consulting_registrant = #{consultingRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="consultingRtime != null">
+        consulting_rtime = #{consultingRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultingNote != null">
+        consulting_note = #{consultingNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting">
+    update jd_consulting
+    set consulting_name = #{consultingName,jdbcType=VARCHAR},
+      consulting_time = #{consultingTime,jdbcType=TIMESTAMP},
+      consulting_way = #{consultingWay,jdbcType=VARCHAR},
+      consulting_content = #{consultingContent,jdbcType=VARCHAR},
+      consulting_type = #{consultingType,jdbcType=VARCHAR},
+      consulting_phone = #{consultingPhone,jdbcType=VARCHAR},
+      consulting_relation = #{consultingRelation,jdbcType=VARCHAR},
+      consulting_oldname = #{consultingOldname,jdbcType=VARCHAR},
+      consulting_oldidcard = #{consultingOldidcard,jdbcType=VARCHAR},
+      consulting_oldsex = #{consultingOldsex,jdbcType=VARCHAR},
+      consulting_oldage = #{consultingOldage,jdbcType=INTEGER},
+      consulting_selfcare = #{consultingSelfcare,jdbcType=VARCHAR},
+      consulting_ordaddress = #{consultingOrdaddress,jdbcType=VARCHAR},
+      consulting_service = #{consultingService,jdbcType=INTEGER},
+      consulting_addname = #{consultingAddname,jdbcType=INTEGER},
+      consulting_addtime = #{consultingAddtime,jdbcType=TIMESTAMP},
+      consulting_registrant = #{consultingRegistrant,jdbcType=INTEGER},
+      consulting_rtime = #{consultingRtime,jdbcType=TIMESTAMP},
+      consulting_note = #{consultingNote,jdbcType=VARCHAR}
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </update>
+</mapper>
