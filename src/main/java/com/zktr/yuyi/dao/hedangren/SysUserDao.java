@@ -26,4 +26,9 @@ public interface SysUserDao {
 
     SysUser login(String userName);
 
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<SysUser> queryAll();
 }

@@ -21,6 +21,8 @@ public interface SysUserService {
      */
     SysUser queryById(Integer id);
 
+    List<SysUser> queryAll();
+
 
 
     /**
@@ -54,5 +56,10 @@ public interface SysUserService {
      */
     SysUser login(String userName);
 
+    /**
+     * 查询所有人
+     * @param id
+     * @return
+     */
     List<SysMenu> usermenu(Integer id);
 }

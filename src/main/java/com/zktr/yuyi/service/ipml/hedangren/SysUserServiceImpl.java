@@ -34,6 +34,14 @@ public class SysUserServiceImpl implements SysUserService {
         return this.sysUserDao.selectByPrimaryKey(id);
     }
 
+    /**
+     * 查询所有人
+     * @return
+     */
+    @Override
+    public List<SysUser> queryAll() {
+        return this.sysUserDao.queryAll();
+    }
 
 
     /**
