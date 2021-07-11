@@ -8,25 +8,37 @@
     <result column="type_opId" jdbcType="INTEGER" property="typeOpid" />
     <result column="type_TimeLiness" jdbcType="VARCHAR" property="typeTimeliness" />
   </resultMap>
+
+
   <sql id="Base_Column_List">
     type_Id, type_name, type_time, type_opId, type_TimeLiness
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+  <!--  查询所有费用类别-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from cost_type
+  </select>
+
+  <select id="selectByKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cost_type
     where type_Id = #{typeId,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cost_type
     where type_Id = #{typeId,jdbcType=INTEGER}
   </delete>
+
+  <!--  新增费用类别-->
   <insert id="insert" keyColumn="type_Id" keyProperty="typeId" parameterType="com.zktr.yuyi.entity.cost.CostType" useGeneratedKeys="true">
-    insert into cost_type (type_name, type_time, type_opId, 
-      type_TimeLiness)
-    values (#{typeName,jdbcType=VARCHAR}, #{typeTime,jdbcType=TIMESTAMP}, #{typeOpid,jdbcType=INTEGER}, 
-      #{typeTimeliness,jdbcType=VARCHAR})
+    insert into cost_type (type_name,  type_opId)
+    values (#{typeName,jdbcType=VARCHAR},  #{typeOpid,jdbcType=INTEGER})
   </insert>
+
+
   <insert id="insertSelective" keyColumn="type_Id" keyProperty="typeId" parameterType="com.zktr.yuyi.entity.cost.CostType" useGeneratedKeys="true">
     insert into cost_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -58,7 +70,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.cost.CostType">
+
+  <!--  根据编号修改费用类别-->
+  <update id="updateByKey" parameterType="com.zktr.yuyi.entity.cost.CostType">
     update cost_type
     <set>
       <if test="typeName != null">
@@ -76,6 +90,8 @@
     </set>
     where type_Id = #{typeId,jdbcType=INTEGER}
   </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostType">
     update cost_type
     set type_name = #{typeName,jdbcType=VARCHAR},

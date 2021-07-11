@@ -10,26 +10,36 @@
     <result column="entryfees_opId" jdbcType="INTEGER" property="entryfeesOpid" />
     <result column="entryfees_TimeLiness" jdbcType="INTEGER" property="entryfeesTimeliness" />
   </resultMap>
+
+
   <sql id="Base_Column_List">
     entryfees_Id, oldpeople_Id, entryfees_money, entryfees_explain, entryfees_time, entryfees_opId, 
     entryfees_TimeLiness
   </sql>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cost_entryfees
     where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cost_entryfees
     where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
   </delete>
+
+
   <insert id="insert" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees" useGeneratedKeys="true">
     insert into cost_entryfees (oldpeople_Id, entryfees_money, entryfees_explain, 
       entryfees_time, entryfees_opId, entryfees_TimeLiness)
     values (#{oldpeopleId,jdbcType=INTEGER}, #{entryfeesMoney,jdbcType=DECIMAL}, #{entryfeesExplain,jdbcType=VARCHAR}, 
       #{entryfeesTime,jdbcType=TIMESTAMP}, #{entryfeesOpid,jdbcType=INTEGER}, #{entryfeesTimeliness,jdbcType=INTEGER})
   </insert>
+
+
   <insert id="insertSelective" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees" useGeneratedKeys="true">
     insert into cost_entryfees
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,6 +83,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees">
     update cost_entryfees
     <set>
@@ -97,6 +108,9 @@
     </set>
     where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
   </update>
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees">
     update cost_entryfees
     set oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
