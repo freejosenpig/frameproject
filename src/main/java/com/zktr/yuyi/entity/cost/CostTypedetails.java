@@ -1,4 +1,4 @@
-package com.zktr.yuyi.entity;
+package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;

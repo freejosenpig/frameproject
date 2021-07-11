@@ -1,6 +1,6 @@
-package com.zktr.yuyi.dao;
+package com.zktr.yuyi.dao.cost;
 
-import com.zktr.yuyi.entity.CostEntryfees;
+import com.zktr.yuyi.entity.cost.CostEntryfees;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

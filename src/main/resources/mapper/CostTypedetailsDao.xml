@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zktr.yuyi.dao.CostTypedetailsDao">
-  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.CostTypedetails">
+<mapper namespace="com.zktr.yuyi.dao.cost.CostTypedetailsDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostTypedetails">
     <id column="item_Id" jdbcType="INTEGER" property="itemId" />
     <result column="type_Id" jdbcType="INTEGER" property="typeId" />
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
@@ -24,7 +24,7 @@
     delete from cost_typedetails
     where item_Id = #{itemId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.CostTypedetails" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails" useGeneratedKeys="true">
     insert into cost_typedetails (type_Id, item_name, item_price, 
       item_explain, item_opId, item_time, 
       item_TimeLiness)
@@ -32,7 +32,7 @@
       #{itemExplain,jdbcType=VARCHAR}, #{itemOpid,jdbcType=INTEGER}, #{itemTime,jdbcType=TIMESTAMP}, 
       #{itemTimeliness,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.CostTypedetails" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails" useGeneratedKeys="true">
     insert into cost_typedetails
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="typeId != null">
@@ -81,7 +81,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.CostTypedetails">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails">
     update cost_typedetails
     <set>
       <if test="typeId != null">
@@ -108,7 +108,7 @@
     </set>
     where item_Id = #{itemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.CostTypedetails">
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails">
     update cost_typedetails
     set type_Id = #{typeId,jdbcType=INTEGER},
       item_name = #{itemName,jdbcType=VARCHAR},

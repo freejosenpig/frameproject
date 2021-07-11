@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zktr.yuyi.dao.CostEntryfeesDao">
-  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.CostEntryfees">
+<mapper namespace="com.zktr.yuyi.dao.cost.CostEntryfeesDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostEntryfees">
     <id column="entryfees_Id" jdbcType="INTEGER" property="entryfeesId" />
     <result column="oldpeople_Id" jdbcType="INTEGER" property="oldpeopleId" />
     <result column="entryfees_money" jdbcType="DECIMAL" property="entryfeesMoney" />
@@ -24,13 +24,13 @@
     delete from cost_entryfees
     where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.CostEntryfees" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees" useGeneratedKeys="true">
     insert into cost_entryfees (oldpeople_Id, entryfees_money, entryfees_explain, 
       entryfees_time, entryfees_opId, entryfees_TimeLiness)
     values (#{oldpeopleId,jdbcType=INTEGER}, #{entryfeesMoney,jdbcType=DECIMAL}, #{entryfeesExplain,jdbcType=VARCHAR}, 
       #{entryfeesTime,jdbcType=TIMESTAMP}, #{entryfeesOpid,jdbcType=INTEGER}, #{entryfeesTimeliness,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.CostEntryfees" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="entryfees_Id" keyProperty="entryfeesId" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees" useGeneratedKeys="true">
     insert into cost_entryfees
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="oldpeopleId != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.CostEntryfees">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees">
     update cost_entryfees
     <set>
       <if test="oldpeopleId != null">
@@ -97,7 +97,7 @@
     </set>
     where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.CostEntryfees">
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostEntryfees">
     update cost_entryfees
     set oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
       entryfees_money = #{entryfeesMoney,jdbcType=DECIMAL},
