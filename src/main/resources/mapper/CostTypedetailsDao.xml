@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostTypedetails">
     <id column="item_Id" jdbcType="INTEGER" property="itemId" />
     <result column="type_Id" jdbcType="INTEGER" property="typeId" />
-    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
-    <result column="item_price" jdbcType="DECIMAL" property="itemPrice" />
+    <result column="item_nameId" jdbcType="INTEGER" property="itemNameId" />
     <result column="item_explain" jdbcType="VARCHAR" property="itemExplain" />
     <result column="item_opId" jdbcType="INTEGER" property="itemOpid" />
     <result column="item_time" jdbcType="TIMESTAMP" property="itemTime" />
@@ -22,7 +21,7 @@
   </resultMap>
 
   <sql id="costType">
-    type.type_Id, type.type_name, type.type_time, type.type_opId, type.type_TimeLiness
+    ct.type_Id,ct.type_name, ct.type_time, ct.type_opId, ct.type_TimeLiness
   </sql>
 
   <sql id="Base_Column_List">
@@ -38,14 +37,15 @@
 
   <!--  查询所有费用详情-->
   <select id="selectAll" resultMap="BaseResultMap">
-    select * from cost_typedetails
+    select <include refid="Base_Column_List"/>,<include refid="costType"/> from cost_typedetails item
+    inner join cost_type ct on item.type_Id=ct.type_Id
   </select>
 
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from item.cost_typedetails
+    from cost_typedetails
     where item.item_Id = #{itemId,jdbcType=INTEGER}
   </select>
 
