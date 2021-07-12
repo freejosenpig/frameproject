@@ -35,7 +35,6 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     /**
-     * 查询所有人
      * @return
      */
     @Override
@@ -87,5 +86,10 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysMenu> usermenu(Integer id) {
         return this.menuDao.usermenu(id);
+    }
+
+    @Override
+    public List<SysUser> queryAllByUser(SysUser user) {
+        return this.sysUserDao.queryAllByUser(user);
     }
 }

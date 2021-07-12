@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.DrugRegistrationDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.DrugRegistration">
+    <id column="msg_id" jdbcType="INTEGER" property="msgId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="rtime" jdbcType="TIMESTAMP" property="rtime" />
+    <result column="drugstype" jdbcType="VARCHAR" property="drugstype" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    msg_id, id, mtime, rtime, drugstype, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drug_registration
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_registration
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="msg_id" keyProperty="msgId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugRegistration" useGeneratedKeys="true">
+    insert into drug_registration (id, mtime, rtime, 
+      drugstype, create_time)
+    values (#{id,jdbcType=INTEGER}, #{mtime,jdbcType=TIMESTAMP}, #{rtime,jdbcType=TIMESTAMP}, 
+      #{drugstype,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="msg_id" keyProperty="msgId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugRegistration" useGeneratedKeys="true">
+    insert into drug_registration
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="rtime != null">
+        rtime,
+      </if>
+      <if test="drugstype != null">
+        drugstype,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtime != null">
+        #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugstype != null">
+        #{drugstype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugRegistration">
+    update drug_registration
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtime != null">
+        rtime = #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugstype != null">
+        drugstype = #{drugstype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugRegistration">
+    update drug_registration
+    set id = #{id,jdbcType=INTEGER},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      rtime = #{rtime,jdbcType=TIMESTAMP},
+      drugstype = #{drugstype,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <select id="selectlinkbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.DrugRegResult">
+    select B.msg_id, B.mtime,B.rtime,B.drugstype, P.oldpeople_name from drug_registration B
+    inner join jd_oldpeople P on B.id = P.oldpeople_id
+  </select>
+</mapper>

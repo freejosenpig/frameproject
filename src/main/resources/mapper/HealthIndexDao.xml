@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.HealthIndexDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.HealthIndex">
+    <id column="hr_id" jdbcType="INTEGER" property="hrId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="etime" jdbcType="TIMESTAMP" property="etime" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="lefteye_visual" jdbcType="DECIMAL" property="lefteyeVisual" />
+    <result column="righteye_visual" jdbcType="DECIMAL" property="righteyeVisual" />
+    <result column="listen" jdbcType="DECIMAL" property="listen" />
+    <result column="heartrate" jdbcType="INTEGER" property="heartrate" />
+    <result column="bloodpressure" jdbcType="DECIMAL" property="bloodpressure" />
+    <result column="bloodfat" jdbcType="DECIMAL" property="bloodfat" />
+    <result column="sleeptime" jdbcType="INTEGER" property="sleeptime" />
+    <result column="bloodsugar" jdbcType="DECIMAL" property="bloodsugar" />
+    <result column="bodyfat" jdbcType="DECIMAL" property="bodyfat" />
+    <result column="hemoglobin" jdbcType="INTEGER" property="hemoglobin" />
+    <result column="vitalcapacity" jdbcType="INTEGER" property="vitalcapacity" />
+    <result column="uricacid" jdbcType="INTEGER" property="uricacid" />
+    <result column="examinationdate" jdbcType="TIMESTAMP" property="examinationdate" />
+    <result column="datasources" jdbcType="VARCHAR" property="datasources" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hr_id, id, etime, weight, height, lefteye_visual, righteye_visual, `listen`, heartrate, 
+    bloodpressure, bloodfat, sleeptime, bloodsugar, bodyfat, hemoglobin, vitalcapacity, 
+    uricacid, examinationdate, datasources, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health_index
+    where hr_id = #{hrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health_index
+    where hr_id = #{hrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="hr_id" keyProperty="hrId" parameterType="com.zktr.yuyi.entity.lishaofeng.HealthIndex" useGeneratedKeys="true">
+    insert into health_index (id, etime, weight, 
+      height, lefteye_visual, righteye_visual, 
+      `listen`, heartrate, bloodpressure, 
+      bloodfat, sleeptime, bloodsugar, 
+      bodyfat, hemoglobin, vitalcapacity, 
+      uricacid, examinationdate, datasources, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{etime,jdbcType=TIMESTAMP}, #{weight,jdbcType=DECIMAL}, 
+      #{height,jdbcType=INTEGER}, #{lefteyeVisual,jdbcType=DECIMAL}, #{righteyeVisual,jdbcType=DECIMAL}, 
+      #{listen,jdbcType=DECIMAL}, #{heartrate,jdbcType=INTEGER}, #{bloodpressure,jdbcType=DECIMAL}, 
+      #{bloodfat,jdbcType=DECIMAL}, #{sleeptime,jdbcType=INTEGER}, #{bloodsugar,jdbcType=DECIMAL}, 
+      #{bodyfat,jdbcType=DECIMAL}, #{hemoglobin,jdbcType=INTEGER}, #{vitalcapacity,jdbcType=INTEGER}, 
+      #{uricacid,jdbcType=INTEGER}, #{examinationdate,jdbcType=TIMESTAMP}, #{datasources,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="hr_id" keyProperty="hrId" parameterType="com.zktr.yuyi.entity.lishaofeng.HealthIndex" useGeneratedKeys="true">
+    insert into health_index
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="etime != null">
+        etime,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="lefteyeVisual != null">
+        lefteye_visual,
+      </if>
+      <if test="righteyeVisual != null">
+        righteye_visual,
+      </if>
+      <if test="listen != null">
+        `listen`,
+      </if>
+      <if test="heartrate != null">
+        heartrate,
+      </if>
+      <if test="bloodpressure != null">
+        bloodpressure,
+      </if>
+      <if test="bloodfat != null">
+        bloodfat,
+      </if>
+      <if test="sleeptime != null">
+        sleeptime,
+      </if>
+      <if test="bloodsugar != null">
+        bloodsugar,
+      </if>
+      <if test="bodyfat != null">
+        bodyfat,
+      </if>
+      <if test="hemoglobin != null">
+        hemoglobin,
+      </if>
+      <if test="vitalcapacity != null">
+        vitalcapacity,
+      </if>
+      <if test="uricacid != null">
+        uricacid,
+      </if>
+      <if test="examinationdate != null">
+        examinationdate,
+      </if>
+      <if test="datasources != null">
+        datasources,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="etime != null">
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="lefteyeVisual != null">
+        #{lefteyeVisual,jdbcType=DECIMAL},
+      </if>
+      <if test="righteyeVisual != null">
+        #{righteyeVisual,jdbcType=DECIMAL},
+      </if>
+      <if test="listen != null">
+        #{listen,jdbcType=DECIMAL},
+      </if>
+      <if test="heartrate != null">
+        #{heartrate,jdbcType=INTEGER},
+      </if>
+      <if test="bloodpressure != null">
+        #{bloodpressure,jdbcType=DECIMAL},
+      </if>
+      <if test="bloodfat != null">
+        #{bloodfat,jdbcType=DECIMAL},
+      </if>
+      <if test="sleeptime != null">
+        #{sleeptime,jdbcType=INTEGER},
+      </if>
+      <if test="bloodsugar != null">
+        #{bloodsugar,jdbcType=DECIMAL},
+      </if>
+      <if test="bodyfat != null">
+        #{bodyfat,jdbcType=DECIMAL},
+      </if>
+      <if test="hemoglobin != null">
+        #{hemoglobin,jdbcType=INTEGER},
+      </if>
+      <if test="vitalcapacity != null">
+        #{vitalcapacity,jdbcType=INTEGER},
+      </if>
+      <if test="uricacid != null">
+        #{uricacid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationdate != null">
+        #{examinationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datasources != null">
+        #{datasources,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.HealthIndex">
+    update health_index
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="etime != null">
+        etime = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="lefteyeVisual != null">
+        lefteye_visual = #{lefteyeVisual,jdbcType=DECIMAL},
+      </if>
+      <if test="righteyeVisual != null">
+        righteye_visual = #{righteyeVisual,jdbcType=DECIMAL},
+      </if>
+      <if test="listen != null">
+        `listen` = #{listen,jdbcType=DECIMAL},
+      </if>
+      <if test="heartrate != null">
+        heartrate = #{heartrate,jdbcType=INTEGER},
+      </if>
+      <if test="bloodpressure != null">
+        bloodpressure = #{bloodpressure,jdbcType=DECIMAL},
+      </if>
+      <if test="bloodfat != null">
+        bloodfat = #{bloodfat,jdbcType=DECIMAL},
+      </if>
+      <if test="sleeptime != null">
+        sleeptime = #{sleeptime,jdbcType=INTEGER},
+      </if>
+      <if test="bloodsugar != null">
+        bloodsugar = #{bloodsugar,jdbcType=DECIMAL},
+      </if>
+      <if test="bodyfat != null">
+        bodyfat = #{bodyfat,jdbcType=DECIMAL},
+      </if>
+      <if test="hemoglobin != null">
+        hemoglobin = #{hemoglobin,jdbcType=INTEGER},
+      </if>
+      <if test="vitalcapacity != null">
+        vitalcapacity = #{vitalcapacity,jdbcType=INTEGER},
+      </if>
+      <if test="uricacid != null">
+        uricacid = #{uricacid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationdate != null">
+        examinationdate = #{examinationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datasources != null">
+        datasources = #{datasources,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where hr_id = #{hrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.HealthIndex">
+    update health_index
+    set id = #{id,jdbcType=INTEGER},
+      etime = #{etime,jdbcType=TIMESTAMP},
+      weight = #{weight,jdbcType=DECIMAL},
+      height = #{height,jdbcType=INTEGER},
+      lefteye_visual = #{lefteyeVisual,jdbcType=DECIMAL},
+      righteye_visual = #{righteyeVisual,jdbcType=DECIMAL},
+      `listen` = #{listen,jdbcType=DECIMAL},
+      heartrate = #{heartrate,jdbcType=INTEGER},
+      bloodpressure = #{bloodpressure,jdbcType=DECIMAL},
+      bloodfat = #{bloodfat,jdbcType=DECIMAL},
+      sleeptime = #{sleeptime,jdbcType=INTEGER},
+      bloodsugar = #{bloodsugar,jdbcType=DECIMAL},
+      bodyfat = #{bodyfat,jdbcType=DECIMAL},
+      hemoglobin = #{hemoglobin,jdbcType=INTEGER},
+      vitalcapacity = #{vitalcapacity,jdbcType=INTEGER},
+      uricacid = #{uricacid,jdbcType=INTEGER},
+      examinationdate = #{examinationdate,jdbcType=TIMESTAMP},
+      datasources = #{datasources,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where hr_id = #{hrId,jdbcType=INTEGER}
+  </update>
+  <select id="selectHealthbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.HealthindexResult">
+    select B.hr_id,B.id,B.etime,B.weight,B.height,B.lefteye_visual,B.righteye_visual,B.listen, B.heartrate,B.bloodpressure,B.bloodfat,B.sleeptime,B.bloodsugar,B.bodyfat,B.hemoglobin,B.vitalcapacity,B.uricacid,B.examinationdate,B.datasources,B.create_time, P.oldpeople_name from health_index B
+    inner join jd_oldpeople P on B.id = P.oldpeople_id
+  </select>
+</mapper>
