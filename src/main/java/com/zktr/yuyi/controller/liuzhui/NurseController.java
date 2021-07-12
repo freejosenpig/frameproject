@@ -10,6 +10,7 @@ import com.zktr.yuyi.vo.AjaxResponse;
 import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.awt.*;
 import java.util.List;
@@ -53,7 +54,7 @@ public class NurseController {
     }
 
     @Log("新增数据")
-    @RequestMapping("/addNurse")
+    @PostMapping("/addNurse")
     public ServiceNurse addNurse(@RequestBody ServiceNurse serviceNurse){
         nurseService.insert(serviceNurse);
         return serviceNurse;
