@@ -62,4 +62,11 @@ public interface SysUserService {
      * @return
      */
     List<SysMenu> usermenu(Integer id);
+
+    /**
+     * 多条件查询
+     * @param user
+     * @return
+     */
+    List<SysUser> queryAllByUser(SysUser user);
 }
