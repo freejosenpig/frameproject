@@ -12,7 +12,6 @@
         select role_id,
                menu_id
         from jdboot.sys_role_menu
-        where = #{}
     </select>
 
     <!--查询指定行数据-->
@@ -72,14 +71,12 @@
                 menu_id = #{menuId},
             </if>
         </set>
-        where = #{}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
         delete
         from jdboot.sys_role_menu
-        where = #{}
     </delete>
 
 </mapper>
