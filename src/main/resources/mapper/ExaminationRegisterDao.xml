@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.ExaminationRegisterDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.ExaminationRegister">
+    <id column="er_id" jdbcType="INTEGER" property="erId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="hospital" jdbcType="VARCHAR" property="hospital" />
+    <result column="etime" jdbcType="TIMESTAMP" property="etime" />
+    <result column="eresult" jdbcType="VARCHAR" property="eresult" />
+    <result column="registrant" jdbcType="INTEGER" property="registrant" />
+    <result column="rgtime" jdbcType="TIMESTAMP" property="rgtime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    er_id, id, hospital, etime, eresult, registrant, rgtime, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examination_register
+    where er_id = #{erId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination_register
+    where er_id = #{erId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="er_id" keyProperty="erId" parameterType="com.zktr.yuyi.entity.lishaofeng.ExaminationRegister" useGeneratedKeys="true">
+    insert into examination_register (id, hospital, etime, 
+      eresult, registrant, rgtime, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{hospital,jdbcType=VARCHAR}, #{etime,jdbcType=TIMESTAMP}, 
+      #{eresult,jdbcType=VARCHAR}, #{registrant,jdbcType=INTEGER}, #{rgtime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="er_id" keyProperty="erId" parameterType="com.zktr.yuyi.entity.lishaofeng.ExaminationRegister" useGeneratedKeys="true">
+    insert into examination_register
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hospital != null">
+        hospital,
+      </if>
+      <if test="etime != null">
+        etime,
+      </if>
+      <if test="eresult != null">
+        eresult,
+      </if>
+      <if test="registrant != null">
+        registrant,
+      </if>
+      <if test="rgtime != null">
+        rgtime,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hospital != null">
+        #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="etime != null">
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eresult != null">
+        #{eresult,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        #{registrant,jdbcType=INTEGER},
+      </if>
+      <if test="rgtime != null">
+        #{rgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.ExaminationRegister">
+    update examination_register
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hospital != null">
+        hospital = #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="etime != null">
+        etime = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eresult != null">
+        eresult = #{eresult,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        registrant = #{registrant,jdbcType=INTEGER},
+      </if>
+      <if test="rgtime != null">
+        rgtime = #{rgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where er_id = #{erId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.ExaminationRegister">
+    update examination_register
+    set id = #{id,jdbcType=INTEGER},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      etime = #{etime,jdbcType=TIMESTAMP},
+      eresult = #{eresult,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=INTEGER},
+      rgtime = #{rgtime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where er_id = #{erId,jdbcType=INTEGER}
+  </update>
+  <select id="selectExRegistbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.ExaminationRegistResult">
+    select B.er_id,B.id,B.hospital, B.etime,B.eresult,B.registrant, B.rgtime,B.create_time,P.oldpeople_name from examination_register B
+    inner join jd_oldpeople P on B.id=P.oldpeople_id
+  </select>
+</mapper>

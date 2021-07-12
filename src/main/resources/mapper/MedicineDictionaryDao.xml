@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.MedicineDictionaryDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.MedicineDictionary">
+    <id column="md_id" jdbcType="INTEGER" property="mdId" />
+    <result column="drugcoding" jdbcType="INTEGER" property="drugcoding" />
+    <result column="drugstype" jdbcType="VARCHAR" property="drugstype" />
+    <result column="drugsname" jdbcType="VARCHAR" property="drugsname" />
+    <result column="minimumspecification" jdbcType="INTEGER" property="minimumspecification" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    md_id, drugcoding, drugstype, drugsname, minimumspecification, `type`, manufacturer, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medicine_dictionary
+    where md_id = #{mdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medicine_dictionary
+    where md_id = #{mdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="md_id" keyProperty="mdId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicineDictionary" useGeneratedKeys="true">
+    insert into medicine_dictionary (drugcoding, drugstype, drugsname, 
+      minimumspecification, `type`, manufacturer, 
+      create_time)
+    values (#{drugcoding,jdbcType=INTEGER}, #{drugstype,jdbcType=VARCHAR}, #{drugsname,jdbcType=VARCHAR}, 
+      #{minimumspecification,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="md_id" keyProperty="mdId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicineDictionary" useGeneratedKeys="true">
+    insert into medicine_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="drugcoding != null">
+        drugcoding,
+      </if>
+      <if test="drugstype != null">
+        drugstype,
+      </if>
+      <if test="drugsname != null">
+        drugsname,
+      </if>
+      <if test="minimumspecification != null">
+        minimumspecification,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="drugcoding != null">
+        #{drugcoding,jdbcType=INTEGER},
+      </if>
+      <if test="drugstype != null">
+        #{drugstype,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsname != null">
+        #{drugsname,jdbcType=VARCHAR},
+      </if>
+      <if test="minimumspecification != null">
+        #{minimumspecification,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicineDictionary">
+    update medicine_dictionary
+    <set>
+      <if test="drugcoding != null">
+        drugcoding = #{drugcoding,jdbcType=INTEGER},
+      </if>
+      <if test="drugstype != null">
+        drugstype = #{drugstype,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsname != null">
+        drugsname = #{drugsname,jdbcType=VARCHAR},
+      </if>
+      <if test="minimumspecification != null">
+        minimumspecification = #{minimumspecification,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where md_id = #{mdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicineDictionary">
+    update medicine_dictionary
+    set drugcoding = #{drugcoding,jdbcType=INTEGER},
+      drugstype = #{drugstype,jdbcType=VARCHAR},
+      drugsname = #{drugsname,jdbcType=VARCHAR},
+      minimumspecification = #{minimumspecification,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where md_id = #{mdId,jdbcType=INTEGER}
+  </update>
+  <select id="selectdictionary"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from medicine_dictionary
+  </select>
+  <select id="selectdictionarybylike"  resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from medicine_dictionary
+    where drugsname like  #{drugsname}
+  </select>
+</mapper>

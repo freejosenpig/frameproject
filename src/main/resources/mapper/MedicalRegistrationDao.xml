@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.MedicalRegistrationDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.MedicalRegistration">
+    <id column="mr_id" jdbcType="INTEGER" property="mrId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="medical_time" jdbcType="TIMESTAMP" property="medicalTime" />
+    <result column="medical_adress" jdbcType="VARCHAR" property="medicalAdress" />
+    <result column="doctor" jdbcType="VARCHAR" property="doctor" />
+    <result column="diagnosis_results" jdbcType="VARCHAR" property="diagnosisResults" />
+    <result column="medical_advice" jdbcType="VARCHAR" property="medicalAdvice" />
+    <result column="rgtime" jdbcType="TIMESTAMP" property="rgtime" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mr_id, id, medical_time, medical_adress, doctor, diagnosis_results, medical_advice, 
+    rgtime, creat_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medical_registration
+    where mr_id = #{mrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medical_registration
+    where mr_id = #{mrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="mr_id" keyProperty="mrId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicalRegistration" useGeneratedKeys="true">
+    insert into medical_registration (id, medical_time, medical_adress, 
+      doctor, diagnosis_results, medical_advice, 
+      rgtime, creat_time)
+    values (#{id,jdbcType=INTEGER}, #{medicalTime,jdbcType=TIMESTAMP}, #{medicalAdress,jdbcType=VARCHAR}, 
+      #{doctor,jdbcType=VARCHAR}, #{diagnosisResults,jdbcType=VARCHAR}, #{medicalAdvice,jdbcType=VARCHAR}, 
+      #{rgtime,jdbcType=TIMESTAMP}, #{creatTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="mr_id" keyProperty="mrId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicalRegistration" useGeneratedKeys="true">
+    insert into medical_registration
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="medicalTime != null">
+        medical_time,
+      </if>
+      <if test="medicalAdress != null">
+        medical_adress,
+      </if>
+      <if test="doctor != null">
+        doctor,
+      </if>
+      <if test="diagnosisResults != null">
+        diagnosis_results,
+      </if>
+      <if test="medicalAdvice != null">
+        medical_advice,
+      </if>
+      <if test="rgtime != null">
+        rgtime,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="medicalTime != null">
+        #{medicalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicalAdress != null">
+        #{medicalAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisResults != null">
+        #{diagnosisResults,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalAdvice != null">
+        #{medicalAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="rgtime != null">
+        #{rgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicalRegistration">
+    update medical_registration
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="medicalTime != null">
+        medical_time = #{medicalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicalAdress != null">
+        medical_adress = #{medicalAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        doctor = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisResults != null">
+        diagnosis_results = #{diagnosisResults,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalAdvice != null">
+        medical_advice = #{medicalAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="rgtime != null">
+        rgtime = #{rgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mr_id = #{mrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicalRegistration">
+    update medical_registration
+    set id = #{id,jdbcType=INTEGER},
+      medical_time = #{medicalTime,jdbcType=TIMESTAMP},
+      medical_adress = #{medicalAdress,jdbcType=VARCHAR},
+      doctor = #{doctor,jdbcType=VARCHAR},
+      diagnosis_results = #{diagnosisResults,jdbcType=VARCHAR},
+      medical_advice = #{medicalAdvice,jdbcType=VARCHAR},
+      rgtime = #{rgtime,jdbcType=TIMESTAMP},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP}
+    where mr_id = #{mrId,jdbcType=INTEGER}
+  </update>
+  <select id="selectMedicalbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.MedicalRegisterResult">
+    select B.mr_id,B.id,B.medical_time,B.medical_adress,B.doctor,B.diagnosis_results,B.medical_advice,B.rgtime,B.creat_time, P.oldpeople_name from medical_registration B
+    inner join jd_oldpeople P on B.id = P.oldpeople_id
+  </select>
+</mapper>
