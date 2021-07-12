@@ -46,20 +46,17 @@ public class NurseController {
     }
 
     @Log("根据id修改数据")
-    @RequestMapping(value = "/updateNurse")
-    public int updateById(@RequestBody String add){
-        return  1;
+    @PostMapping(value = "/updateNurse")
+    public ServiceNurse updateById(@RequestBody ServiceNurse serviceNurse){
+        nurseService.update(serviceNurse);
+        return serviceNurse;
     }
 
     @Log("新增数据")
     @RequestMapping("/addNurse")
-    public AjaxResponse addNurse(@RequestBody String add){
-
-        JSONObject jsonObject = JSONObject.parseObject(add);
-        String one = jsonObject.getString("ServiceNurse");
-        ServiceNurse serviceNurse = JSON.parseObject(one, ServiceNurse.class);
-        ServiceNurse newc=nurseService.insert(serviceNurse);
-        return AjaxResponse.success(newc);
+    public ServiceNurse addNurse(@RequestBody ServiceNurse serviceNurse){
+        nurseService.insert(serviceNurse);
+        return serviceNurse;
 
     }
 }
