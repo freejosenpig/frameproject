@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.DrugsDepositDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit">
+    <id column="dd_id" jdbcType="INTEGER" property="ddId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="paymentmethod" jdbcType="VARCHAR" property="paymentmethod" />
+    <result column="dgname" jdbcType="VARCHAR" property="dgname" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="munit" jdbcType="VARCHAR" property="munit" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dd_id, id, paymentmethod, dgname, `number`, munit, `status`, rname, creat_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drugs_deposit
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drugs_deposit
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="dd_id" keyProperty="ddId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit" useGeneratedKeys="true">
+    insert into drugs_deposit (id, paymentmethod, dgname, 
+      `number`, munit, `status`, 
+      rname, creat_time)
+    values (#{id,jdbcType=INTEGER}, #{paymentmethod,jdbcType=VARCHAR}, #{dgname,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{munit,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{rname,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="dd_id" keyProperty="ddId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit" useGeneratedKeys="true">
+    insert into drugs_deposit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paymentmethod != null">
+        paymentmethod,
+      </if>
+      <if test="dgname != null">
+        dgname,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="munit != null">
+        munit,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="rname != null">
+        rname,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paymentmethod != null">
+        #{paymentmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="dgname != null">
+        #{dgname,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="munit != null">
+        #{munit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit">
+    update drugs_deposit
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paymentmethod != null">
+        paymentmethod = #{paymentmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="dgname != null">
+        dgname = #{dgname,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="munit != null">
+        munit = #{munit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit">
+    update drugs_deposit
+    set id = #{id,jdbcType=INTEGER},
+      paymentmethod = #{paymentmethod,jdbcType=VARCHAR},
+      dgname = #{dgname,jdbcType=VARCHAR},
+      `number` = #{number,jdbcType=INTEGER},
+      munit = #{munit,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP}
+    where dd_id = #{ddId,jdbcType=INTEGER}
+  </update>
+  <select id="selectDepositbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.DrugsDepositResult">
+    select B.dd_id,B.id,B.paymentmethod,B.dgname,B.number,B.munit,B.status,B.rname,B.creat_time,P.oldpeople_name from drugs_deposit B
+  inner join jd_oldpeople P on B.id = P.oldpeople_id
+
+  </select>
+</mapper>

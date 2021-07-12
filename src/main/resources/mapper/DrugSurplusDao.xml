@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.DrugSurplusDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.DrugSurplus">
+    <id column="mes_id" jdbcType="INTEGER" property="mesId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mname" jdbcType="VARCHAR" property="mname" />
+    <result column="minimum_size" jdbcType="VARCHAR" property="minimumSize" />
+    <result column="surplusmedine" jdbcType="INTEGER" property="surplusmedine" />
+    <result column="balancestatus" jdbcType="VARCHAR" property="balancestatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mes_id, id, mname, minimum_size, surplusmedine, balancestatus, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drug_surplus
+    where mes_id = #{mesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drug_surplus
+    where mes_id = #{mesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="mes_id" keyProperty="mesId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugSurplus" useGeneratedKeys="true">
+    insert into drug_surplus (id, mname, minimum_size, 
+      surplusmedine, balancestatus, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{minimumSize,jdbcType=VARCHAR}, 
+      #{surplusmedine,jdbcType=INTEGER}, #{balancestatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="mes_id" keyProperty="mesId" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugSurplus" useGeneratedKeys="true">
+    insert into drug_surplus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mname != null">
+        mname,
+      </if>
+      <if test="minimumSize != null">
+        minimum_size,
+      </if>
+      <if test="surplusmedine != null">
+        surplusmedine,
+      </if>
+      <if test="balancestatus != null">
+        balancestatus,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mname != null">
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="minimumSize != null">
+        #{minimumSize,jdbcType=VARCHAR},
+      </if>
+      <if test="surplusmedine != null">
+        #{surplusmedine,jdbcType=INTEGER},
+      </if>
+      <if test="balancestatus != null">
+        #{balancestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugSurplus">
+    update drug_surplus
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mname != null">
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="minimumSize != null">
+        minimum_size = #{minimumSize,jdbcType=VARCHAR},
+      </if>
+      <if test="surplusmedine != null">
+        surplusmedine = #{surplusmedine,jdbcType=INTEGER},
+      </if>
+      <if test="balancestatus != null">
+        balancestatus = #{balancestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mes_id = #{mesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugSurplus">
+    update drug_surplus
+    set id = #{id,jdbcType=INTEGER},
+      mname = #{mname,jdbcType=VARCHAR},
+      minimum_size = #{minimumSize,jdbcType=VARCHAR},
+      surplusmedine = #{surplusmedine,jdbcType=INTEGER},
+      balancestatus = #{balancestatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where mes_id = #{mesId,jdbcType=INTEGER}
+  </update>
+  <select id="selectSurplusbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.DrugSuplusResult">
+    select B.mes_id,B.id,B.mname,B.minimum_size,B.surplusmedine,B.balancestatus,B.create_time, P.oldpeople_name from drug_surplus B
+    inner join jd_oldpeople P on B.id = P.oldpeople_id
+  </select>
+</mapper>

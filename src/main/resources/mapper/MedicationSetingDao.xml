@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.lishaofeng.MedicationSetingDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.lishaofeng.MedicationSeting">
+    <id column="ms_id" jdbcType="INTEGER" property="msId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="disease" jdbcType="VARCHAR" property="disease" />
+    <result column="diseasetype" jdbcType="VARCHAR" property="diseasetype" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ms_id, id, disease, diseasetype, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medication_seting
+    where ms_id = #{msId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medication_seting
+    where ms_id = #{msId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ms_id" keyProperty="msId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicationSeting" useGeneratedKeys="true">
+    insert into medication_seting (id, disease, diseasetype, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{disease,jdbcType=VARCHAR}, #{diseasetype,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ms_id" keyProperty="msId" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicationSeting" useGeneratedKeys="true">
+    insert into medication_seting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="disease != null">
+        disease,
+      </if>
+      <if test="diseasetype != null">
+        diseasetype,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="disease != null">
+        #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasetype != null">
+        #{diseasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicationSeting">
+    update medication_seting
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="disease != null">
+        disease = #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasetype != null">
+        diseasetype = #{diseasetype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ms_id = #{msId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.lishaofeng.MedicationSeting">
+    update medication_seting
+    set id = #{id,jdbcType=INTEGER},
+      disease = #{disease,jdbcType=VARCHAR},
+      diseasetype = #{diseasetype,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ms_id = #{msId,jdbcType=INTEGER}
+  </update>
+  <select id="selectMedSetingbyperson" resultType="com.zktr.yuyi.entity.lishaofeng.result.MedicationSetingsResult">
+    select B.ms_id,B.id,B.disease,B.diseasetype,B.create_time,P.oldpeople_name from medication_seting B
+    inner join jd_oldpeople P on B.id = P.oldpeople_id
+  </select>
+</mapper>

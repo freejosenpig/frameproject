@@ -1,5 +1,8 @@
 package com.zktr.yuyi.entity.hedangren;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -26,6 +29,8 @@ public class SysDepartment implements Serializable {
     /**
      * 部门创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
     /**
      * 删除状态
@@ -38,6 +43,8 @@ public class SysDepartment implements Serializable {
     /**
      * 部门修改时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
 
