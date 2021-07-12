@@ -2,7 +2,10 @@ package com.zktr.yuyi.controller.liuzhui;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.zktr.yuyi.annotation.Log;
+import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import com.zktr.yuyi.exception.CustomError;
 import com.zktr.yuyi.service.liuzhui.NurseService;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 护工表(serve_nurse)Controller
@@ -60,4 +65,24 @@ public class NurseController {
         return serviceNurse;
 
     }
+
+    /**
+     * 条件分页查询用户信息
+     * @param conditionpage 查询条件
+     * @return 菜单信息
+     */
+//    @PostMapping("/conditionpageuser")
+//    public AjaxResponse conditionpageuser(@RequestBody String conditionpage){
+//        JSONObject jsonObject = JSONObject.parseObject(conditionpage);
+//        String condition = jsonObject.getString("condition");//查询条件
+//        ServiceNurse user = JSON.parseObject(condition, ServiceNurse.class);
+//        int currentPage = Integer.parseInt(jsonObject.getString("currentPage"));
+//        int pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+//        Map<String,Object> map=new HashMap<>();
+//        Page<Object> page= PageHelper.startPage(currentPage,pageSize);
+//        List<ServiceNurse> users=sysUserService.queryAllByUser(user);
+//        map.put("total",page.getTotal());
+//        map.put("rows",users);
+//        return AjaxResponse.success(map);
+//    }
 }
