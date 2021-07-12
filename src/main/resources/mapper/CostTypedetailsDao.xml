@@ -25,7 +25,7 @@
   </sql>
 
   <sql id="Base_Column_List">
-    item.item_Id, item.type_Id, item.item_name, item.item_price, item.item_explain, item.item_opId, item.item_time, item.item_TimeLiness
+    item.item_Id, item.type_Id, item.item_nameId, item.item_explain, item.item_opId, item.item_time, item.item_TimeLiness
   </sql>
 
   <!--  根据类别编号查询费用详情-->

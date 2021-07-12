@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
 /**
@@ -39,6 +41,9 @@ public class CostPrestore implements Serializable {
      * 时效性
      */
     private Integer prestoreTimeliness;
+
+    //老人信息
+    private JdOldpeople jdOldpeople;
 
     private static final long serialVersionUID = 1L;
 }
