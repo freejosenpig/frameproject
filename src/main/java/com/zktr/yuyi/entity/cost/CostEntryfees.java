@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 /**
  * cost_entryfees
@@ -32,6 +34,7 @@ public class CostEntryfees implements Serializable {
     /**
      * 缴费时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date entryfeesTime;
 
     /**

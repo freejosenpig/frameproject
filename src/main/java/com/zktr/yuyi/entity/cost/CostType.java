@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -23,6 +25,7 @@ public class CostType implements Serializable {
     /**
      * 新增时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date typeTime;
 
     /**

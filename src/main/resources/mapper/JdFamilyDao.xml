@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdFamilyDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdFamily">
+    <id column="family_id" jdbcType="INTEGER" property="familyId" />
+    <result column="family_name" jdbcType="VARCHAR" property="familyName" />
+    <result column="family_phone" jdbcType="VARCHAR" property="familyPhone" />
+    <result column="family_address" jdbcType="VARCHAR" property="familyAddress" />
+    <result column="family_ordid" jdbcType="INTEGER" property="familyOrdid" />
+    <result column="family_relation" jdbcType="VARCHAR" property="familyRelation" />
+    <result column="family_addname" jdbcType="INTEGER" property="familyAddname" />
+    <result column="family_addtime" jdbcType="TIMESTAMP" property="familyAddtime" />
+    <result column="family_registrant" jdbcType="INTEGER" property="familyRegistrant" />
+    <result column="family_rtime" jdbcType="TIMESTAMP" property="familyRtime" />
+    <result column="family_note" jdbcType="VARCHAR" property="familyNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    family_id, family_name, family_phone, family_address, family_ordid, family_relation, 
+    family_addname, family_addtime, family_registrant, family_rtime, family_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_family
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_family
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="family_id" keyProperty="familyId" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily" useGeneratedKeys="true">
+    insert into jd_family (family_name, family_phone, family_address, 
+      family_ordid, family_relation, family_addname, 
+      family_addtime, family_registrant, family_rtime, 
+      family_note)
+    values (#{familyName,jdbcType=VARCHAR}, #{familyPhone,jdbcType=VARCHAR}, #{familyAddress,jdbcType=VARCHAR}, 
+      #{familyOrdid,jdbcType=INTEGER}, #{familyRelation,jdbcType=VARCHAR}, #{familyAddname,jdbcType=INTEGER}, 
+      #{familyAddtime,jdbcType=TIMESTAMP}, #{familyRegistrant,jdbcType=INTEGER}, #{familyRtime,jdbcType=TIMESTAMP}, 
+      #{familyNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="family_id" keyProperty="familyId" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily" useGeneratedKeys="true">
+    insert into jd_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="familyName != null">
+        family_name,
+      </if>
+      <if test="familyPhone != null">
+        family_phone,
+      </if>
+      <if test="familyAddress != null">
+        family_address,
+      </if>
+      <if test="familyOrdid != null">
+        family_ordid,
+      </if>
+      <if test="familyRelation != null">
+        family_relation,
+      </if>
+      <if test="familyAddname != null">
+        family_addname,
+      </if>
+      <if test="familyAddtime != null">
+        family_addtime,
+      </if>
+      <if test="familyRegistrant != null">
+        family_registrant,
+      </if>
+      <if test="familyRtime != null">
+        family_rtime,
+      </if>
+      <if test="familyNote != null">
+        family_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="familyName != null">
+        #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhone != null">
+        #{familyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null">
+        #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyOrdid != null">
+        #{familyOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="familyRelation != null">
+        #{familyRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddname != null">
+        #{familyAddname,jdbcType=INTEGER},
+      </if>
+      <if test="familyAddtime != null">
+        #{familyAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="familyRegistrant != null">
+        #{familyRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="familyRtime != null">
+        #{familyRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="familyNote != null">
+        #{familyNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily">
+    update jd_family
+    <set>
+      <if test="familyName != null">
+        family_name = #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhone != null">
+        family_phone = #{familyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null">
+        family_address = #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyOrdid != null">
+        family_ordid = #{familyOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="familyRelation != null">
+        family_relation = #{familyRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddname != null">
+        family_addname = #{familyAddname,jdbcType=INTEGER},
+      </if>
+      <if test="familyAddtime != null">
+        family_addtime = #{familyAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="familyRegistrant != null">
+        family_registrant = #{familyRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="familyRtime != null">
+        family_rtime = #{familyRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="familyNote != null">
+        family_note = #{familyNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily">
+    update jd_family
+    set family_name = #{familyName,jdbcType=VARCHAR},
+      family_phone = #{familyPhone,jdbcType=VARCHAR},
+      family_address = #{familyAddress,jdbcType=VARCHAR},
+      family_ordid = #{familyOrdid,jdbcType=INTEGER},
+      family_relation = #{familyRelation,jdbcType=VARCHAR},
+      family_addname = #{familyAddname,jdbcType=INTEGER},
+      family_addtime = #{familyAddtime,jdbcType=TIMESTAMP},
+      family_registrant = #{familyRegistrant,jdbcType=INTEGER},
+      family_rtime = #{familyRtime,jdbcType=TIMESTAMP},
+      family_note = #{familyNote,jdbcType=VARCHAR}
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </update>
+</mapper>

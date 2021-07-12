@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.cost.CostListDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostList">
+    <id column="list_Id" jdbcType="INTEGER" property="listId" />
+    <result column="oldpeople_Id" jdbcType="INTEGER" property="oldpeopleId" />
+    <result column="list_explain" jdbcType="VARCHAR" property="listExplain" />
+    <result column="list_moeny" jdbcType="DECIMAL" property="listMoeny" />
+    <result column="list_time" jdbcType="TIMESTAMP" property="listTime" />
+    <result column="liat_opId" jdbcType="INTEGER" property="liatOpid" />
+    <result column="list_remark" jdbcType="VARCHAR" property="listRemark" />
+    <result column="timeLiness" jdbcType="INTEGER" property="timeLiness" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    list_Id, oldpeople_Id, list_explain, list_moeny, list_time, liat_opId, list_remark
+  </sql>
+
+  <!--  根据老人编号查询流水信息-->
+  <select id="selectByOldId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from cost_list
+    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cost_list
+    where list_Id = #{listId,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cost_list
+    where list_Id = #{listId,jdbcType=INTEGER}
+  </delete>
+
+  <!--  新增流水信息-->
+  <insert id="insert" keyColumn="list_Id" keyProperty="listId" parameterType="com.zktr.yuyi.entity.cost.CostList" useGeneratedKeys="true">
+    insert into cost_list (oldpeople_Id, list_explain, list_moeny, liat_opId, list_remark)
+    values (#{oldpeopleId,jdbcType=INTEGER}, #{listExplain,jdbcType=VARCHAR}, #{listMoeny,jdbcType=DECIMAL}, 
+      #{liatOpid,jdbcType=INTEGER}, #{listRemark,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" keyColumn="list_Id" keyProperty="listId" parameterType="com.zktr.yuyi.entity.cost.CostList" useGeneratedKeys="true">
+    insert into cost_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        oldpeople_Id,
+      </if>
+      <if test="listExplain != null">
+        list_explain,
+      </if>
+      <if test="listMoeny != null">
+        list_moeny,
+      </if>
+      <if test="listTime != null">
+        list_time,
+      </if>
+      <if test="liatOpid != null">
+        liat_opId,
+      </if>
+      <if test="listRemark != null">
+        list_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleId != null">
+        #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="listExplain != null">
+        #{listExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="listMoeny != null">
+        #{listMoeny,jdbcType=DECIMAL},
+      </if>
+      <if test="listTime != null">
+        #{listTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="liatOpid != null">
+        #{liatOpid,jdbcType=INTEGER},
+      </if>
+      <if test="listRemark != null">
+        #{listRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!--  根据编号修改流水信息-->
+  <update id="updateByKey" parameterType="com.zktr.yuyi.entity.cost.CostList">
+    update cost_list
+    <set>
+      <if test="oldpeopleId != null">
+        oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      </if>
+      <if test="listExplain != null">
+        list_explain = #{listExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="listMoeny != null">
+        list_moeny = #{listMoeny,jdbcType=DECIMAL},
+      </if>
+      <if test="listTime != null">
+        list_time = #{listTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="liatOpid != null">
+        liat_opId = #{liatOpid,jdbcType=INTEGER},
+      </if>
+      <if test="listRemark != null">
+        list_remark = #{listRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where list_Id = #{listId,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostList">
+    update cost_list
+    set oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
+      list_explain = #{listExplain,jdbcType=VARCHAR},
+      list_moeny = #{listMoeny,jdbcType=DECIMAL},
+      list_time = #{listTime,jdbcType=TIMESTAMP},
+      liat_opId = #{liatOpid,jdbcType=INTEGER},
+      list_remark = #{listRemark,jdbcType=VARCHAR}
+    where list_Id = #{listId,jdbcType=INTEGER}
+  </update>
+</mapper>

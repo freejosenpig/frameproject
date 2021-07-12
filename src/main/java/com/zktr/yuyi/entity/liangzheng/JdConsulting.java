@@ -2,6 +2,10 @@ package com.zktr.yuyi.entity.liangzheng;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
 
 /**
@@ -23,6 +27,7 @@ public class JdConsulting implements Serializable {
     /**
      * 咨询时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date consultingTime;
 
     /**
@@ -83,26 +88,31 @@ public class JdConsulting implements Serializable {
     /**
      * 接待人
      */
+    private ServiceNurse serviceNurse2;
     private Integer consultingService;
 
     /**
      * 咨询档案创建人
      */
+    private SysUser sysUser;
     private Integer consultingAddname;
 
     /**
      * 咨询档案创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date consultingAddtime;
 
     /**
      * 咨询档案登记人
      */
+    private ServiceNurse serviceNurse;
     private Integer consultingRegistrant;
 
     /**
      * 咨询档案登记时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date consultingRtime;
 
     /**
@@ -110,5 +120,9 @@ public class JdConsulting implements Serializable {
      */
     private String consultingNote;
 
+    /**
+     * 时效性
+     */
+    private Integer timeliness;
     private static final long serialVersionUID = 1L;
 }
