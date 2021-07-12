@@ -41,4 +41,9 @@ public class CostBackServiceImpl implements CostBackService  {
     public List<CostBack> selectAll() {
         return costBackdao.selectAll();
     }
+
+    @Override
+    public List<CostBack> selectBycontion(String backname) {
+        return costBackdao.selectBycontion(backname);
+    }
 }

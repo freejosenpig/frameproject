@@ -12,24 +12,77 @@
     <result column="entry_money" jdbcType="DECIMAL" property="entryMoney" />
     <result column="out_money" jdbcType="DECIMAL" property="outMoney" />
     <result column="back_TimeLiness" jdbcType="INTEGER" property="backTimeliness" />
+
+    <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+      <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+      <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+      <result column="oldpeople_sex" jdbcType="VARCHAR" property="oldpeopleSex" />
+      <result column="oldpeople_idcard" jdbcType="VARCHAR" property="oldpeopleIdcard" />
+      <result column="oldpeople_birthday" jdbcType="TIMESTAMP" property="oldpeopleBirthday" />
+      <result column="oldpeople_phone" jdbcType="VARCHAR" property="oldpeoplePhone" />
+      <result column="oldpeople_marriage" jdbcType="VARCHAR" property="oldpeopleMarriage" />
+      <result column="oldpeople_national" jdbcType="VARCHAR" property="oldpeopleNational" />
+      <result column="oldpeople_political" jdbcType="VARCHAR" property="oldpeoplePolitical" />
+      <result column="oldpeople_job" jdbcType="VARCHAR" property="oldpeopleJob" />
+      <result column="oldpeople_address" jdbcType="VARCHAR" property="oldpeopleAddress" />
+      <result column="oldpeople_hobby" jdbcType="VARCHAR" property="oldpeopleHobby" />
+      <result column="oldpeople_character" jdbcType="VARCHAR" property="oldpeopleCharacter" />
+      <result column="oldpeople_likefood" jdbcType="VARCHAR" property="oldpeopleLikefood" />
+      <result column="oldpeople_culture" jdbcType="VARCHAR" property="oldpeopleCulture" />
+      <result column="oldpeople_ability" jdbcType="VARCHAR" property="oldpeopleAbility" />
+      <result column="oldpeople_medical" jdbcType="VARCHAR" property="oldpeopleMedical" />
+      <result column="oldpeople_medicalid" jdbcType="VARCHAR" property="oldpeopleMedicalid" />
+      <result column="oldpeople_number" jdbcType="VARCHAR" property="oldpeopleNumber" />
+      <result column="oldpeople_addname" jdbcType="INTEGER" property="oldpeopleAddname" />
+      <result column="oldpeople_addtime" jdbcType="TIMESTAMP" property="oldpeopleAddtime" />
+      <result column="oldpeople_account" jdbcType="DECIMAL" property="oldpeopleAccount" />
+      <result column="oldpeople_age" jdbcType="INTEGER" property="oldpeopleAge" />
+      <result column="oldpeople_status" jdbcType="INTEGER" property="oldpeopleStatus" />
+      <result column="oldpeople_registrant" jdbcType="INTEGER" property="oldpeopleRegistrant" />
+      <result column="oldpeople_rtime" jdbcType="TIMESTAMP" property="oldpeopleRtime" />
+      <result column="oldpeople_note" jdbcType="VARCHAR" property="oldpeopleNote" />
+    </association>
+
   </resultMap>
 
 
+  <sql id="oldpeople">
+     old.oldpeople_id,  old.oldpeople_name,  old.oldpeople_sex,  old.oldpeople_idcard,  old.oldpeople_birthday,
+     old.oldpeople_phone,  old.oldpeople_marriage,  old.oldpeople_national,  old.oldpeople_political,  old.oldpeople_job,
+     old.oldpeople_address,  old.oldpeople_hobby,  old.oldpeople_character,  old.oldpeople_likefood,  old.oldpeople_culture,
+     old.oldpeople_ability,  old.oldpeople_medical,  old.oldpeople_medicalid,  old.oldpeople_number,  old.oldpeople_addname,
+     old.oldpeople_addtime,  old.oldpeople_account,  old.oldpeople_age, oldpeople_status,  old.oldpeople_registrant,
+     old.oldpeople_rtime,  old.oldpeople_note
+  </sql>
 
   <sql id="Base_Column_List">
-    back_Id, oldpeople_Id, istoback, back_money, back_entryfees_money, back_opId, back_time, 
-    entry_money, out_money, back_TimeLiness
+    b.back_Id, b.oldpeople_Id, b.istoback, b.back_money, b.back_entryfees_money, b.back_opId, b.back_time,
+    b.entry_money, b.out_money, b.back_TimeLiness
   </sql>
+
+  <!--  多条件查询-->
+  <select id="selectBycontion" resultMap="BaseResultMap">
+    select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_back b
+    inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+    <where>
+      <if test="oldpeople_name != null">
+        oldpeople_name like CONCAT(CONCAT('%',#{oldpeopleName,jdbcType=VARCHAR},'%'))
+      </if>
+    </where>
+    ORDER BY b.back_Id
+  </select>
 
   <!--根据老人编号查询退住信息-->
   <select id="selectByoldId" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/> from cost_back
-    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+    select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_back b
+    inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+    where old.oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
   </select>
 
   <!--查询所有退住信息-->
   <select id="selectAll" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/> from cost_back
+    select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_back b
+    inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
   </select>
 
 

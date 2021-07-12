@@ -18,14 +18,13 @@ public class CostOutController {
     //    查询所有
     @GetMapping("/seletcOutAll")
     public AjaxResponse selectAll(){
-        costOutstandingService.selectAll();
-        return AjaxResponse.success("新增成功");
+        return AjaxResponse.success( costOutstandingService.selectAll());
     }
     //    根据老人编号查询欠费信息
     @GetMapping("/selectOutByOldId")
-    public AjaxResponse selectByOldId(Integer oldId){
-        costOutstandingService.selectByOldId(oldId);
-        return AjaxResponse.success("查询成功");
+    public AjaxResponse selectByOldId(@PathVariable Integer oldId){
+
+        return AjaxResponse.success(costOutstandingService.selectByOldId(oldId));
     }
     //    新增欠费信息
     @PostMapping("/insertOutstanding")
