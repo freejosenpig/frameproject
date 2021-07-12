@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.ABadDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.ABad">
+    <id column="bed_id" jdbcType="INTEGER" property="bedId" />
+    <result column="bed_number" jdbcType="VARCHAR" property="bedNumber" />
+    <result column="bed_room" jdbcType="INTEGER" property="bedRoom" />
+    <result column="bed_status" jdbcType="INTEGER" property="bedStatus" />
+    <association property="room" javaType="com.zktr.yuyi.entity.liangzheng.ARoom">
+      <id column="room_id" jdbcType="INTEGER" property="roomId" />
+      <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
+      <result column="room_type" jdbcType="INTEGER" property="roomType" />
+      <result column="room_floor" jdbcType="INTEGER" property="roomFloor" />
+      <result column="room_building" jdbcType="VARCHAR" property="roomBuilding" />
+      <result column="room_status" jdbcType="INTEGER" property="roomStatus" />
+    </association>
+    <association property="roomtype" javaType="com.zktr.yuyi.entity.liangzheng.ARoomtype">
+      <id column="roomtype_id" jdbcType="INTEGER" property="roomtypeId" />
+      <result column="roomtype_name" jdbcType="VARCHAR" property="roomtypeName" />
+      <result column="roomtype_price" jdbcType="DECIMAL" property="roomtypePrice" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_b">
+    b.bed_id, b.bed_number, b.bed_room, b.bed_status
+  </sql>
+  <sql id="Base_Column_r">
+    r.room_id, r.room_number, r.room_type, r.room_floor, r.room_building, r.room_status
+  </sql>
+  <sql id="Base_Column_rt">
+    rt.roomtype_id, rt.roomtype_name, rt.roomtype_price
+  </sql>
+  <select id="selectAllBed" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_b" />,
+    <include refid="Base_Column_r" />,
+    <include refid="Base_Column_rt" />
+    from a_bed b
+    inner join a_room r on b.bed_room = r.room_id
+    inner join a_roontype rt on r.room_type = rt.roomtype_id
+    where b.bed_status = 0
+  </select>
+  <sql id="Base_Column_List">
+    bad_id, bad_number, bad_room, bad_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from a_bad
+    where bad_id = #{badId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from a_bad
+    where bad_id = #{badId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="bad_id" keyProperty="badId" parameterType="com.zktr.yuyi.entity.liangzheng.ABad" useGeneratedKeys="true">
+    insert into a_bad (bad_number, bad_room, bad_status
+      )
+    values (#{badNumber,jdbcType=VARCHAR}, #{badRoom,jdbcType=INTEGER}, #{badStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="bad_id" keyProperty="badId" parameterType="com.zktr.yuyi.entity.liangzheng.ABad" useGeneratedKeys="true">
+    insert into a_bad
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="badNumber != null">
+        bad_number,
+      </if>
+      <if test="badRoom != null">
+        bad_room,
+      </if>
+      <if test="badStatus != null">
+        bad_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="badNumber != null">
+        #{badNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="badRoom != null">
+        #{badRoom,jdbcType=INTEGER},
+      </if>
+      <if test="badStatus != null">
+        #{badStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.ABad">
+    update a_bad
+    <set>
+      <if test="badNumber != null">
+        bad_number = #{badNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="badRoom != null">
+        bad_room = #{badRoom,jdbcType=INTEGER},
+      </if>
+      <if test="badStatus != null">
+        bad_status = #{badStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bad_id = #{badId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.ABad">
+    update a_bad
+    set bad_number = #{badNumber,jdbcType=VARCHAR},
+      bad_room = #{badRoom,jdbcType=INTEGER},
+      bad_status = #{badStatus,jdbcType=INTEGER}
+    where bad_id = #{badId,jdbcType=INTEGER}
+  </update>
+</mapper>

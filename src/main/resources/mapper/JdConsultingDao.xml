@@ -79,6 +79,12 @@
     inner join sys_user su on con.consulting_addname = su.id
     inner join service_nurse sn2 on con.consulting_service = sn2.id
     where con.timeliness = 0
+    order by con.consulting_id desc
+  </select>
+  <select id="selectConsultingById"  resultMap="BaseResultMap">
+    select consulting_oldname,consulting_oldidcard,consulting_oldsex,consulting_oldage,consulting_ordaddress
+    from jd_consulting
+    where consulting_id = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insertConsulting" keyColumn="consulting_id" keyProperty="consultingId" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting" useGeneratedKeys="true">
     insert into jd_consulting (consulting_name, consulting_time,

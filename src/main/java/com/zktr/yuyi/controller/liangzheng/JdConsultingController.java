@@ -25,6 +25,16 @@ public class JdConsultingController {
         return consultingPageInfo;
     }
 
+    @GetMapping("/selectConsulting")
+    public List<JdConsulting> selectConsulting(){
+        return consultingService.selectAllConsulting();
+    }
+
+    @GetMapping("/selectConsultingById")
+    public JdConsulting selectConsultingById(@RequestParam("what") Integer id){
+        return consultingService.selectConsultingById(id);
+    }
+
     @PostMapping("/insertConsulting")
     public AjaxResponse insertConsulting(@RequestBody JdConsulting jdConsulting){
         consultingService.insertConsulting(jdConsulting);
