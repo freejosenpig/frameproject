@@ -16,21 +16,11 @@
     </properties>
 
     <dependencies>
-<<<<<<< HEAD
-        <!--分页插件-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.2.10</version>
-        </dependency>
-=======
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.13</version>
         </dependency>
-
->>>>>>> ad3838b172aff47107e4519393f2718f206961fe
         <!-- 阿里巴巴json-->
         <dependency>
             <groupId>com.alibaba</groupId>
