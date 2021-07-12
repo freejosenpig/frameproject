@@ -4,34 +4,65 @@
   <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.cost.CostTypedetails">
     <id column="item_Id" jdbcType="INTEGER" property="itemId" />
     <result column="type_Id" jdbcType="INTEGER" property="typeId" />
-    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
-    <result column="item_price" jdbcType="DECIMAL" property="itemPrice" />
+    <result column="item_nameId" jdbcType="INTEGER" property="itemNameId" />
     <result column="item_explain" jdbcType="VARCHAR" property="itemExplain" />
     <result column="item_opId" jdbcType="INTEGER" property="itemOpid" />
     <result column="item_time" jdbcType="TIMESTAMP" property="itemTime" />
     <result column="item_TimeLiness" jdbcType="VARCHAR" property="itemTimeliness" />
+
+    <association property="costType" javaType="com.zktr.yuyi.entity.cost.CostType">
+      <id column="type_Id" jdbcType="INTEGER" property="typeId" />
+      <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+      <result column="type_time" jdbcType="TIMESTAMP" property="typeTime" />
+      <result column="type_opId" jdbcType="INTEGER" property="typeOpid" />
+      <result column="type_TimeLiness" jdbcType="VARCHAR" property="typeTimeliness" />
+    </association>
+
   </resultMap>
-  <sql id="Base_Column_List">
-    item_Id, type_Id, item_name, item_price, item_explain, item_opId, item_time, item_TimeLiness
+
+  <sql id="costType">
+    ct.type_Id,ct.type_name, ct.type_time, ct.type_opId, ct.type_TimeLiness
   </sql>
+
+  <sql id="Base_Column_List">
+    item.item_Id, item.type_Id, item.item_name, item.item_price, item.item_explain, item.item_opId, item.item_time, item.item_TimeLiness
+  </sql>
+
+  <!--  根据类别编号查询费用详情-->
+  <select id="selectBytypeId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from cost_typedetails
+    where item.type_Id=#{typeId,jdbcType=INTEGER}
+  </select>
+
+  <!--  查询所有费用详情-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>,<include refid="costType"/> from cost_typedetails item
+    inner join cost_type ct on item.type_Id=ct.type_Id
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cost_typedetails
-    where item_Id = #{itemId,jdbcType=INTEGER}
+    where item.item_Id = #{itemId,jdbcType=INTEGER}
   </select>
+
+  <!--  删除费用详情-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cost_typedetails
     where item_Id = #{itemId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails" useGeneratedKeys="true">
-    insert into cost_typedetails (type_Id, item_name, item_price, 
-      item_explain, item_opId, item_time, 
-      item_TimeLiness)
+
+  <!--新增费用详情-->
+  <insert id="insertdetails" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails" useGeneratedKeys="true">
+    insert into cost_typedetails (type_Id, item_name, item_price,item_explain, item_opId)
     values (#{typeId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemPrice,jdbcType=DECIMAL}, 
-      #{itemExplain,jdbcType=VARCHAR}, #{itemOpid,jdbcType=INTEGER}, #{itemTime,jdbcType=TIMESTAMP}, 
-      #{itemTimeliness,jdbcType=VARCHAR})
+      #{itemExplain,jdbcType=VARCHAR}, #{itemOpid,jdbcType=INTEGER})
   </insert>
+
+
   <insert id="insertSelective" keyColumn="item_Id" keyProperty="itemId" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails" useGeneratedKeys="true">
     insert into cost_typedetails
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -81,7 +112,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails">
+
+  <!--  修改费用详情-->
+  <update id="updateByKey" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails">
     update cost_typedetails
     <set>
       <if test="typeId != null">
@@ -108,6 +141,8 @@
     </set>
     where item_Id = #{itemId,jdbcType=INTEGER}
   </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.cost.CostTypedetails">
     update cost_typedetails
     set type_Id = #{typeId,jdbcType=INTEGER},

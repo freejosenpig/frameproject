@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdOldpeopleDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+    <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+    <result column="oldpeople_sex" jdbcType="VARCHAR" property="oldpeopleSex" />
+    <result column="oldpeople_idcard" jdbcType="VARCHAR" property="oldpeopleIdcard" />
+    <result column="oldpeople_birthday" jdbcType="TIMESTAMP" property="oldpeopleBirthday" />
+    <result column="oldpeople_phone" jdbcType="VARCHAR" property="oldpeoplePhone" />
+    <result column="oldpeople_marriage" jdbcType="VARCHAR" property="oldpeopleMarriage" />
+    <result column="oldpeople_national" jdbcType="VARCHAR" property="oldpeopleNational" />
+    <result column="oldpeople_political" jdbcType="VARCHAR" property="oldpeoplePolitical" />
+    <result column="oldpeople_job" jdbcType="VARCHAR" property="oldpeopleJob" />
+    <result column="oldpeople_address" jdbcType="VARCHAR" property="oldpeopleAddress" />
+    <result column="oldpeople_hobby" jdbcType="VARCHAR" property="oldpeopleHobby" />
+    <result column="oldpeople_character" jdbcType="VARCHAR" property="oldpeopleCharacter" />
+    <result column="oldpeople_likefood" jdbcType="VARCHAR" property="oldpeopleLikefood" />
+    <result column="oldpeople_culture" jdbcType="VARCHAR" property="oldpeopleCulture" />
+    <result column="oldpeople_ability" jdbcType="VARCHAR" property="oldpeopleAbility" />
+    <result column="oldpeople_medical" jdbcType="VARCHAR" property="oldpeopleMedical" />
+    <result column="oldpeople_medicalid" jdbcType="VARCHAR" property="oldpeopleMedicalid" />
+    <result column="oldpeople_number" jdbcType="VARCHAR" property="oldpeopleNumber" />
+    <result column="oldpeople_addname" jdbcType="INTEGER" property="oldpeopleAddname" />
+    <result column="oldpeople_addtime" jdbcType="TIMESTAMP" property="oldpeopleAddtime" />
+    <result column="oldpeople_account" jdbcType="DECIMAL" property="oldpeopleAccount" />
+    <result column="oldpeople_age" jdbcType="INTEGER" property="oldpeopleAge" />
+    <result column="oldpeople_status" jdbcType="INTEGER" property="oldpeopleStatus" />
+    <result column="oldpeople_registrant" jdbcType="INTEGER" property="oldpeopleRegistrant" />
+    <result column="oldpeople_rtime" jdbcType="TIMESTAMP" property="oldpeopleRtime" />
+    <result column="oldpeople_note" jdbcType="VARCHAR" property="oldpeopleNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oldpeople_id, oldpeople_name, oldpeople_sex, oldpeople_idcard, oldpeople_birthday, 
+    oldpeople_phone, oldpeople_marriage, oldpeople_national, oldpeople_political, oldpeople_job, 
+    oldpeople_address, oldpeople_hobby, oldpeople_character, oldpeople_likefood, oldpeople_culture, 
+    oldpeople_ability, oldpeople_medical, oldpeople_medicalid, oldpeople_number, oldpeople_addname, 
+    oldpeople_addtime, oldpeople_account, oldpeople_age, oldpeople_status, oldpeople_registrant, 
+    oldpeople_rtime, oldpeople_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_oldpeople
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_oldpeople
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="oldpeople_id" keyProperty="oldpeopleId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople" useGeneratedKeys="true">
+    insert into jd_oldpeople (oldpeople_name, oldpeople_sex, oldpeople_idcard, 
+      oldpeople_birthday, oldpeople_phone, oldpeople_marriage, 
+      oldpeople_national, oldpeople_political, 
+      oldpeople_job, oldpeople_address, oldpeople_hobby, 
+      oldpeople_character, oldpeople_likefood, 
+      oldpeople_culture, oldpeople_ability, oldpeople_medical, 
+      oldpeople_medicalid, oldpeople_number, oldpeople_addname, 
+      oldpeople_addtime, oldpeople_account, oldpeople_age, 
+      oldpeople_status, oldpeople_registrant, oldpeople_rtime, 
+      oldpeople_note)
+    values (#{oldpeopleName,jdbcType=VARCHAR}, #{oldpeopleSex,jdbcType=VARCHAR}, #{oldpeopleIdcard,jdbcType=VARCHAR}, 
+      #{oldpeopleBirthday,jdbcType=TIMESTAMP}, #{oldpeoplePhone,jdbcType=VARCHAR}, #{oldpeopleMarriage,jdbcType=VARCHAR}, 
+      #{oldpeopleNational,jdbcType=VARCHAR}, #{oldpeoplePolitical,jdbcType=VARCHAR}, 
+      #{oldpeopleJob,jdbcType=VARCHAR}, #{oldpeopleAddress,jdbcType=VARCHAR}, #{oldpeopleHobby,jdbcType=VARCHAR}, 
+      #{oldpeopleCharacter,jdbcType=VARCHAR}, #{oldpeopleLikefood,jdbcType=VARCHAR}, 
+      #{oldpeopleCulture,jdbcType=VARCHAR}, #{oldpeopleAbility,jdbcType=VARCHAR}, #{oldpeopleMedical,jdbcType=VARCHAR}, 
+      #{oldpeopleMedicalid,jdbcType=VARCHAR}, #{oldpeopleNumber,jdbcType=VARCHAR}, #{oldpeopleAddname,jdbcType=INTEGER}, 
+      #{oldpeopleAddtime,jdbcType=TIMESTAMP}, #{oldpeopleAccount,jdbcType=DECIMAL}, #{oldpeopleAge,jdbcType=INTEGER}, 
+      #{oldpeopleStatus,jdbcType=INTEGER}, #{oldpeopleRegistrant,jdbcType=INTEGER}, #{oldpeopleRtime,jdbcType=TIMESTAMP}, 
+      #{oldpeopleNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="oldpeople_id" keyProperty="oldpeopleId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople" useGeneratedKeys="true">
+    insert into jd_oldpeople
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleName != null">
+        oldpeople_name,
+      </if>
+      <if test="oldpeopleSex != null">
+        oldpeople_sex,
+      </if>
+      <if test="oldpeopleIdcard != null">
+        oldpeople_idcard,
+      </if>
+      <if test="oldpeopleBirthday != null">
+        oldpeople_birthday,
+      </if>
+      <if test="oldpeoplePhone != null">
+        oldpeople_phone,
+      </if>
+      <if test="oldpeopleMarriage != null">
+        oldpeople_marriage,
+      </if>
+      <if test="oldpeopleNational != null">
+        oldpeople_national,
+      </if>
+      <if test="oldpeoplePolitical != null">
+        oldpeople_political,
+      </if>
+      <if test="oldpeopleJob != null">
+        oldpeople_job,
+      </if>
+      <if test="oldpeopleAddress != null">
+        oldpeople_address,
+      </if>
+      <if test="oldpeopleHobby != null">
+        oldpeople_hobby,
+      </if>
+      <if test="oldpeopleCharacter != null">
+        oldpeople_character,
+      </if>
+      <if test="oldpeopleLikefood != null">
+        oldpeople_likefood,
+      </if>
+      <if test="oldpeopleCulture != null">
+        oldpeople_culture,
+      </if>
+      <if test="oldpeopleAbility != null">
+        oldpeople_ability,
+      </if>
+      <if test="oldpeopleMedical != null">
+        oldpeople_medical,
+      </if>
+      <if test="oldpeopleMedicalid != null">
+        oldpeople_medicalid,
+      </if>
+      <if test="oldpeopleNumber != null">
+        oldpeople_number,
+      </if>
+      <if test="oldpeopleAddname != null">
+        oldpeople_addname,
+      </if>
+      <if test="oldpeopleAddtime != null">
+        oldpeople_addtime,
+      </if>
+      <if test="oldpeopleAccount != null">
+        oldpeople_account,
+      </if>
+      <if test="oldpeopleAge != null">
+        oldpeople_age,
+      </if>
+      <if test="oldpeopleStatus != null">
+        oldpeople_status,
+      </if>
+      <if test="oldpeopleRegistrant != null">
+        oldpeople_registrant,
+      </if>
+      <if test="oldpeopleRtime != null">
+        oldpeople_rtime,
+      </if>
+      <if test="oldpeopleNote != null">
+        oldpeople_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldpeopleName != null">
+        #{oldpeopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleSex != null">
+        #{oldpeopleSex,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleIdcard != null">
+        #{oldpeopleIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleBirthday != null">
+        #{oldpeopleBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeoplePhone != null">
+        #{oldpeoplePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMarriage != null">
+        #{oldpeopleMarriage,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleNational != null">
+        #{oldpeopleNational,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeoplePolitical != null">
+        #{oldpeoplePolitical,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleJob != null">
+        #{oldpeopleJob,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAddress != null">
+        #{oldpeopleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleHobby != null">
+        #{oldpeopleHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleCharacter != null">
+        #{oldpeopleCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleLikefood != null">
+        #{oldpeopleLikefood,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleCulture != null">
+        #{oldpeopleCulture,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAbility != null">
+        #{oldpeopleAbility,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMedical != null">
+        #{oldpeopleMedical,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMedicalid != null">
+        #{oldpeopleMedicalid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleNumber != null">
+        #{oldpeopleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAddname != null">
+        #{oldpeopleAddname,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleAddtime != null">
+        #{oldpeopleAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeopleAccount != null">
+        #{oldpeopleAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="oldpeopleAge != null">
+        #{oldpeopleAge,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleStatus != null">
+        #{oldpeopleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleRegistrant != null">
+        #{oldpeopleRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleRtime != null">
+        #{oldpeopleRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeopleNote != null">
+        #{oldpeopleNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    update jd_oldpeople
+    <set>
+      <if test="oldpeopleName != null">
+        oldpeople_name = #{oldpeopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleSex != null">
+        oldpeople_sex = #{oldpeopleSex,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleIdcard != null">
+        oldpeople_idcard = #{oldpeopleIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleBirthday != null">
+        oldpeople_birthday = #{oldpeopleBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeoplePhone != null">
+        oldpeople_phone = #{oldpeoplePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMarriage != null">
+        oldpeople_marriage = #{oldpeopleMarriage,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleNational != null">
+        oldpeople_national = #{oldpeopleNational,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeoplePolitical != null">
+        oldpeople_political = #{oldpeoplePolitical,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleJob != null">
+        oldpeople_job = #{oldpeopleJob,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAddress != null">
+        oldpeople_address = #{oldpeopleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleHobby != null">
+        oldpeople_hobby = #{oldpeopleHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleCharacter != null">
+        oldpeople_character = #{oldpeopleCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleLikefood != null">
+        oldpeople_likefood = #{oldpeopleLikefood,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleCulture != null">
+        oldpeople_culture = #{oldpeopleCulture,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAbility != null">
+        oldpeople_ability = #{oldpeopleAbility,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMedical != null">
+        oldpeople_medical = #{oldpeopleMedical,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleMedicalid != null">
+        oldpeople_medicalid = #{oldpeopleMedicalid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleNumber != null">
+        oldpeople_number = #{oldpeopleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpeopleAddname != null">
+        oldpeople_addname = #{oldpeopleAddname,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleAddtime != null">
+        oldpeople_addtime = #{oldpeopleAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeopleAccount != null">
+        oldpeople_account = #{oldpeopleAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="oldpeopleAge != null">
+        oldpeople_age = #{oldpeopleAge,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleStatus != null">
+        oldpeople_status = #{oldpeopleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleRegistrant != null">
+        oldpeople_registrant = #{oldpeopleRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="oldpeopleRtime != null">
+        oldpeople_rtime = #{oldpeopleRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldpeopleNote != null">
+        oldpeople_note = #{oldpeopleNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    update jd_oldpeople
+    set oldpeople_name = #{oldpeopleName,jdbcType=VARCHAR},
+      oldpeople_sex = #{oldpeopleSex,jdbcType=VARCHAR},
+      oldpeople_idcard = #{oldpeopleIdcard,jdbcType=VARCHAR},
+      oldpeople_birthday = #{oldpeopleBirthday,jdbcType=TIMESTAMP},
+      oldpeople_phone = #{oldpeoplePhone,jdbcType=VARCHAR},
+      oldpeople_marriage = #{oldpeopleMarriage,jdbcType=VARCHAR},
+      oldpeople_national = #{oldpeopleNational,jdbcType=VARCHAR},
+      oldpeople_political = #{oldpeoplePolitical,jdbcType=VARCHAR},
+      oldpeople_job = #{oldpeopleJob,jdbcType=VARCHAR},
+      oldpeople_address = #{oldpeopleAddress,jdbcType=VARCHAR},
+      oldpeople_hobby = #{oldpeopleHobby,jdbcType=VARCHAR},
+      oldpeople_character = #{oldpeopleCharacter,jdbcType=VARCHAR},
+      oldpeople_likefood = #{oldpeopleLikefood,jdbcType=VARCHAR},
+      oldpeople_culture = #{oldpeopleCulture,jdbcType=VARCHAR},
+      oldpeople_ability = #{oldpeopleAbility,jdbcType=VARCHAR},
+      oldpeople_medical = #{oldpeopleMedical,jdbcType=VARCHAR},
+      oldpeople_medicalid = #{oldpeopleMedicalid,jdbcType=VARCHAR},
+      oldpeople_number = #{oldpeopleNumber,jdbcType=VARCHAR},
+      oldpeople_addname = #{oldpeopleAddname,jdbcType=INTEGER},
+      oldpeople_addtime = #{oldpeopleAddtime,jdbcType=TIMESTAMP},
+      oldpeople_account = #{oldpeopleAccount,jdbcType=DECIMAL},
+      oldpeople_age = #{oldpeopleAge,jdbcType=INTEGER},
+      oldpeople_status = #{oldpeopleStatus,jdbcType=INTEGER},
+      oldpeople_registrant = #{oldpeopleRegistrant,jdbcType=INTEGER},
+      oldpeople_rtime = #{oldpeopleRtime,jdbcType=TIMESTAMP},
+      oldpeople_note = #{oldpeopleNote,jdbcType=VARCHAR}
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+</mapper>

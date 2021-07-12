@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdHealthDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdHealth">
+    <id column="health_id" jdbcType="INTEGER" property="healthId" />
+    <result column="health_ordid" jdbcType="INTEGER" property="healthOrdid" />
+    <result column="health_evaluator" jdbcType="INTEGER" property="healthEvaluator" />
+    <result column="health_result" jdbcType="VARCHAR" property="healthResult" />
+    <result column="health_disease" jdbcType="VARCHAR" property="healthDisease" />
+    <result column="health_status" jdbcType="INTEGER" property="healthStatus" />
+    <result column="health_addname" jdbcType="INTEGER" property="healthAddname" />
+    <result column="health_addtime" jdbcType="TIMESTAMP" property="healthAddtime" />
+    <result column="health_registrant" jdbcType="INTEGER" property="healthRegistrant" />
+    <result column="health_rtime" jdbcType="TIMESTAMP" property="healthRtime" />
+    <result column="health_note" jdbcType="VARCHAR" property="healthNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    health_id, health_ordid, health_evaluator, health_result, health_disease, health_status, 
+    health_addname, health_addtime, health_registrant, health_rtime, health_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_health
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_health
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="health_id" keyProperty="healthId" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth" useGeneratedKeys="true">
+    insert into jd_health (health_ordid, health_evaluator, health_result, 
+      health_disease, health_status, health_addname, 
+      health_addtime, health_registrant, health_rtime, 
+      health_note)
+    values (#{healthOrdid,jdbcType=INTEGER}, #{healthEvaluator,jdbcType=INTEGER}, #{healthResult,jdbcType=VARCHAR}, 
+      #{healthDisease,jdbcType=VARCHAR}, #{healthStatus,jdbcType=INTEGER}, #{healthAddname,jdbcType=INTEGER}, 
+      #{healthAddtime,jdbcType=TIMESTAMP}, #{healthRegistrant,jdbcType=INTEGER}, #{healthRtime,jdbcType=TIMESTAMP}, 
+      #{healthNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="health_id" keyProperty="healthId" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth" useGeneratedKeys="true">
+    insert into jd_health
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="healthOrdid != null">
+        health_ordid,
+      </if>
+      <if test="healthEvaluator != null">
+        health_evaluator,
+      </if>
+      <if test="healthResult != null">
+        health_result,
+      </if>
+      <if test="healthDisease != null">
+        health_disease,
+      </if>
+      <if test="healthStatus != null">
+        health_status,
+      </if>
+      <if test="healthAddname != null">
+        health_addname,
+      </if>
+      <if test="healthAddtime != null">
+        health_addtime,
+      </if>
+      <if test="healthRegistrant != null">
+        health_registrant,
+      </if>
+      <if test="healthRtime != null">
+        health_rtime,
+      </if>
+      <if test="healthNote != null">
+        health_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="healthOrdid != null">
+        #{healthOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="healthEvaluator != null">
+        #{healthEvaluator,jdbcType=INTEGER},
+      </if>
+      <if test="healthResult != null">
+        #{healthResult,jdbcType=VARCHAR},
+      </if>
+      <if test="healthDisease != null">
+        #{healthDisease,jdbcType=VARCHAR},
+      </if>
+      <if test="healthStatus != null">
+        #{healthStatus,jdbcType=INTEGER},
+      </if>
+      <if test="healthAddname != null">
+        #{healthAddname,jdbcType=INTEGER},
+      </if>
+      <if test="healthAddtime != null">
+        #{healthAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="healthRegistrant != null">
+        #{healthRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="healthRtime != null">
+        #{healthRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="healthNote != null">
+        #{healthNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth">
+    update jd_health
+    <set>
+      <if test="healthOrdid != null">
+        health_ordid = #{healthOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="healthEvaluator != null">
+        health_evaluator = #{healthEvaluator,jdbcType=INTEGER},
+      </if>
+      <if test="healthResult != null">
+        health_result = #{healthResult,jdbcType=VARCHAR},
+      </if>
+      <if test="healthDisease != null">
+        health_disease = #{healthDisease,jdbcType=VARCHAR},
+      </if>
+      <if test="healthStatus != null">
+        health_status = #{healthStatus,jdbcType=INTEGER},
+      </if>
+      <if test="healthAddname != null">
+        health_addname = #{healthAddname,jdbcType=INTEGER},
+      </if>
+      <if test="healthAddtime != null">
+        health_addtime = #{healthAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="healthRegistrant != null">
+        health_registrant = #{healthRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="healthRtime != null">
+        health_rtime = #{healthRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="healthNote != null">
+        health_note = #{healthNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth">
+    update jd_health
+    set health_ordid = #{healthOrdid,jdbcType=INTEGER},
+      health_evaluator = #{healthEvaluator,jdbcType=INTEGER},
+      health_result = #{healthResult,jdbcType=VARCHAR},
+      health_disease = #{healthDisease,jdbcType=VARCHAR},
+      health_status = #{healthStatus,jdbcType=INTEGER},
+      health_addname = #{healthAddname,jdbcType=INTEGER},
+      health_addtime = #{healthAddtime,jdbcType=TIMESTAMP},
+      health_registrant = #{healthRegistrant,jdbcType=INTEGER},
+      health_rtime = #{healthRtime,jdbcType=TIMESTAMP},
+      health_note = #{healthNote,jdbcType=VARCHAR}
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </update>
+</mapper>
