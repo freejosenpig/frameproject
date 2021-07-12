@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 /**
  * cost_entryfees
@@ -46,6 +47,9 @@ public class CostEntryfees implements Serializable {
      * 时效性
      */
     private Integer entryfeesTimeliness;
+
+    //老人信息
+    private JdOldpeople jdOldpeople;
 
     private static final long serialVersionUID = 1L;
 }

@@ -1,7 +1,5 @@
 package com.zktr.yuyi.exception;
 
-
-
 public class CustomError extends RuntimeException {
     //异常错误编码
     private int code ;

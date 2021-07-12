@@ -3,6 +3,7 @@ package com.zktr.yuyi.dao.hedangren;
 import com.zktr.yuyi.entity.hedangren.SysMenu;
 import com.zktr.yuyi.entity.hedangren.SysUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -31,4 +32,11 @@ public interface SysUserDao {
      * @return
      */
     List<SysUser> queryAll();
+
+    /**
+     * 多条件查询
+     * @param user
+     * @return
+     */
+    List<SysUser> queryAllByUser(SysUser user);
 }

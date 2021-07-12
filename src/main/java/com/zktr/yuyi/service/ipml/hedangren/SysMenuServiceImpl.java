@@ -61,9 +61,8 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return 实例对象
      */
     @Override
-    public SysMenu update(SysMenu sysMenu) {
-        this.sysMenuDao.update(sysMenu);
-        return this.queryById(sysMenu.getId());
+    public boolean update(SysMenu sysMenu) {
+        return this.sysMenuDao.update(sysMenu)>0?true:false;
     }
 
     /**
@@ -75,5 +74,15 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public boolean deleteById(Integer id) {
         return this.sysMenuDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SysMenu> usermenu(int i) {
+        return this.sysMenuDao.queryUserMenu(i);
+    }
+
+    @Override
+    public List<SysMenu> queryUserMenu(Integer id) {
+        return this.sysMenuDao.usermenu(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.zktr.yuyi.controller.cost;
 
 import com.zktr.yuyi.entity.cost.CostType;
+import com.zktr.yuyi.entity.cost.CostTypedetails;
 import com.zktr.yuyi.service.cost.CostTypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class CostTypecontroller {
     @GetMapping("/findCostTypeById")
     public CostType findCostTypeById(@PathVariable int tyId){
         return  costtypeservice.findByKey(tyId);
+    }
+    //    联合类别设置，查询所有费用详情
+    @GetMapping("/findAlldetails")
+    public List<CostTypedetails> findAlldetails(){
+        return costtypeservice.selectAlldetails();
     }
 }

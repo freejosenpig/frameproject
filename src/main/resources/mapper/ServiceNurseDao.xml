@@ -32,25 +32,36 @@
     from service_nurse
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    *
+    from service_nurse
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service_nurse
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
+
+    insert into service_nurse (
+     n_name,n_sex,n_age,n_nation, n_phone,n_card,n_address, n_ephone,n_work,n_type,n_dept, n_img,n_work_date,n_money,n_ann,team_id,
+      )
+    values (#{nName,jdbcType=VARCHAR}, #{nSex,jdbcType=VARCHAR},#{nAge,jdbcType=INTEGER},#{nNation,jdbcType=VARCHAR},#{nPhone,jdbcType=INTEGER},
+        #{nCard,jdbcType=INTEGER},#{nAddress,jdbcType=VARCHAR},#{nEphone,jdbcType=INTEGER},#{nWork,jdbcType=VARCHAR}, #{nType,jdbcType=VARCHAR}, #{nDept,jdbcType=VARCHAR}, #{nImg,jdbcType=VARCHAR},
+        #{nWorkDate,jdbcType=DATE}, #{nMoney,jdbcType=INTEGER},#{nAnn,jdbcType=VARCHAR},#{teamId,jdbcType=INTEGER},
+
     insert into service_nurse (n_name, n_sex, n_age,
       n_nation, n_phone, n_card, 
       n_address, n_ephone, n_work, 
       n_type, n_dept, n_img, 
       n_work_date, n_money, n_ann, 
-      create_people, create_time, team_id
-      )
+      create_people, create_time, team_id)
     values (#{nName,jdbcType=VARCHAR}, #{nSex,jdbcType=VARCHAR}, #{nAge,jdbcType=INTEGER},
       #{nNation,jdbcType=VARCHAR}, #{nPhone,jdbcType=INTEGER}, #{nCard,jdbcType=INTEGER}, 
       #{nAddress,jdbcType=VARCHAR}, #{nEphone,jdbcType=INTEGER}, #{nWork,jdbcType=VARCHAR}, 
       #{nType,jdbcType=VARCHAR}, #{nDept,jdbcType=VARCHAR}, #{nImg,jdbcType=VARCHAR}, 
       #{nWorkDate,jdbcType=DATE}, #{nMoney,jdbcType=INTEGER}, #{nAnn,jdbcType=VARCHAR}, 
-      #{createPeople,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{teamId,jdbcType=INTEGER}
-      )
+      #{createPeople,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{teamId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
     insert into service_nurse

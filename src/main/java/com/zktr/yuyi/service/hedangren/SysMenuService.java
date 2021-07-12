@@ -43,7 +43,7 @@ public interface SysMenuService {
      * @param sysMenu 实例对象
      * @return 实例对象
      */
-    SysMenu update(SysMenu sysMenu);
+    boolean update(SysMenu sysMenu);
 
     /**
      * 通过主键删除数据
@@ -53,4 +53,13 @@ public interface SysMenuService {
      */
     boolean deleteById(Integer id);
 
+
+    /**
+     * 查询有所的权限菜单
+     * @param i
+     * @return
+     */
+    List<SysMenu> usermenu(int i);
+
+    List<SysMenu> queryUserMenu(Integer id);
 }

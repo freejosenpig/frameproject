@@ -82,5 +82,7 @@ public interface SysMenuDao {
     int deleteById(Integer id);
 
     List<SysMenu> usermenu(Integer id);
+
+    List<SysMenu> queryUserMenu(int i);
 }
 
