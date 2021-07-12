@@ -3,7 +3,7 @@
 <mapper namespace="com.zktr.yuyi.dao.liuzhui.ServiceNurseDao">
   <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+    <result column="n_name" jdbcType="VARCHAR" property="nName" />
     <result column="n_sex" jdbcType="VARCHAR" property="nSex" />
     <result column="n_age" jdbcType="INTEGER" property="nAge" />
     <result column="n_nation" jdbcType="VARCHAR" property="nNation" />
@@ -23,7 +23,7 @@
     <result column="team_id" jdbcType="INTEGER" property="teamId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, plan_name, n_sex, n_age, n_nation, n_phone, n_card, n_address, n_ephone, n_work, 
+    id, n_name, n_sex, n_age, n_nation, n_phone, n_card, n_address, n_ephone, n_work,
     n_type, n_dept, n_img, n_work_date, n_money, n_ann, create_people, create_time, team_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -37,14 +37,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
-    insert into service_nurse (plan_name, n_sex, n_age, 
+    insert into service_nurse (n_name, n_sex, n_age,
       n_nation, n_phone, n_card, 
       n_address, n_ephone, n_work, 
       n_type, n_dept, n_img, 
       n_work_date, n_money, n_ann, 
       create_people, create_time, team_id
       )
-    values (#{planName,jdbcType=VARCHAR}, #{nSex,jdbcType=VARCHAR}, #{nAge,jdbcType=INTEGER}, 
+    values (#{nName,jdbcType=VARCHAR}, #{nSex,jdbcType=VARCHAR}, #{nAge,jdbcType=INTEGER},
       #{nNation,jdbcType=VARCHAR}, #{nPhone,jdbcType=INTEGER}, #{nCard,jdbcType=INTEGER}, 
       #{nAddress,jdbcType=VARCHAR}, #{nEphone,jdbcType=INTEGER}, #{nWork,jdbcType=VARCHAR}, 
       #{nType,jdbcType=VARCHAR}, #{nDept,jdbcType=VARCHAR}, #{nImg,jdbcType=VARCHAR}, 
@@ -55,8 +55,8 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse" useGeneratedKeys="true">
     insert into service_nurse
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="planName != null">
-        plan_name,
+      <if test="nName != null">
+        n_name,
       </if>
       <if test="nSex != null">
         n_sex,
@@ -111,8 +111,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="planName != null">
-        #{planName,jdbcType=VARCHAR},
+      <if test="nName != null">
+        #{nName,jdbcType=VARCHAR},
       </if>
       <if test="nSex != null">
         #{nSex,jdbcType=VARCHAR},
@@ -170,8 +170,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
     update service_nurse
     <set>
-      <if test="planName != null">
-        plan_name = #{planName,jdbcType=VARCHAR},
+      <if test="nName != null">
+        n_name = #{nName,jdbcType=VARCHAR},
       </if>
       <if test="nSex != null">
         n_sex = #{nSex,jdbcType=VARCHAR},
@@ -229,7 +229,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
     update service_nurse
-    set plan_name = #{planName,jdbcType=VARCHAR},
+    set n_name = #{nName,jdbcType=VARCHAR},
       n_sex = #{nSex,jdbcType=VARCHAR},
       n_age = #{nAge,jdbcType=INTEGER},
       n_nation = #{nNation,jdbcType=VARCHAR},

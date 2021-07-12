@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdOnDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdOn">
+    <id column="on_id" jdbcType="INTEGER" property="onId" />
+    <result column="on_oldid" jdbcType="INTEGER" property="onOldid" />
+    <result column="on_time" jdbcType="TIMESTAMP" property="onTime" />
+    <result column="on_addname" jdbcType="INTEGER" property="onAddname" />
+    <result column="on_addtime" jdbcType="TIMESTAMP" property="onAddtime" />
+    <result column="on_bed" jdbcType="INTEGER" property="onBed" />
+    <result column="on_registrant" jdbcType="INTEGER" property="onRegistrant" />
+    <result column="on_rtime" jdbcType="TIMESTAMP" property="onRtime" />
+    <result column="on_operator" jdbcType="INTEGER" property="onOperator" />
+    <result column="on_note" jdbcType="VARCHAR" property="onNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    on_id, on_oldid, on_time, on_addname, on_addtime, on_bed, on_registrant, on_rtime, 
+    on_operator, on_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_on
+    where on_id = #{onId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_on
+    where on_id = #{onId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="on_id" keyProperty="onId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOn" useGeneratedKeys="true">
+    insert into jd_on (on_oldid, on_time, on_addname, 
+      on_addtime, on_bed, on_registrant, 
+      on_rtime, on_operator, on_note
+      )
+    values (#{onOldid,jdbcType=INTEGER}, #{onTime,jdbcType=TIMESTAMP}, #{onAddname,jdbcType=INTEGER}, 
+      #{onAddtime,jdbcType=TIMESTAMP}, #{onBed,jdbcType=INTEGER}, #{onRegistrant,jdbcType=INTEGER}, 
+      #{onRtime,jdbcType=TIMESTAMP}, #{onOperator,jdbcType=INTEGER}, #{onNote,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="on_id" keyProperty="onId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOn" useGeneratedKeys="true">
+    insert into jd_on
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="onOldid != null">
+        on_oldid,
+      </if>
+      <if test="onTime != null">
+        on_time,
+      </if>
+      <if test="onAddname != null">
+        on_addname,
+      </if>
+      <if test="onAddtime != null">
+        on_addtime,
+      </if>
+      <if test="onBed != null">
+        on_bed,
+      </if>
+      <if test="onRegistrant != null">
+        on_registrant,
+      </if>
+      <if test="onRtime != null">
+        on_rtime,
+      </if>
+      <if test="onOperator != null">
+        on_operator,
+      </if>
+      <if test="onNote != null">
+        on_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="onOldid != null">
+        #{onOldid,jdbcType=INTEGER},
+      </if>
+      <if test="onTime != null">
+        #{onTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onAddname != null">
+        #{onAddname,jdbcType=INTEGER},
+      </if>
+      <if test="onAddtime != null">
+        #{onAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onBed != null">
+        #{onBed,jdbcType=INTEGER},
+      </if>
+      <if test="onRegistrant != null">
+        #{onRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="onRtime != null">
+        #{onRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onOperator != null">
+        #{onOperator,jdbcType=INTEGER},
+      </if>
+      <if test="onNote != null">
+        #{onNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdOn">
+    update jd_on
+    <set>
+      <if test="onOldid != null">
+        on_oldid = #{onOldid,jdbcType=INTEGER},
+      </if>
+      <if test="onTime != null">
+        on_time = #{onTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onAddname != null">
+        on_addname = #{onAddname,jdbcType=INTEGER},
+      </if>
+      <if test="onAddtime != null">
+        on_addtime = #{onAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onBed != null">
+        on_bed = #{onBed,jdbcType=INTEGER},
+      </if>
+      <if test="onRegistrant != null">
+        on_registrant = #{onRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="onRtime != null">
+        on_rtime = #{onRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onOperator != null">
+        on_operator = #{onOperator,jdbcType=INTEGER},
+      </if>
+      <if test="onNote != null">
+        on_note = #{onNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where on_id = #{onId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdOn">
+    update jd_on
+    set on_oldid = #{onOldid,jdbcType=INTEGER},
+      on_time = #{onTime,jdbcType=TIMESTAMP},
+      on_addname = #{onAddname,jdbcType=INTEGER},
+      on_addtime = #{onAddtime,jdbcType=TIMESTAMP},
+      on_bed = #{onBed,jdbcType=INTEGER},
+      on_registrant = #{onRegistrant,jdbcType=INTEGER},
+      on_rtime = #{onRtime,jdbcType=TIMESTAMP},
+      on_operator = #{onOperator,jdbcType=INTEGER},
+      on_note = #{onNote,jdbcType=VARCHAR}
+    where on_id = #{onId,jdbcType=INTEGER}
+  </update>
+</mapper>

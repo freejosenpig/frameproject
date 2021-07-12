@@ -22,7 +22,45 @@
     <result column="consulting_registrant" jdbcType="INTEGER" property="consultingRegistrant" />
     <result column="consulting_rtime" jdbcType="TIMESTAMP" property="consultingRtime" />
     <result column="consulting_note" jdbcType="VARCHAR" property="consultingNote" />
+    <result column="timeliness" jdbcType="INTEGER" property="timeliness" />
+    <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="n_name" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="serviceNurse2" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id2" jdbcType="INTEGER" property="id" />
+      <result column="n_name2" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="sysUser" javaType="com.zktr.yuyi.entity.hedangren.SysUser">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_pass" jdbcType="VARCHAR" property="userPass" />
+      <result column="user_icon" jdbcType="VARCHAR" property="userIcon" />
+      <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+      <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+      <result column="user_state" jdbcType="INTEGER" property="userState" />
+      <result column="user_flag" jdbcType="INTEGER" property="userFlag" />
+      <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+      <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    </association>
   </resultMap>
+  <sql id="Base_Column_su">
+    su.id,  su.user_name,  su.user_pass,  su.user_icon,  su.user_phone,  su.user_sex,  su.user_state,  su.user_flag,
+    su.create_date,  su.update_date
+  </sql>
+  <sql id="Base_Column_sn">
+    sn.id, sn.n_name
+  </sql>
+  <sql id="Base_Column_sn2">
+    sn2.id id2, sn2.n_name n_name2
+  </sql>
+  <sql id="Base_Column_con">
+    con.consulting_id, con.consulting_name, con.consulting_time, con.consulting_way, con.consulting_content,
+    con.consulting_type, con.consulting_phone, con.consulting_relation, con.consulting_oldname, con.consulting_oldidcard,
+    con.consulting_oldsex, con.consulting_oldage, con.consulting_selfcare, con.consulting_ordaddress,
+    con.consulting_service, con.consulting_addname, con.consulting_addtime, con.consulting_registrant,
+    con.consulting_rtime, con.consulting_note, con.timeliness
+  </sql>
   <sql id="Base_Column_List">
     consulting_id, consulting_name, consulting_time, consulting_way, consulting_content, 
     consulting_type, consulting_phone, consulting_relation, consulting_oldname, consulting_oldidcard, 
@@ -30,6 +68,62 @@
     consulting_service, consulting_addname, consulting_addtime, consulting_registrant, 
     consulting_rtime, consulting_note
   </sql>
+  <select id="selectAllConsulting"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_con" />,
+    <include refid="Base_Column_su" />,
+    <include refid="Base_Column_sn" />,
+    <include refid="Base_Column_sn2" />
+    from jd_consulting con
+    inner join service_nurse sn on con.consulting_registrant = sn.id
+    inner join sys_user su on con.consulting_addname = su.id
+    inner join service_nurse sn2 on con.consulting_service = sn2.id
+    where con.timeliness = 0
+  </select>
+  <insert id="insertConsulting" keyColumn="consulting_id" keyProperty="consultingId" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting" useGeneratedKeys="true">
+    insert into jd_consulting (consulting_name, consulting_time,
+      consulting_way, consulting_content, consulting_type,
+      consulting_phone, consulting_relation, consulting_oldname,
+      consulting_oldidcard, consulting_oldsex,
+      consulting_oldage, consulting_selfcare, consulting_ordaddress,
+      consulting_service, consulting_addname, consulting_addtime,
+      consulting_registrant, consulting_rtime,
+      consulting_note)
+    values (#{consultingName,jdbcType=VARCHAR}, #{consultingTime,jdbcType=TIMESTAMP},
+      #{consultingWay,jdbcType=VARCHAR}, #{consultingContent,jdbcType=VARCHAR}, #{consultingType,jdbcType=VARCHAR},
+      #{consultingPhone,jdbcType=VARCHAR}, #{consultingRelation,jdbcType=VARCHAR}, #{consultingOldname,jdbcType=VARCHAR},
+      #{consultingOldidcard,jdbcType=VARCHAR}, #{consultingOldsex,jdbcType=VARCHAR},
+      #{consultingOldage,jdbcType=INTEGER}, #{consultingSelfcare,jdbcType=VARCHAR}, #{consultingOrdaddress,jdbcType=VARCHAR},
+      #{consultingService,jdbcType=INTEGER}, #{consultingAddname,jdbcType=INTEGER}, #{consultingAddtime,jdbcType=TIMESTAMP},
+      #{consultingRegistrant,jdbcType=INTEGER}, #{consultingRtime,jdbcType=TIMESTAMP},
+      #{consultingNote,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateConsulting" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting">
+    update jd_consulting
+    set consulting_name = #{consultingName,jdbcType=VARCHAR},
+      consulting_time = #{consultingTime,jdbcType=TIMESTAMP},
+      consulting_way = #{consultingWay,jdbcType=VARCHAR},
+      consulting_content = #{consultingContent,jdbcType=VARCHAR},
+      consulting_type = #{consultingType,jdbcType=VARCHAR},
+      consulting_phone = #{consultingPhone,jdbcType=VARCHAR},
+      consulting_relation = #{consultingRelation,jdbcType=VARCHAR},
+      consulting_oldname = #{consultingOldname,jdbcType=VARCHAR},
+      consulting_oldidcard = #{consultingOldidcard,jdbcType=VARCHAR},
+      consulting_oldsex = #{consultingOldsex,jdbcType=VARCHAR},
+      consulting_oldage = #{consultingOldage,jdbcType=INTEGER},
+      consulting_selfcare = #{consultingSelfcare,jdbcType=VARCHAR},
+      consulting_ordaddress = #{consultingOrdaddress,jdbcType=VARCHAR},
+      consulting_service = #{consultingService,jdbcType=INTEGER},
+      consulting_registrant = #{consultingRegistrant,jdbcType=INTEGER},
+      consulting_rtime = #{consultingRtime,jdbcType=TIMESTAMP},
+      consulting_note = #{consultingNote,jdbcType=VARCHAR}
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteConsulting" parameterType="com.zktr.yuyi.entity.liangzheng.JdConsulting">
+    update jd_consulting
+    set timeliness = 1
+    where consulting_id = #{consultingId,jdbcType=INTEGER}
+  </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

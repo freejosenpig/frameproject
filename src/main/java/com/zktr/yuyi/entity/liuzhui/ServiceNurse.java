@@ -12,7 +12,7 @@ import lombok.Data;
 public class ServiceNurse implements Serializable {
     private Integer id;
 
-    private String planName;
+    private String nName;
 
     private String nSex;
 

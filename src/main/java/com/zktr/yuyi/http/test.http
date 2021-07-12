@@ -1,0 +1,4 @@
+GET http://localhost:8188/selectAllConsulting
+Accept: application/json
+
+###
