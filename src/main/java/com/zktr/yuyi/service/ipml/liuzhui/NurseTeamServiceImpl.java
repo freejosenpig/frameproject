@@ -43,9 +43,9 @@ public class NurseTeamServiceImpl implements NurseTeamService {
      */
     @Override
     @Transactional
-    public NurseTeam update(NurseTeam NurseTeam) {
-        serveNurseTeamDao.updateByPrimaryKeySelective(NurseTeam);
-        return NurseTeam;
+    public NurseTeam update(NurseTeam nurseTeam) {
+        serveNurseTeamDao.updateByPrimaryKeySelective(nurseTeam);
+        return nurseTeam;
     }
     /*
        插入数据
