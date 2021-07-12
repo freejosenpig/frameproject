@@ -41,4 +41,9 @@ public class JdConsultingServiceImpl implements JdConsultingService {
         consultingDao.deleteConsulting(consulting);
         return consulting;
     }
+
+    @Override
+    public JdConsulting selectConsultingById(Integer id) {
+        return consultingDao.selectConsultingById(id);
+    }
 }
