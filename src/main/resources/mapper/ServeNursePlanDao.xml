@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liuzhui.ServeNursePlanDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.NursePlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+    <result column="plan_type" jdbcType="VARCHAR" property="planType" />
+    <result column="plan_money" jdbcType="INTEGER" property="planMoney" />
+    <result column="plan_way" jdbcType="INTEGER" property="planWay" />
+    <result column="plan_hz" jdbcType="INTEGER" property="planHz" />
+    <result column="plan_time" jdbcType="TIMESTAMP" property="planTime" />
+    <result column="create_people" jdbcType="VARCHAR" property="createPeople" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, plan_name, plan_type, plan_money, plan_way, plan_hz, plan_time, create_people, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from serve_nurse_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from serve_nurse_plan
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from serve_nurse_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NursePlan" useGeneratedKeys="true">
+    insert into serve_nurse_plan (plan_name, plan_type, plan_money, 
+      plan_way, plan_hz, plan_time, 
+      create_people, create_time)
+    values (#{planName,jdbcType=VARCHAR}, #{planType,jdbcType=VARCHAR}, #{planMoney,jdbcType=INTEGER}, 
+      #{planWay,jdbcType=INTEGER}, #{planHz,jdbcType=INTEGER}, #{planTime,jdbcType=TIMESTAMP}, 
+      #{createPeople,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NursePlan" useGeneratedKeys="true">
+    insert into serve_nurse_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="planName != null">
+        plan_name,
+      </if>
+      <if test="planType != null">
+        plan_type,
+      </if>
+      <if test="planMoney != null">
+        plan_money,
+      </if>
+      <if test="planWay != null">
+        plan_way,
+      </if>
+      <if test="planHz != null">
+        plan_hz,
+      </if>
+      <if test="planTime != null">
+        plan_time,
+      </if>
+      <if test="createPeople != null">
+        create_people,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="planName != null">
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null">
+        #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="planMoney != null">
+        #{planMoney,jdbcType=INTEGER},
+      </if>
+      <if test="planWay != null">
+        #{planWay,jdbcType=INTEGER},
+      </if>
+      <if test="planHz != null">
+        #{planHz,jdbcType=INTEGER},
+      </if>
+      <if test="planTime != null">
+        #{planTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.NursePlan">
+    update serve_nurse_plan
+    <set>
+      <if test="planName != null">
+        plan_name = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null">
+        plan_type = #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="planMoney != null">
+        plan_money = #{planMoney,jdbcType=INTEGER},
+      </if>
+      <if test="planWay != null">
+        plan_way = #{planWay,jdbcType=INTEGER},
+      </if>
+      <if test="planHz != null">
+        plan_hz = #{planHz,jdbcType=INTEGER},
+      </if>
+      <if test="planTime != null">
+        plan_time = #{planTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPeople != null">
+        create_people = #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.NursePlan">
+    update serve_nurse_plan
+    set plan_name = #{planName,jdbcType=VARCHAR},
+      plan_type = #{planType,jdbcType=VARCHAR},
+      plan_money = #{planMoney,jdbcType=INTEGER},
+      plan_way = #{planWay,jdbcType=INTEGER},
+      plan_hz = #{planHz,jdbcType=INTEGER},
+      plan_time = #{planTime,jdbcType=TIMESTAMP},
+      create_people = #{createPeople,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

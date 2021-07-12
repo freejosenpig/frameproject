@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liuzhui.ServeNurseLevelDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.ServeNurseLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="l_name" jdbcType="VARCHAR" property="lName" />
+    <result column="l_type" jdbcType="VARCHAR" property="lType" />
+    <result column="l_money" jdbcType="INTEGER" property="lMoney" />
+    <result column="l_date" jdbcType="DATE" property="lDate" />
+    <result column="l_explain" jdbcType="VARCHAR" property="lExplain" />
+    <result column="create_people" jdbcType="VARCHAR" property="createPeople" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, l_name, l_type, l_money, l_date, l_explain, create_people, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from serve_nurse_level
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from serve_nurse_level
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from serve_nurse_level
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServeNurseLevel" useGeneratedKeys="true">
+    insert into serve_nurse_level (l_name, l_type, l_money, 
+      l_date, l_explain, create_people, 
+      create_time)
+    values (#{lName,jdbcType=VARCHAR}, #{lType,jdbcType=VARCHAR}, #{lMoney,jdbcType=INTEGER}, 
+      #{lDate,jdbcType=DATE}, #{lExplain,jdbcType=VARCHAR}, #{createPeople,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.ServeNurseLevel" useGeneratedKeys="true">
+    insert into serve_nurse_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lName != null">
+        l_name,
+      </if>
+      <if test="lType != null">
+        l_type,
+      </if>
+      <if test="lMoney != null">
+        l_money,
+      </if>
+      <if test="lDate != null">
+        l_date,
+      </if>
+      <if test="lExplain != null">
+        l_explain,
+      </if>
+      <if test="createPeople != null">
+        create_people,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lName != null">
+        #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lType != null">
+        #{lType,jdbcType=VARCHAR},
+      </if>
+      <if test="lMoney != null">
+        #{lMoney,jdbcType=INTEGER},
+      </if>
+      <if test="lDate != null">
+        #{lDate,jdbcType=DATE},
+      </if>
+      <if test="lExplain != null">
+        #{lExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.ServeNurseLevel">
+    update serve_nurse_level
+    <set>
+      <if test="lName != null">
+        l_name = #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lType != null">
+        l_type = #{lType,jdbcType=VARCHAR},
+      </if>
+      <if test="lMoney != null">
+        l_money = #{lMoney,jdbcType=INTEGER},
+      </if>
+      <if test="lDate != null">
+        l_date = #{lDate,jdbcType=DATE},
+      </if>
+      <if test="lExplain != null">
+        l_explain = #{lExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        create_people = #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.ServeNurseLevel">
+    update serve_nurse_level
+    set l_name = #{lName,jdbcType=VARCHAR},
+      l_type = #{lType,jdbcType=VARCHAR},
+      l_money = #{lMoney,jdbcType=INTEGER},
+      l_date = #{lDate,jdbcType=DATE},
+      l_explain = #{lExplain,jdbcType=VARCHAR},
+      create_people = #{createPeople,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

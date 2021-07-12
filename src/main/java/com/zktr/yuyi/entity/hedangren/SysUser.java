@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 public class SysUser implements Serializable {
+
     private Integer id;
 
     private String userName;

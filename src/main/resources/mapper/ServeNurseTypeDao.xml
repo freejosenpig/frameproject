@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liuzhui.ServeNurseTypeDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.NurseType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_introduce" jdbcType="VARCHAR" property="tIntroduce" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="create_people" jdbcType="VARCHAR" property="createPeople" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, t_name, t_introduce, project_id, create_people, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from serve_nurse_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from serve_nurse_type
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from serve_nurse_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NurseType" useGeneratedKeys="true">
+    insert into serve_nurse_type (t_name, t_introduce, project_id, 
+      create_people, create_time)
+    values (#{tName,jdbcType=VARCHAR}, #{tIntroduce,jdbcType=VARCHAR}, #{projectId,jdbcType=INTEGER}, 
+      #{createPeople,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NurseType" useGeneratedKeys="true">
+    insert into serve_nurse_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tIntroduce != null">
+        t_introduce,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="createPeople != null">
+        create_people,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tIntroduce != null">
+        #{tIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.NurseType">
+    update serve_nurse_type
+    <set>
+      <if test="tName != null">
+        t_name = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tIntroduce != null">
+        t_introduce = #{tIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="createPeople != null">
+        create_people = #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.NurseType">
+    update serve_nurse_type
+    set t_name = #{tName,jdbcType=VARCHAR},
+      t_introduce = #{tIntroduce,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      create_people = #{createPeople,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

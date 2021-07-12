@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liuzhui.ServeNurseLogDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liuzhui.NurseLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="r_time" jdbcType="TIMESTAMP" property="rTime" />
+    <result column="r_name" jdbcType="VARCHAR" property="rName" />
+    <result column="r_number" jdbcType="INTEGER" property="rNumber" />
+    <result column="r_team" jdbcType="VARCHAR" property="rTeam" />
+    <result column="r_people" jdbcType="VARCHAR" property="rPeople" />
+    <result column="r_finish" jdbcType="VARCHAR" property="rFinish" />
+    <result column="r_rest" jdbcType="VARCHAR" property="rRest" />
+    <result column="r_medicine" jdbcType="VARCHAR" property="rMedicine" />
+    <result column="r_activity" jdbcType="VARCHAR" property="rActivity" />
+    <result column="r_ann" jdbcType="VARCHAR" property="rAnn" />
+    <result column="nurse_id" jdbcType="INTEGER" property="nurseId" />
+    <result column="create_people" jdbcType="VARCHAR" property="createPeople" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, r_time, r_name, r_number, r_team, r_people, r_finish, r_rest, r_medicine, r_activity, 
+    r_ann, nurse_id, create_people, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from serve_nurse_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultType="com.zktr.yuyi.entity.liuzhui.NurseLog">
+    select
+     *
+    from serve_nurse_log
+   </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from serve_nurse_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NurseLog" useGeneratedKeys="true">
+    insert into serve_nurse_log (r_time, r_name, r_number, 
+      r_team, r_people, r_finish, 
+      r_rest, r_medicine, r_activity, 
+      r_ann, nurse_id, create_people, 
+      create_time)
+    values (#{rTime,jdbcType=TIMESTAMP}, #{rName,jdbcType=VARCHAR}, #{rNumber,jdbcType=INTEGER}, 
+      #{rTeam,jdbcType=VARCHAR}, #{rPeople,jdbcType=VARCHAR}, #{rFinish,jdbcType=VARCHAR}, 
+      #{rRest,jdbcType=VARCHAR}, #{rMedicine,jdbcType=VARCHAR}, #{rActivity,jdbcType=VARCHAR}, 
+      #{rAnn,jdbcType=VARCHAR}, #{nurseId,jdbcType=INTEGER}, #{createPeople,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.liuzhui.NurseLog" useGeneratedKeys="true">
+    insert into serve_nurse_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rTime != null">
+        r_time,
+      </if>
+      <if test="rName != null">
+        r_name,
+      </if>
+      <if test="rNumber != null">
+        r_number,
+      </if>
+      <if test="rTeam != null">
+        r_team,
+      </if>
+      <if test="rPeople != null">
+        r_people,
+      </if>
+      <if test="rFinish != null">
+        r_finish,
+      </if>
+      <if test="rRest != null">
+        r_rest,
+      </if>
+      <if test="rMedicine != null">
+        r_medicine,
+      </if>
+      <if test="rActivity != null">
+        r_activity,
+      </if>
+      <if test="rAnn != null">
+        r_ann,
+      </if>
+      <if test="nurseId != null">
+        nurse_id,
+      </if>
+      <if test="createPeople != null">
+        create_people,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rTime != null">
+        #{rTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rName != null">
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        #{rNumber,jdbcType=INTEGER},
+      </if>
+      <if test="rTeam != null">
+        #{rTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="rPeople != null">
+        #{rPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="rFinish != null">
+        #{rFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="rRest != null">
+        #{rRest,jdbcType=VARCHAR},
+      </if>
+      <if test="rMedicine != null">
+        #{rMedicine,jdbcType=VARCHAR},
+      </if>
+      <if test="rActivity != null">
+        #{rActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="rAnn != null">
+        #{rAnn,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseId != null">
+        #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liuzhui.NurseLog">
+    update serve_nurse_log
+    <set>
+      <if test="rTime != null">
+        r_time = #{rTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rName != null">
+        r_name = #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        r_number = #{rNumber,jdbcType=INTEGER},
+      </if>
+      <if test="rTeam != null">
+        r_team = #{rTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="rPeople != null">
+        r_people = #{rPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="rFinish != null">
+        r_finish = #{rFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="rRest != null">
+        r_rest = #{rRest,jdbcType=VARCHAR},
+      </if>
+      <if test="rMedicine != null">
+        r_medicine = #{rMedicine,jdbcType=VARCHAR},
+      </if>
+      <if test="rActivity != null">
+        r_activity = #{rActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="rAnn != null">
+        r_ann = #{rAnn,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseId != null">
+        nurse_id = #{nurseId,jdbcType=INTEGER},
+      </if>
+      <if test="createPeople != null">
+        create_people = #{createPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liuzhui.NurseLog">
+    update serve_nurse_log
+    set r_time = #{rTime,jdbcType=TIMESTAMP},
+      r_name = #{rName,jdbcType=VARCHAR},
+      r_number = #{rNumber,jdbcType=INTEGER},
+      r_team = #{rTeam,jdbcType=VARCHAR},
+      r_people = #{rPeople,jdbcType=VARCHAR},
+      r_finish = #{rFinish,jdbcType=VARCHAR},
+      r_rest = #{rRest,jdbcType=VARCHAR},
+      r_medicine = #{rMedicine,jdbcType=VARCHAR},
+      r_activity = #{rActivity,jdbcType=VARCHAR},
+      r_ann = #{rAnn,jdbcType=VARCHAR},
+      nurse_id = #{nurseId,jdbcType=INTEGER},
+      create_people = #{createPeople,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
