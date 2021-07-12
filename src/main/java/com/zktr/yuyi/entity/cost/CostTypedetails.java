@@ -25,12 +25,8 @@ public class CostTypedetails implements Serializable {
     /**
      * 费用详情名称
      */
-    private String itemName;
+    private String itemNameId;
 
-    /**
-     * 价格
-     */
-    private Long itemPrice;
 
     /**
      * 说明
