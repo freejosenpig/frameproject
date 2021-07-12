@@ -1,6 +1,7 @@
 package com.zktr.yuyi.service.hedangren;
 
 import com.zktr.yuyi.entity.hedangren.SysRole;
+import com.zktr.yuyi.entity.hedangren.SysRoleMenu;
 
 import java.util.List;
 
@@ -56,4 +57,11 @@ public interface SysRoleService {
     List<SysRole> queryAll();
 
     List<SysRole> queryAllByCondition(SysRole role);
+
+    /**
+     * 批量插入角色权限表记录
+     * @param lists
+     * @return
+     */
+    boolean insertBatch(List<SysRoleMenu> lists);
 }

@@ -85,4 +85,14 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenu> queryUserMenu(Integer id) {
         return this.sysMenuDao.usermenu(id);
     }
+
+    /**
+     * 查询某角色所具有的菜单
+     * @param roleId 角色id
+     * @return
+     */
+    @Override
+    public List<SysMenu> rolemenu(Integer roleId) {
+        return this.sysMenuDao.rolemenu(roleId);
+    }
 }

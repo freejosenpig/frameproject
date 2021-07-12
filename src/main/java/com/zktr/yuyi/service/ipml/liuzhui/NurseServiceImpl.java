@@ -4,6 +4,7 @@ import com.zktr.yuyi.dao.liuzhui.ServiceNurseDao;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import com.zktr.yuyi.service.liuzhui.NurseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,14 +43,16 @@ public class NurseServiceImpl implements NurseService {
         更新数据
      */
     @Override
-    public int update(ServiceNurse serviceNurse) {
+    @Transactional
+    public ServiceNurse update(ServiceNurse serviceNurse) {
         serviceNurseDao.updateByPrimaryKeySelective(serviceNurse);
-        return 1;
+        return serviceNurse;
     }
     /*
        插入数据
      */
     @Override
+    @Transactional
     public ServiceNurse insert(ServiceNurse serviceNurse) {
         this.serviceNurseDao.insert(serviceNurse);
         return serviceNurse;

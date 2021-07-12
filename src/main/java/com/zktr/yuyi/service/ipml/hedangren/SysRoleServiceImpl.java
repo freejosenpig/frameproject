@@ -1,7 +1,9 @@
 package com.zktr.yuyi.service.ipml.hedangren;
 
 import com.zktr.yuyi.dao.hedangren.SysRoleDao;
+import com.zktr.yuyi.dao.hedangren.SysRoleMenuDao;
 import com.zktr.yuyi.entity.hedangren.SysRole;
+import com.zktr.yuyi.entity.hedangren.SysRoleMenu;
 import com.zktr.yuyi.service.hedangren.SysRoleService;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class SysRoleServiceImpl implements SysRoleService {
     @Resource
     private SysRoleDao sysRoleDao;
+    @Resource
+    private SysRoleMenuDao roleMenuDao;
 
     /**
      * 通过ID查询单条数据
@@ -89,5 +93,10 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public List<SysRole> queryAllByCondition(SysRole role) {
         return this.sysRoleDao.queryAll(role);
+    }
+
+    @Override
+    public boolean insertBatch(List<SysRoleMenu> lists) {
+        return this.roleMenuDao.insertBatch(lists)>0?true:false;
     }
 }

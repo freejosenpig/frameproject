@@ -12,4 +12,6 @@ public interface JdConsultingService {
     JdConsulting updateConsulting(JdConsulting consulting);
 
     JdConsulting deleteConsulting(JdConsulting consulting);
+
+    JdConsulting selectConsultingById(Integer id);
 }

@@ -84,5 +84,7 @@ public interface SysMenuDao {
     List<SysMenu> usermenu(Integer id);
 
     List<SysMenu> queryUserMenu(int i);
+
+    List<SysMenu> rolemenu(Integer roleId);
 }
 

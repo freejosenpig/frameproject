@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.ARoomtypeDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.ARoomtype">
+    <id column="roomtype_id" jdbcType="INTEGER" property="roomtypeId" />
+    <result column="roomtype_name" jdbcType="VARCHAR" property="roomtypeName" />
+    <result column="roomtype_price" jdbcType="DECIMAL" property="roomtypePrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    roomtype_id, roomtype_name, roomtype_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from a_roomtype
+    where roomtype_id = #{roomtypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from a_roomtype
+    where roomtype_id = #{roomtypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="roomtype_id" keyProperty="roomtypeId" parameterType="com.zktr.yuyi.entity.liangzheng.ARoomtype" useGeneratedKeys="true">
+    insert into a_roomtype (roomtype_name, roomtype_price)
+    values (#{roomtypeName,jdbcType=VARCHAR}, #{roomtypePrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="roomtype_id" keyProperty="roomtypeId" parameterType="com.zktr.yuyi.entity.liangzheng.ARoomtype" useGeneratedKeys="true">
+    insert into a_roomtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roomtypeName != null">
+        roomtype_name,
+      </if>
+      <if test="roomtypePrice != null">
+        roomtype_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roomtypeName != null">
+        #{roomtypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtypePrice != null">
+        #{roomtypePrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.ARoomtype">
+    update a_roomtype
+    <set>
+      <if test="roomtypeName != null">
+        roomtype_name = #{roomtypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtypePrice != null">
+        roomtype_price = #{roomtypePrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where roomtype_id = #{roomtypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.ARoomtype">
+    update a_roomtype
+    set roomtype_name = #{roomtypeName,jdbcType=VARCHAR},
+      roomtype_price = #{roomtypePrice,jdbcType=DECIMAL}
+    where roomtype_id = #{roomtypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

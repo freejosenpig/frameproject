@@ -18,11 +18,37 @@ public interface JdConsultingDao {
 
     int updateByPrimaryKey(JdConsulting record);
 
+    /**
+     * 查询所有咨询
+     * @return
+     */
     List<JdConsulting> selectAllConsulting();
 
+    /**
+     * 新增咨询
+     * @param consulting
+     * @return
+     */
     int insertConsulting(JdConsulting consulting);
 
+    /**
+     * 修改咨询
+     * @param consulting
+     * @return
+     */
     int updateConsulting(JdConsulting consulting);
 
+    /**
+     * 删除咨询
+     * @param consulting
+     * @return
+     */
     int deleteConsulting(JdConsulting consulting);
+
+    /**
+     * 根据老人姓名查询咨询
+     * @param id
+     * @return
+     */
+    JdConsulting selectConsultingById(Integer id);
 }

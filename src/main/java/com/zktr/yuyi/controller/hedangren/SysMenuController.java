@@ -5,6 +5,7 @@ import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.service.hedangren.SysMenuService;
 import com.zktr.yuyi.service.hedangren.SysUserService;
 import com.zktr.yuyi.vo.AjaxResponse;
+import com.zktr.yuyi.vo.SystemRoleMenuVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -80,6 +81,29 @@ public class SysMenuController {
             ).collect(Collectors.toList());
             return AjaxResponse.success(treemenu);
         }
+    }
+
+    /**
+     * 角色管理 查询角色所有的菜单及某个角色所具有菜单
+     * @param roleId  角色id
+     * @return vo
+     */
+    @PostMapping("/findmenus")
+    public AjaxResponse findmenus(Integer roleId){
+        SystemRoleMenuVo vo=new SystemRoleMenuVo();
+        //查询角色独有菜单
+        List<SysMenu> usermenu = sysMenuService.rolemenu(roleId);
+        //查询所有菜单
+        List<SysMenu> menulist=sysMenuService.rolemenu(0);
+        List<SysMenu> allmenu = menulist.stream().filter(m -> m.getParentId() == 0).map(
+                (m) -> {
+                    m.setChildMenu(getChildrens(m, menulist));
+                    return m;
+                }
+        ).collect(Collectors.toList());
+        vo.setAllmenus(allmenu);
+        vo.setMenus(usermenu);
+        return AjaxResponse.success(vo);
     }
 
 

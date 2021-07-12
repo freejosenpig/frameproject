@@ -26,7 +26,7 @@ public interface NurseService {
     /*
         修改数据
      */
-    int update(ServiceNurse serviceNurse);
+    ServiceNurse update(ServiceNurse serviceNurse);
     /*
         增加数据
      */

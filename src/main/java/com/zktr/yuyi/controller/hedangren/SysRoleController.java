@@ -2,18 +2,21 @@ package com.zktr.yuyi.controller.hedangren;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zktr.yuyi.entity.hedangren.SysMenu;
 import com.zktr.yuyi.entity.hedangren.SysRole;
+import com.zktr.yuyi.entity.hedangren.SysRoleMenu;
+import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.service.hedangren.SysRoleService;
+import com.zktr.yuyi.service.hedangren.SysUserService;
 import com.zktr.yuyi.vo.AjaxResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * (SysRole)表控制层
@@ -29,6 +32,8 @@ public class SysRoleController {
      */
     @Resource
     private SysRoleService sysRoleService;
+    @Resource
+    private SysUserService sysUserService;
 
     /**
      * 通过主键查询单条数据
@@ -71,6 +76,36 @@ public class SysRoleController {
         map.put("rows",users);
         return AjaxResponse.success(map);
     }
+
+    /**
+     * 角色管理 添加角色
+     * @param add json对象
+     * @return vo
+     */
+    @PostMapping("/addnewrole")
+    public AjaxResponse addnewrole(@RequestBody String add){
+        JSONObject jsonObject = JSONObject.parseObject(add);
+        String menus = jsonObject.getString("menus");//菜单
+        List<SysMenu> sysMenu= JSONArray.parseArray(menus, SysMenu.class);
+        String roles = jsonObject.getString("roles");//角色
+        SysRole sysRole = JSON.parseObject(roles, SysRole.class);
+        SysUser user = sysUserService.login(sysRole.getCreatePeople());
+        sysRole.setCreatePeople(user.getId()+"");
+        sysRole.setCreateDate(new Date());
+        sysRole.setDeleteFlag(0);
+        //新增角色
+        sysRoleService.insert(sysRole);
+        //新增角色菜单
+        List<SysRoleMenu> lists=new ArrayList<>();
+        for (int i=0;i<sysMenu.size();i++){
+            SysRoleMenu sysRoleMenu=new SysRoleMenu();
+            sysRoleMenu.setRoleId(sysRole.getId());
+            sysRoleMenu.setMenuId(sysMenu.get(i).getId());
+            lists.add(sysRoleMenu);
+        }
+        return AjaxResponse.success(sysRoleService.insertBatch(lists));
+    }
+
 
 
 }

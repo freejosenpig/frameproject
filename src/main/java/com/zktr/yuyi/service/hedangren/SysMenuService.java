@@ -62,4 +62,11 @@ public interface SysMenuService {
     List<SysMenu> usermenu(int i);
 
     List<SysMenu> queryUserMenu(Integer id);
+
+    /**
+     *查询某角色所具有的菜单
+     * @param roleId 角色id
+     * @return 实列对象
+     */
+    List<SysMenu> rolemenu(Integer roleId);
 }
