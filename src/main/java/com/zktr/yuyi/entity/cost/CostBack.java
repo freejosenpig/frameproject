@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
 /**
@@ -19,6 +21,8 @@ public class CostBack implements Serializable {
      * 老人编号
      */
     private Integer oldpeopleId;
+    //老人信息
+    private JdOldpeople jdOldpeople;
 
     private Integer istoback;
 
@@ -56,6 +60,7 @@ public class CostBack implements Serializable {
      * 时效性
      */
     private Integer backTimeliness;
+
 
     private static final long serialVersionUID = 1L;
 }

@@ -35,5 +35,11 @@ public class CostListServiceImpl implements CostListService {
         return costListDao.selectByOldId(oldId);
     }
 
+    //查询所有流水信息
+    @Override
+    public List<CostList> selectAll() {
+        return costListDao.selectAll();
+    }
+
 
 }

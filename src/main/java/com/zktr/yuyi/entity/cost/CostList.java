@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
 /**
@@ -50,6 +52,8 @@ public class CostList implements Serializable {
      */
     private  int timeLiness;
 
+
+    private JdOldpeople jdOldpeople;
 
     private static final long serialVersionUID = 1L;
 }

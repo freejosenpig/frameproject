@@ -10,11 +10,58 @@
     <result column="liat_opId" jdbcType="INTEGER" property="liatOpid" />
     <result column="list_remark" jdbcType="VARCHAR" property="listRemark" />
     <result column="timeLiness" jdbcType="INTEGER" property="timeLiness" />
+
+    <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+      <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+      <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+      <result column="oldpeople_sex" jdbcType="VARCHAR" property="oldpeopleSex" />
+      <result column="oldpeople_idcard" jdbcType="VARCHAR" property="oldpeopleIdcard" />
+      <result column="oldpeople_birthday" jdbcType="TIMESTAMP" property="oldpeopleBirthday" />
+      <result column="oldpeople_phone" jdbcType="VARCHAR" property="oldpeoplePhone" />
+      <result column="oldpeople_marriage" jdbcType="VARCHAR" property="oldpeopleMarriage" />
+      <result column="oldpeople_national" jdbcType="VARCHAR" property="oldpeopleNational" />
+      <result column="oldpeople_political" jdbcType="VARCHAR" property="oldpeoplePolitical" />
+      <result column="oldpeople_job" jdbcType="VARCHAR" property="oldpeopleJob" />
+      <result column="oldpeople_address" jdbcType="VARCHAR" property="oldpeopleAddress" />
+      <result column="oldpeople_hobby" jdbcType="VARCHAR" property="oldpeopleHobby" />
+      <result column="oldpeople_character" jdbcType="VARCHAR" property="oldpeopleCharacter" />
+      <result column="oldpeople_likefood" jdbcType="VARCHAR" property="oldpeopleLikefood" />
+      <result column="oldpeople_culture" jdbcType="VARCHAR" property="oldpeopleCulture" />
+      <result column="oldpeople_ability" jdbcType="VARCHAR" property="oldpeopleAbility" />
+      <result column="oldpeople_medical" jdbcType="VARCHAR" property="oldpeopleMedical" />
+      <result column="oldpeople_medicalid" jdbcType="VARCHAR" property="oldpeopleMedicalid" />
+      <result column="oldpeople_number" jdbcType="VARCHAR" property="oldpeopleNumber" />
+      <result column="oldpeople_addname" jdbcType="INTEGER" property="oldpeopleAddname" />
+      <result column="oldpeople_addtime" jdbcType="TIMESTAMP" property="oldpeopleAddtime" />
+      <result column="oldpeople_account" jdbcType="DECIMAL" property="oldpeopleAccount" />
+      <result column="oldpeople_age" jdbcType="INTEGER" property="oldpeopleAge" />
+      <result column="oldpeople_status" jdbcType="INTEGER" property="oldpeopleStatus" />
+      <result column="oldpeople_registrant" jdbcType="INTEGER" property="oldpeopleRegistrant" />
+      <result column="oldpeople_rtime" jdbcType="TIMESTAMP" property="oldpeopleRtime" />
+      <result column="oldpeople_note" jdbcType="VARCHAR" property="oldpeopleNote" />
+    </association>
+
+
   </resultMap>
 
   <sql id="Base_Column_List">
-    list_Id, oldpeople_Id, list_explain, list_moeny, list_time, liat_opId, list_remark
+    list.list_Id, list.oldpeople_Id, list.list_explain, list.list_moeny, list.list_time, list.liat_opId, list.list_remark
   </sql>
+
+  <sql id="oldpeople">
+     old.oldpeople_id,  old.oldpeople_name,  old.oldpeople_sex,  old.oldpeople_idcard,  old.oldpeople_birthday,
+     old.oldpeople_phone,  old.oldpeople_marriage,  old.oldpeople_national,  old.oldpeople_political,  old.oldpeople_job,
+     old.oldpeople_address,  old.oldpeople_hobby,  old.oldpeople_character,  old.oldpeople_likefood,  old.oldpeople_culture,
+     old.oldpeople_ability,  old.oldpeople_medical,  old.oldpeople_medicalid,  old.oldpeople_number,  old.oldpeople_addname,
+     old.oldpeople_addtime,  old.oldpeople_account,  old.oldpeople_age, oldpeople_status,  old.oldpeople_registrant,
+     old.oldpeople_rtime,  old.oldpeople_note
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_list list
+    inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+  </select>
+
 
   <!--  根据老人编号查询流水信息-->
   <select id="selectByOldId" resultMap="BaseResultMap">

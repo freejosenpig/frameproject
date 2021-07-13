@@ -13,4 +13,6 @@ public interface CostBackService {
     List<CostBack> selectByoldId(Integer oldId);
     //    查询所有退住信息
     List<CostBack> selectAll();
+    //根据老人姓名模糊查询
+    List<CostBack> selectBycontion(String backname);
 }

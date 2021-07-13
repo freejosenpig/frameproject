@@ -12,4 +12,6 @@ public interface CostListService {
 
     //    根据老人编号查询流水信息
     List<CostList> selectByOldId(Integer oldId);
+    //查询所有流水信息
+    List<CostList> selectAll();
 }
