@@ -15,4 +15,6 @@ public interface JdOldpeopleService {
     JdOldpeople updateOldpeople(JdOldpeople jdOldpeople);
 
     JdOldpeople updateAccount(JdOldpeople jdOldpeople);
+
+    JdOldpeople selectByPrimaryKey(Integer oldpeopleId);
 }
