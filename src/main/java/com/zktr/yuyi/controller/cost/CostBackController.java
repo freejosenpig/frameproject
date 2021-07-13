@@ -64,7 +64,12 @@ public class CostBackController {
 
     //根据老人编号修改老人账户余额
     @PutMapping("/updateAccount")
-    public AjaxResponse updateAccount(JdOldpeople jdOldpeople ){
+    public AjaxResponse updateAccount(@RequestBody JdOldpeople jdOldpeople ){
         return AjaxResponse.success(oldpeopleService.updateAccount(jdOldpeople));
+    }
+//    根据老人编号查询老人信息
+    @GetMapping("/selectByPrimaryKey/{OldId}")
+    public AjaxResponse selectByPrimaryKey(@PathVariable Integer OldId){
+        return AjaxResponse.success(oldpeopleService.selectByPrimaryKey(OldId));
     }
 }

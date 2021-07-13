@@ -53,5 +53,10 @@ public class CostOutstanding implements Serializable {
      */
     private Integer outstandingTimeliness;
 
+    //欠费状态
+    private Integer outstandingstatus;
+    //欠费说明
+    private String outstandingremark;
+
     private static final long serialVersionUID = 1L;
 }

@@ -17,8 +17,8 @@ public class CostOutController {
 
     //    查询所有
     @GetMapping("/seletcOutAll")
-    public AjaxResponse selectAll(){
-        return AjaxResponse.success( costOutstandingService.selectAll());
+    public List<CostOutstanding> selectAll(){
+        return  costOutstandingService.selectAll();
     }
     //    根据老人编号查询欠费信息
     @GetMapping("/selectOutByOldId")
