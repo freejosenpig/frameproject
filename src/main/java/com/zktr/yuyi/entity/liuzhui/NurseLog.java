@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.liuzhui;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -15,6 +17,7 @@ public class NurseLog implements Serializable {
      */
     private Integer id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
     private Date rTime;
 
     private String rName;
@@ -57,6 +60,7 @@ public class NurseLog implements Serializable {
 
     private String createPeople;
 
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;

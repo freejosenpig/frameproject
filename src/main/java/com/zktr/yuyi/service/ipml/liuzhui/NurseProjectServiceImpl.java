@@ -31,6 +31,13 @@ public class NurseProjectServiceImpl implements NurseProjectService {
     public List<ServeNurseProject> queryAll() {
         return serveNurseProjectDao.selectAll();
     }
+    /**
+     * 多条件查询
+     */
+    @Override
+    public List<ServeNurseProject> queryAllByUser(ServeNurseProject serveNurseProject) {
+        return this.serveNurseProjectDao.selectAllByNurse(serveNurseProject);
+    }
 
     /*
         根据id删除
