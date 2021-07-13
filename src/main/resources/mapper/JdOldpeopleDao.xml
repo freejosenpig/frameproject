@@ -29,15 +29,85 @@
     <result column="oldpeople_registrant" jdbcType="INTEGER" property="oldpeopleRegistrant" />
     <result column="oldpeople_rtime" jdbcType="TIMESTAMP" property="oldpeopleRtime" />
     <result column="oldpeople_note" jdbcType="VARCHAR" property="oldpeopleNote" />
+    <result column="timeliness" jdbcType="INTEGER" property="timeliness"/>
+    <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="n_name" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="sysUser" javaType="com.zktr.yuyi.entity.hedangren.SysUser">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
   </resultMap>
+  <sql id="Base_Column_su">
+    su.id,  su.user_name
+  </sql>
+  <sql id="Base_Column_sn">
+    sn.id, sn.n_name
+  </sql>
+  <sql id="Base_Column_o">
+    o.oldpeople_id, o.oldpeople_name, o.oldpeople_sex, o.oldpeople_idcard, o.oldpeople_birthday,
+    o.oldpeople_phone, o.oldpeople_marriage, o.oldpeople_national, o.oldpeople_political, o.oldpeople_job,
+    o.oldpeople_address, o.oldpeople_hobby, o.oldpeople_character, o.oldpeople_likefood, o.oldpeople_culture,
+    o.oldpeople_ability, o.oldpeople_medical, o.oldpeople_medicalid, o.oldpeople_number, o.oldpeople_addname,
+    o.oldpeople_addtime, o.oldpeople_account, o.oldpeople_age, o.oldpeople_status, o.oldpeople_registrant,
+    o.oldpeople_rtime, o.oldpeople_note, o.timeliness
+  </sql>
   <sql id="Base_Column_List">
     oldpeople_id, oldpeople_name, oldpeople_sex, oldpeople_idcard, oldpeople_birthday, 
     oldpeople_phone, oldpeople_marriage, oldpeople_national, oldpeople_political, oldpeople_job, 
     oldpeople_address, oldpeople_hobby, oldpeople_character, oldpeople_likefood, oldpeople_culture, 
     oldpeople_ability, oldpeople_medical, oldpeople_medicalid, oldpeople_number, oldpeople_addname, 
     oldpeople_addtime, oldpeople_account, oldpeople_age, oldpeople_status, oldpeople_registrant, 
-    oldpeople_rtime, oldpeople_note
+    oldpeople_rtime, oldpeople_note, timeliness
   </sql>
+  <update id="updateOldpeople" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    update jd_oldpeople
+    set oldpeople_name = #{oldpeopleName,jdbcType=VARCHAR},
+      oldpeople_sex = #{oldpeopleSex,jdbcType=VARCHAR},
+      oldpeople_idcard = #{oldpeopleIdcard,jdbcType=VARCHAR},
+      oldpeople_birthday = #{oldpeopleBirthday,jdbcType=TIMESTAMP},
+      oldpeople_phone = #{oldpeoplePhone,jdbcType=VARCHAR},
+      oldpeople_marriage = #{oldpeopleMarriage,jdbcType=VARCHAR},
+      oldpeople_national = #{oldpeopleNational,jdbcType=VARCHAR},
+      oldpeople_political = #{oldpeoplePolitical,jdbcType=VARCHAR},
+      oldpeople_job = #{oldpeopleJob,jdbcType=VARCHAR},
+      oldpeople_address = #{oldpeopleAddress,jdbcType=VARCHAR},
+      oldpeople_hobby = #{oldpeopleHobby,jdbcType=VARCHAR},
+      oldpeople_character = #{oldpeopleCharacter,jdbcType=VARCHAR},
+      oldpeople_likefood = #{oldpeopleLikefood,jdbcType=VARCHAR},
+      oldpeople_culture = #{oldpeopleCulture,jdbcType=VARCHAR},
+      oldpeople_ability = #{oldpeopleAbility,jdbcType=VARCHAR},
+      oldpeople_medical = #{oldpeopleMedical,jdbcType=VARCHAR},
+      oldpeople_medicalid = #{oldpeopleMedicalid,jdbcType=VARCHAR},
+      oldpeople_account = #{oldpeopleAccount,jdbcType=DECIMAL},
+      oldpeople_age = #{oldpeopleAge,jdbcType=INTEGER},
+      oldpeople_registrant = #{oldpeopleRegistrant,jdbcType=INTEGER},
+      oldpeople_rtime = #{oldpeopleRtime,jdbcType=TIMESTAMP},
+      oldpeople_note = #{oldpeopleNote,jdbcType=VARCHAR}
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateAccount" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    update jd_oldpeople
+    set oldpeople_account = #{oldpeopleAccount,jdbcType=DECIMAL}
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteOldpeople" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+    update jd_oldpeople
+    set timeliness = 1
+    where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllOldpeople" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_su" />,
+    <include refid="Base_Column_sn" />,
+    <include refid="Base_Column_o" />
+    from jd_oldpeople o
+    inner join service_nurse sn on o.oldpeople_registrant = sn.id
+    inner join sys_user su on o.oldpeople_addname = su.id
+    where o.timeliness = 0
+    order by o.oldpeople_id desc
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

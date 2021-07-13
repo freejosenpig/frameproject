@@ -2,6 +2,9 @@ package com.zktr.yuyi.entity.liangzheng;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
 
 /**
@@ -33,6 +36,7 @@ public class JdFamily implements Serializable {
     /**
      * 家属老人
      */
+    private JdOldpeople jdOldpeople;
     private Integer familyOrdid;
 
     /**
@@ -43,6 +47,7 @@ public class JdFamily implements Serializable {
     /**
      * 家属档案创建人
      */
+    private SysUser sysUser;
     private Integer familyAddname;
 
     /**
@@ -53,6 +58,7 @@ public class JdFamily implements Serializable {
     /**
      * 家属档案登记人
      */
+    private ServiceNurse serviceNurse;
     private Integer familyRegistrant;
 
     /**
@@ -64,6 +70,11 @@ public class JdFamily implements Serializable {
      * 家属档案备注
      */
     private String familyNote;
+
+    /**
+     * 时效性
+     */
+    private Integer timeliness;
 
     private static final long serialVersionUID = 1L;
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface JdConsultingService {
     List<JdConsulting> selectAllConsulting();
 
-    JdConsulting insertConsulting(JdConsulting consulting);
+    JdConsulting insertConsulting(String addname,JdConsulting consulting);
 
     JdConsulting updateConsulting(JdConsulting consulting);
 
