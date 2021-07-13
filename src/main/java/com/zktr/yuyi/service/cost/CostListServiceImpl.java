@@ -44,5 +44,10 @@ public class CostListServiceImpl implements CostListService {
         return costListDao.selectAll();
     }
 
+    @Override
+    public List<CostList> selectBycontion(String oldpeopleName) {
+        return  costListDao.selectBycontion(oldpeopleName);
+    }
+
 
 }

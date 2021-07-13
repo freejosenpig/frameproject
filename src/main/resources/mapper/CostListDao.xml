@@ -59,8 +59,20 @@
 
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_list list
-    inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+    inner join jd_oldpeople old on old.oldpeople_id=list.oldpeople_Id
   </select>
+
+  <select id="selectBycontion" resultMap="BaseResultMap">
+    select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_list list
+    inner join jd_oldpeople old on old.oldpeople_id=list.oldpeople_Id
+    <where>
+      <if test="oldpeople_name != null">
+        oldpeople_name like CONCAT(CONCAT('%',#{oldpeopleName,jdbcType=VARCHAR},'%'))
+      </if>
+    </where>
+    ORDER BY  list.list_Id
+  </select>
+
 
 
   <!--  根据老人编号查询流水信息-->

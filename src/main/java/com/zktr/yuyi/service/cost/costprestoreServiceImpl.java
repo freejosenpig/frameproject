@@ -21,6 +21,7 @@ public class costprestoreServiceImpl implements costprestoreService {
     @Transactional
     @Override
     public CostPrestore insertprestore(CostPrestore costPrestore) {
+        costPrestore.setPrestoreOpid(1);
        costPrestoreDao.insert(costPrestore);
        return costPrestore;
     }
