@@ -12,6 +12,11 @@
     <result column="entry_money" jdbcType="DECIMAL" property="entryMoney" />
     <result column="out_money" jdbcType="DECIMAL" property="outMoney" />
     <result column="back_TimeLiness" jdbcType="INTEGER" property="backTimeliness" />
+    <association property="jdOn" javaType="com.zktr.yuyi.entity.liangzheng.JdOn">
+      <id column="on_id" jdbcType="INTEGER" property="onId" />
+      <result column="on_time" jdbcType="TIMESTAMP" property="onTime" />
+      <result column="on_oldid" jdbcType="INTEGER" property="onOldid" />
+    </association>
 
     <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
       <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
@@ -44,7 +49,9 @@
     </association>
 
   </resultMap>
-
+  <sql id="Base_Column_on">
+    onx.on_id, onx.on_time, onx.on_oldid
+  </sql>
 
   <sql id="oldpeople">
      old.oldpeople_id,  old.oldpeople_name,  old.oldpeople_sex,  old.oldpeople_idcard,  old.oldpeople_birthday,
@@ -90,8 +97,9 @@
 
   <!--查询所有退住信息-->
   <select id="selectAll" resultMap="BaseResultMap">
-    select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_back b
+    select <include refid="oldpeople"/>,<include refid="Base_Column_List"/>,<include refid="Base_Column_on"/> from cost_back b
     inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+    inner join jd_on onx on old.oldpeople_id = onx.on_oldid
     ORDER BY b.back_Id
   </select>
 

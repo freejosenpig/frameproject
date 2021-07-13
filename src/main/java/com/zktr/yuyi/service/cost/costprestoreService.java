@@ -17,4 +17,6 @@ public interface costprestoreService {
     //查询所有预存信息
     List<CostPrestore> selectAll();
 
+
+    CostPrestore updateById(CostPrestore costPrestore);
 }

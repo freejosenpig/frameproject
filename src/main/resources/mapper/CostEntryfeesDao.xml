@@ -59,7 +59,7 @@
 
   <!--  根据老人编号查询缴费信息-->
   <select id="selectByoldId" resultMap="BaseResultMap">
-    select * from cost_entryfees where  oldpeople_Id={oldpeopleId,jdbcType=INTEGER };
+    select * from cost_entryfees where  oldpeople_Id={oldpeopleId,jdbcType=INTEGER }
   </select>
 
   <!--  查询所有缴费信息-->

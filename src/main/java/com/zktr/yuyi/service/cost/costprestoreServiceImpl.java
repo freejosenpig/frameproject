@@ -43,4 +43,10 @@ public class costprestoreServiceImpl implements costprestoreService {
     public List<CostPrestore> selectAll() {
         return costPrestoreDao.selectAll();
     }
+
+    @Override
+    public CostPrestore updateById(CostPrestore costPrestore) {
+        costPrestoreDao.updateById(costPrestore);
+        return costPrestore;
+    }
 }

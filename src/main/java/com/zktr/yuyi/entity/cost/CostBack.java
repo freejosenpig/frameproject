@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
+import com.zktr.yuyi.entity.liangzheng.JdOn;
 import lombok.Data;
 
 /**
@@ -25,6 +26,10 @@ public class CostBack implements Serializable {
     //老人信息
     private JdOldpeople jdOldpeople;
 
+    /**
+     * 入住信息
+     */
+    private JdOn jdOn;
     private Integer istoback;
 
     /**

@@ -9,7 +9,7 @@
     <result column="list_time" jdbcType="TIMESTAMP" property="listTime" />
     <result column="liat_opId" jdbcType="INTEGER" property="liatOpid" />
     <result column="list_remark" jdbcType="VARCHAR" property="listRemark" />
-    <result column="timeLiness" jdbcType="INTEGER" property="timeLiness" />
+    <result column="list_timeLiness" jdbcType="INTEGER" property="listtimeLiness" />
 
     <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
       <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
@@ -60,6 +60,7 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_list list
     inner join jd_oldpeople old on old.oldpeople_id=list.oldpeople_Id
+    where list_timeLiness=0
   </select>
 
   <select id="selectBycontion" resultMap="BaseResultMap">
@@ -169,6 +170,7 @@
       <if test="listRemark != null">
         list_remark = #{listRemark,jdbcType=VARCHAR},
       </if>
+      list_timeLiness=1
     </set>
     where list_Id = #{listId,jdbcType=INTEGER}
   </update>
