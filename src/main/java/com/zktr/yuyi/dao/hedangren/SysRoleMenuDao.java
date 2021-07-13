@@ -77,7 +77,7 @@ public interface SysRoleMenuDao {
      *
      * @return 影响行数
      */
-    int deleteById();
+    int deleteById(int id);
 
 }
 

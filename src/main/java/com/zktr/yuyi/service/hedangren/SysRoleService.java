@@ -2,7 +2,9 @@ package com.zktr.yuyi.service.hedangren;
 
 import com.zktr.yuyi.entity.hedangren.SysRole;
 import com.zktr.yuyi.entity.hedangren.SysRoleMenu;
+import com.zktr.yuyi.entity.hedangren.SysUserRole;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -44,7 +46,7 @@ public interface SysRoleService {
      * @param sysRole 实例对象
      * @return 实例对象
      */
-    SysRole update(SysRole sysRole);
+    boolean update(SysRole sysRole);
 
     /**
      * 通过主键删除数据
@@ -64,4 +66,8 @@ public interface SysRoleService {
      * @return
      */
     boolean insertBatch(List<SysRoleMenu> lists);
+
+    List<SysUserRole> findtfhasuser(Integer id);
+
+    boolean deletemenus(Integer id);
 }

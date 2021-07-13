@@ -91,7 +91,9 @@ public class SysRoleController {
         SysRole sysRole = JSON.parseObject(roles, SysRole.class);
         SysUser user = sysUserService.login(sysRole.getCreatePeople());
         sysRole.setCreatePeople(user.getId()+"");
+        sysRole.setUpdatePeople(user.getId()+"");
         sysRole.setCreateDate(new Date());
+        sysRole.setUpdateDate(new Date());
         sysRole.setDeleteFlag(0);
         //新增角色
         sysRoleService.insert(sysRole);
