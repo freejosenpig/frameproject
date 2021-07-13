@@ -81,5 +81,6 @@ public interface SysRoleDao {
      */
     int deleteById(Integer id);
 
+    List<SysRole> userhasrole(Integer id);
 }
 

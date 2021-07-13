@@ -80,6 +80,7 @@
     <delete id="deleteById">
         delete
         from jdboot.sys_user_role
+        where user_id=#{id}
     </delete>
 
 </mapper>

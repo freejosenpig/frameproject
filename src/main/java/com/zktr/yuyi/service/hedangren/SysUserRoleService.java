@@ -40,11 +40,5 @@ public interface SysUserRoleService {
 
 
 
-    /**
-     * 通过主键删除数据
-     *
-     * @return 是否成功
-     */
-    boolean deleteById();
 
 }

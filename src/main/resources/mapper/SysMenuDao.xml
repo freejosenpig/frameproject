@@ -92,7 +92,7 @@
     </select>
     <select id="usermenu" resultMap="SysMenuMap">
         <if test="userId != null and userId == 0">
-            select * from sys_menu where visible=0 order by id
+            select * from sys_menu where visible=0 order by order_num
         </if>
         <if test="userId != null and userId != 0">
             select distinct d.* from sys_user a
@@ -104,7 +104,7 @@
     </select>
     <select id="queryUserMenu" resultMap="SysMenuMap">
         <if test="userId != null and userId == 0">
-            select * from sys_menu order by id
+            select * from sys_menu order by order_num
         </if>
         <if test="userId != null and userId != 0">
             select distinct d.* from sys_user a

@@ -112,4 +112,14 @@ public class SysRoleServiceImpl implements SysRoleService {
     public boolean deletemenus(Integer id) {
         return this.roleMenuDao.deleteById(id)>0;
     }
+
+    /**
+     * 根据id查询拥有的角色
+     * @param id
+     * @return
+     */
+    @Override
+    public List<SysRole> userhasrole(Integer id) {
+        return this.sysRoleDao.userhasrole(id);
+    }
 }
