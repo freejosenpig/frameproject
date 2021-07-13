@@ -13,11 +13,75 @@
     <result column="health_registrant" jdbcType="INTEGER" property="healthRegistrant" />
     <result column="health_rtime" jdbcType="TIMESTAMP" property="healthRtime" />
     <result column="health_note" jdbcType="VARCHAR" property="healthNote" />
+    <result column="timeliness" javaType="INTEGER" property="timeliness"/>
+    <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="n_name" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="serviceNurse2" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id2" jdbcType="INTEGER" property="id" />
+      <result column="n_name2" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="sysUser" javaType="com.zktr.yuyi.entity.hedangren.SysUser">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
+    <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+      <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+      <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     health_id, health_ordid, health_evaluator, health_result, health_disease, health_status, 
     health_addname, health_addtime, health_registrant, health_rtime, health_note
   </sql>
+  <sql id="Base_Column_h">
+    h.health_id, h.health_ordid, h.health_evaluator, h.health_result, h.health_disease, h.health_status,
+    h.health_addname, h.health_addtime, h.health_registrant, h.health_rtime, h.health_note, h.timeliess
+  </sql>
+  <sql id="Base_Column_su">
+    su.id,  su.user_name
+  </sql>
+  <sql id="Base_Column_sn">
+    sn.id, sn.n_name
+  </sql>
+  <sql id="Base_Column_sn2">
+    sn2.id id2, sn2.n_name n_name2
+  </sql>
+  <sql id="Base_Column_o">
+    o.oldpeople_id, o.oldpeople_name
+  </sql>
+  <update id="updateHealth" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth">
+    update jd_health
+    set
+      health_evaluator = #{healthEvaluator,jdbcType=INTEGER},
+      health_result = #{healthResult,jdbcType=VARCHAR},
+      health_disease = #{healthDisease,jdbcType=VARCHAR},
+      health_status = #{healthStatus,jdbcType=INTEGER},
+      health_registrant = #{healthRegistrant,jdbcType=INTEGER},
+      health_rtime = #{healthRtime,jdbcType=TIMESTAMP},
+      health_note = #{healthNote,jdbcType=VARCHAR}
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteHealth" parameterType="com.zktr.yuyi.entity.liangzheng.JdHealth">
+    update jd_health
+    set
+      timeliness = 1
+    where health_id = #{healthId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllHealth" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_h" />,
+    <include refid="Base_Column_su" />,
+    <include refid="Base_Column_sn" />,
+    <include refid="Base_Column_sn2" />
+    from jd_health h
+    inner join service_nurse sn on h.health_registrant = sn.id
+    inner join sys_user su on h.health_addname = su.id
+    inner join service_nurse sn2 on h.health_evaluator = sn2.id
+    where h.timeliness = 0
+    order by h.health_id desc
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
