@@ -1,7 +1,10 @@
 package com.zktr.yuyi.controller.cost;
 
+import com.zktr.yuyi.dao.liangzheng.JdOldpeopleDao;
 import com.zktr.yuyi.entity.cost.CostPrestore;
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import com.zktr.yuyi.service.cost.costprestoreService;
+import com.zktr.yuyi.service.liangzheng.JdOldpeopleService;
 import com.zktr.yuyi.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.loadtime.Aj;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -16,6 +20,8 @@ import java.util.List;
 public class CostprestoreController {
     @Autowired
     private costprestoreService costprestoreService;
+    @Resource
+    private JdOldpeopleService oldpeopleService;
 
     //    新增预存
     @PostMapping("/insertprestore")
@@ -42,5 +48,10 @@ public class CostprestoreController {
     @GetMapping("/selectPreAll")
     public List<CostPrestore> selectAll(){
         return costprestoreService.selectAll();
+    }
+
+    @GetMapping("/selectAllOldpeople")
+    public AjaxResponse selectAllOldpeople(){
+        return AjaxResponse.success(oldpeopleService.selectAllOldpeople());
     }
 }

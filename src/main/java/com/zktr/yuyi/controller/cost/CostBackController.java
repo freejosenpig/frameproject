@@ -1,12 +1,16 @@
 package com.zktr.yuyi.controller.cost;
 
 import com.zktr.yuyi.entity.cost.CostBack;
+import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import com.zktr.yuyi.service.cost.CostBackService;
+import com.zktr.yuyi.service.liangzheng.JdOldpeopleService;
 import com.zktr.yuyi.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -14,6 +18,8 @@ import java.util.List;
 public class CostBackController {
     @Autowired
     private CostBackService costBackService;
+    @Resource
+    private JdOldpeopleService oldpeopleService;
 
     //新增退住结算
     @PostMapping("/insertcostback")
@@ -55,4 +61,10 @@ public class CostBackController {
 //    public CostBack updateisback(@PathVariable("oldId") Integer oldId){
 //        return costBackService.updateisback(oldId);
 //    }
+
+    //根据老人编号修改老人账户余额
+    @PutMapping("/updateAccount")
+    public AjaxResponse updateAccount(JdOldpeople jdOldpeople ){
+        return AjaxResponse.success(oldpeopleService.updateAccount(jdOldpeople));
+    }
 }
