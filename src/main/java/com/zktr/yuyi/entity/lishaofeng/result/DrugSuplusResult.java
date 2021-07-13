@@ -8,7 +8,7 @@ public class DrugSuplusResult {
     /**
      * 药物剩余id
      */
-    private Integer mesId;
+    private Integer mes_Id;
 
     /**
      * 老人id
@@ -38,6 +38,6 @@ public class DrugSuplusResult {
     /**
      * 创建时间
      */
-    private Date createTime;
-    private String oldpeopleName;
+    private Date create_Time;
+    private String oldpeople_Name;
 }

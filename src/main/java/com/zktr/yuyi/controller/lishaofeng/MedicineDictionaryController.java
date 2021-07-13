@@ -15,6 +15,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
+@RequestMapping("service")
 public class MedicineDictionaryController {
     @Autowired
     private MedicineDictionaryServiceImp medicineDictionaryServiceImp;
@@ -34,6 +35,11 @@ public class MedicineDictionaryController {
         PageInfo<MedicineDictionary> medicineDictionaryPageInfo = medicineDictionaryServiceImp.selectMedicineDictionarybypageandname(name1,page1, size1);
         return AjaxResponse.success(medicineDictionaryPageInfo) ;
     }
-
+    @RequestMapping(value = "/MedicineDictionarybyid/{id}",method = RequestMethod.DELETE)
+    public AjaxResponse delectbypage(@PathVariable("id") int id) {
+        log.info(String.valueOf(id));
+        int i = medicineDictionaryServiceImp.deleteByPrimaryKey(id);
+        return AjaxResponse.success(i);
+    }
 
 }

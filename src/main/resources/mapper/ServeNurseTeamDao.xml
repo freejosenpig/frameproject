@@ -17,12 +17,14 @@
     from serve_nurse_team
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectAll" resultType="com.zktr.yuyi.entity.liuzhui.NurseTeam">
+
+  <select id="selectAll" resultMap="BaseResultMap">
     select
-     *
+    <include refid="Base_Column_List" />
     from serve_nurse_team
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from serve_nurse_team
     where id = #{id,jdbcType=INTEGER}
   </delete>

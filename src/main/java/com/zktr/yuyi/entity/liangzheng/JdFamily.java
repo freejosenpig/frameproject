@@ -3,6 +3,7 @@ package com.zktr.yuyi.entity.liangzheng;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
@@ -53,6 +54,7 @@ public class JdFamily implements Serializable {
     /**
      * 家属档案创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date familyAddtime;
 
     /**
@@ -64,6 +66,7 @@ public class JdFamily implements Serializable {
     /**
      * 家属档案登记时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date familyRtime;
 
     /**

@@ -3,13 +3,14 @@ package com.zktr.yuyi.entity.liangzheng;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
 
 /**
  * jd_oldpeople
- * @author 
+ * @author
  */
 @Data
 public class JdOldpeople implements Serializable {
@@ -36,6 +37,7 @@ public class JdOldpeople implements Serializable {
     /**
      * 生日
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date oldpeopleBirthday;
 
     /**
@@ -117,6 +119,7 @@ public class JdOldpeople implements Serializable {
     /**
      * 老人档案创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date oldpeopleAddtime;
 
     /**
@@ -143,6 +146,7 @@ public class JdOldpeople implements Serializable {
     /**
      * 老人档案登记时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date oldpeopleRtime;
 
     /**

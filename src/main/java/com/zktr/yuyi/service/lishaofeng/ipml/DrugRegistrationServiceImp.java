@@ -16,6 +16,12 @@ public class DrugRegistrationServiceImp implements DrugRegistrationService {
     @Resource
     @Autowired
    private DrugRegistrationDao drugRegistrationDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer msgId) {
+        return drugRegistrationDao.deleteByPrimaryKey(msgId);
+    }
+
     @Override
     public List<DrugRegResult> selectlinkbyperson() {
         return drugRegistrationDao.selectlinkbyperson();

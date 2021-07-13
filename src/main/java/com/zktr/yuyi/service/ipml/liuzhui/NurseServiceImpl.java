@@ -31,6 +31,16 @@ public class NurseServiceImpl implements NurseService {
         return serviceNurseDao.selectAll();
     }
 
+    /**
+     * 多条件查询
+     * @param serviceNurse
+     * @return
+     */
+    @Override
+    public List<ServiceNurse> queryAllByUser(ServiceNurse serviceNurse) {
+        return this.serviceNurseDao.selectAllByNurse(serviceNurse);
+    }
+
     /*
         根据id删除
      */

@@ -34,7 +34,7 @@ public class JdOnserviceImpl implements JdOnservice {
         CostEntryfees costEntryfees=new CostEntryfees();
         costEntryfees.setEntryfeesMoney(record.getOnmoney());
         costEntryfees.setEntryfeesExplain("入住缴费");
-        costEntryfees.setEntryfeesOpid(record.getOnOldid());
+        costEntryfees.setOldpeopleId(record.getOnOldid());
         costEntryfeesService.insertentryfees(costEntryfees);
         return record;
     }

@@ -1,6 +1,7 @@
 package com.zktr.yuyi.service.ipml.liuzhui;
 
 import com.zktr.yuyi.dao.liuzhui.ServeNurseLevelDao;
+import com.zktr.yuyi.entity.liuzhui.NurseLog;
 import com.zktr.yuyi.entity.liuzhui.ServeNurseLevel;
 import com.zktr.yuyi.service.liuzhui.NurseLevelService;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,13 @@ public class NurseLevelServiceImpl implements NurseLevelService {
         return serveNurseLevelDao.selectAll();
     }
 
+    /**
+     * 多条件查询
+     */
+    @Override
+    public List<ServeNurseLevel> queryAllByUser(ServeNurseLevel serveNurseLevel) {
+        return this.serveNurseLevelDao.selectAllByNurse(serveNurseLevel);
+    }
     /*
         根据id删除
      */

@@ -1,5 +1,6 @@
 package com.zktr.yuyi.service.liuzhui;
 
+import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 
 import java.util.List;
@@ -18,6 +19,10 @@ public interface NurseService {
         查询所有
      */
     List<ServiceNurse> queryAll();
+    /**
+     * 多条件查询
+     */
+    List<ServiceNurse> queryAllByUser(ServiceNurse serviceNurse);
     /*
         通过id，删除
      */

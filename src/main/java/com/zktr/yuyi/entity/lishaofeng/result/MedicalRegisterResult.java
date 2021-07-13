@@ -8,7 +8,7 @@ public class MedicalRegisterResult {
     /**
      * 就医登记id
      */
-    private Integer mrId;
+    private Integer mr_Id;
 
     /**
      * 老人id
@@ -18,12 +18,12 @@ public class MedicalRegisterResult {
     /**
      * 就医时间
      */
-    private Date medicalTime;
+    private Date medical_Time;
 
     /**
      * 就医地点
      */
-    private String medicalAdress;
+    private String medical_Adress;
 
     /**
      * 医生
@@ -33,18 +33,18 @@ public class MedicalRegisterResult {
     /**
      * 诊断结果
      */
-    private String diagnosisResults;
+    private String diagnosis_Results;
 
     /**
      * 医嘱
      */
-    private String medicalAdvice;
+    private String medical_Advice;
 
     /**
      * 登记时间
      */
     private Date rgtime;
 
-    private Date creatTime;
-    private String oldpeopleName;
+    private Date creat_Time;
+    private String oldpeople_Name;
 }

@@ -25,6 +25,37 @@
     *
     from serve_nurse_level
   </select>
+  <select id="selectAllByNurse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    id, l_name, l_type, l_money, l_date, l_explain, create_people, create_time
+    from serve_nurse_level
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="lName != null and lName != ''">
+        and l_name like CONCAT('%',#{lName},'%')
+      </if>
+      <if test="lType != null and lType != ''">
+        and l_type = #{lType}
+      </if>
+      <if test="lMoney != null and lMoney != ''">
+        and l_money  = #{lMoney}
+      </if>
+      <if test="lDate != null and lDate !=''">
+        and l_date = #{lDate}
+      </if>
+      <if test="lExplain != null and lExplain != ''">
+        and l_explain = #{lExplain}
+      </if>
+      <if test="createPeople != null">
+        and create_people = #{createPeople},
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime},
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from serve_nurse_level
     where id = #{id,jdbcType=INTEGER}

@@ -28,6 +28,51 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAllByNurse"  resultMap="BaseResultMap">
+    select
+     id,r_time, r_name, r_number, r_team, r_people, r_finish, r_rest, r_medicine, r_activity,
+    r_ann, nurse_id, create_people, create_time
+    from serve_nurse_log
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="rTime != null and rTime != ''">
+        and r_time = #{rTime}
+      </if>
+      <if test="rName != null and rName != ''">
+        and r_name like CONCAT('%',#{rName},'%')
+      </if>
+      <if test="rNumber != null and rNumber != ''">
+        and r_number  = #{rNumber}
+      </if>
+      <if test="rTeam != null and rTeam !=''">
+        and r_team = #{rTeam}
+      </if>
+      <if test="rPeople != null and rPeople != ''">
+        and r_people like CONCAT('%',#{rPeople},'%')
+      </if>
+      <if test="rFinish != null and rFinish != ''">
+        and r_finish = #{rFinish}
+      </if>
+      <if test="rRest != null">
+        and r_rest = #{rRest}
+      </if>
+      <if test="rMedicine != null">
+        and r_medicine = #{rMedicine},
+      </if>
+      <if test="rActivity != null">
+        and r_activity = #{rActivity},
+      </if>
+      <if test="rAnn != null">
+        and r_ann = #{rAnn},
+      </if>
+      <if test="nurseId != null">
+        and nurse_id = #{nurseId},
+      </if>
+    </where>
+  </select>
+
   <select id="selectAll" resultType="com.zktr.yuyi.entity.liuzhui.NurseLog">
     select
      *

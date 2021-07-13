@@ -25,10 +25,10 @@ public class NurseTeamController {
 
     @Log("查询所有护工组")
     @GetMapping("/selectAll")
-    public List<NurseTeam> selectAll(){
+    public AjaxResponse selectAll(){
         List<NurseTeam> list =  this.nurseTeamService.queryAll();
         System.out.println(this.nurseTeamService.queryAll());
-        return list;
+        return AjaxResponse.success(list);
     }
 
     @Log("根据id删除护工组")

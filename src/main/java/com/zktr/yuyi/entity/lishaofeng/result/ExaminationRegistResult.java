@@ -8,7 +8,7 @@ public class ExaminationRegistResult {
     /**
      * 体检id
      */
-    private Integer erId;
+    private Integer er_Id;
 
     /**
      * 老人id
@@ -40,6 +40,6 @@ public class ExaminationRegistResult {
      */
     private Date rgtime;
 
-    private Date createTime;
-    private String oldpeopleName;
+    private Date create_time;
+    private String oldpeople_name;
 }

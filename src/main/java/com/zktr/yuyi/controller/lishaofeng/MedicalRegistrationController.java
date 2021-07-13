@@ -7,15 +7,13 @@ import com.zktr.yuyi.service.lishaofeng.ipml.MedicalRegisterImp;
 import com.zktr.yuyi.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @Slf4j
+@RequestMapping("service")
 public class MedicalRegistrationController {
     @Autowired
     private MedicalRegisterImp medicalRegisterImp;
@@ -32,5 +30,10 @@ public class MedicalRegistrationController {
         log.info(String.valueOf(page));
         PageInfo<MedicalRegisterResult> medicalRegisterResultPageInfo = medicalRegisterImp.selectMedicalbypersonbypage(page, size);
         return AjaxResponse.success(medicalRegisterResultPageInfo);
+    }
+    @RequestMapping(value = "/medicalRegisterdelectbyid/{id}",method = RequestMethod.DELETE)
+    public AjaxResponse delectbypage(@PathVariable("id") int id) {
+        int i = medicalRegisterImp.deleteByPrimaryKey(id);
+        return AjaxResponse.success(i);
     }
 }
