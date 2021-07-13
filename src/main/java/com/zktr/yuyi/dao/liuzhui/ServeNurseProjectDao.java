@@ -17,6 +17,7 @@ public interface ServeNurseProjectDao {
     ServeNurseProject selectByPrimaryKey(Integer id);
     List<ServeNurseProject> selectAll();
 
+    List<ServeNurseProject> selectAllByNurse(ServeNurseProject serveNurseProject);
     int updateByPrimaryKeySelective(ServeNurseProject record);
 
     int updateByPrimaryKey(ServeNurseProject record);

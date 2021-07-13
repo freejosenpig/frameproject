@@ -30,6 +30,14 @@ public class NurseLogServiceImpl implements NurseLogService {
     public List<NurseLog> queryAll() {
         return serveNurseLogDao.selectAll();
     }
+    /**
+     * 多条件查询
+     */
+    @Override
+    public List<NurseLog> queryAllByUser(NurseLog nurseLog) {
+        return this.serveNurseLogDao.selectAllByNurse(nurseLog);
+    }
+
 
     /*
         根据id删除

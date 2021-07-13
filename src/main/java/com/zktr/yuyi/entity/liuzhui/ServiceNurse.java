@@ -1,7 +1,10 @@
 package com.zktr.yuyi.entity.liuzhui;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -20,9 +23,9 @@ public class ServiceNurse implements Serializable {
 
     private String nNation;
 
-    private Integer nPhone;
+    private BigInteger nPhone;
 
-    private Integer nCard;
+    private BigInteger nCard;
 
     private String nAddress;
 
@@ -36,6 +39,7 @@ public class ServiceNurse implements Serializable {
 
     private String nImg;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date nWorkDate;
 
     private Integer nMoney;
@@ -44,6 +48,7 @@ public class ServiceNurse implements Serializable {
 
     private String createPeople;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     private Integer teamId;

@@ -34,48 +34,37 @@ public class NurseController {
 
     @Log("根据id查询单个护工")
     @GetMapping("/select/{uid}")
-    public ServiceNurse selectOne(@PathVariable(value = "uid") int uid){
-        return this.nurseService.queryById(uid);
+    public AjaxResponse selectOne(@PathVariable(value = "uid") int uid){
+       ServiceNurse serviceNurse= this.nurseService.queryById(uid);
+        return AjaxResponse.success();
     }
 
     @Log("查询所有护工")
     @GetMapping("/selectAll")
-    public PageInfo<ServiceNurse> selectAll(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
-        PageHelper.startPage(currentPage, pagesize);
+    public AjaxResponse selectAll(){
         List<ServiceNurse> list =  this.nurseService.queryAll();
-        PageInfo<ServiceNurse> consultingPageInfo=new PageInfo<>(list);
-        System.out.println(this.nurseService.queryAll());
-        return consultingPageInfo;
+        return AjaxResponse.success(list);
     }
 
-    /*
-    @GetMapping("/selectAllConsulting")
-    public PageInfo<JdConsulting> selectAllConsulting(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
-        PageHelper.startPage(currentPage, pagesize);
-        List<JdConsulting> consultings=consultingService.selectAllConsulting();
-        PageInfo<JdConsulting> consultingPageInfo=new PageInfo<>(consultings);
-        return consultingPageInfo;
-    }
-     */
     @Log("根据id删除护工")
     @GetMapping("/delete/{uid}")
     public AjaxResponse deleteById(@PathVariable(value = "uid") int uid){
         this.nurseService.deleteById(uid);
-        return AjaxResponse.success(true);
+        return AjaxResponse.success();
     }
 
     @Log("根据id修改数据")
-    @PutMapping(value = "/updateNurse")
-    public ServiceNurse updateById(@RequestBody ServiceNurse serviceNurse){
+    @PutMapping("/updateNurse")
+    public AjaxResponse updateById(@RequestBody ServiceNurse serviceNurse){
         nurseService.update(serviceNurse);
-        return serviceNurse;
+        return AjaxResponse.success();
     }
 
     @Log("新增数据")
     @PostMapping("/addNurse")
-    public ServiceNurse addNurse(@RequestBody ServiceNurse serviceNurse){
+    public AjaxResponse addNurse(@RequestBody ServiceNurse serviceNurse){
         nurseService.insert(serviceNurse);
-        return serviceNurse;
+        return  AjaxResponse.success();
 
     }
 

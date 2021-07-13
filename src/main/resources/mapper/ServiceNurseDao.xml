@@ -321,4 +321,9 @@
       team_id = #{teamId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="deleteNurse" parameterType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+    update service_nurse
+    set n_ephone = 1;
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

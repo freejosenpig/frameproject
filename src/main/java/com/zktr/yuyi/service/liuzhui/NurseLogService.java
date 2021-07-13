@@ -16,6 +16,10 @@ public interface NurseLogService {
         查询所有
      */
     List<NurseLog> queryAll();
+    /**
+     * 多条件查询
+     */
+    List<NurseLog> queryAllByUser(NurseLog nurseLog);
     /*
         通过id，删除
      */

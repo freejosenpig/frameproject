@@ -26,6 +26,40 @@
     *
     from serve_nurse_project
   </select>
+  <select id="selectAllByNurse"  resultMap="BaseResultMap">
+    select
+      id, plan_name, p_type, p_way, p_monry, p_time, p_introduce, create_people, create_time
+    from serve_nurse_project
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="planName != null and planName != ''">
+        and plan_name like CONCAT('%',#{planName},'%')
+      </if>
+      <if test="pType != null and pType != ''">
+        and p_type = #{pType}
+      </if>
+      <if test="pWay != null and pWay != ''">
+        and p_way  = #{pWay}
+      </if>
+      <if test="pMonry != null and pMonry !=''">
+        and p_monry = #{pMonry}
+      </if>
+      <if test="pTime != null and pTime != ''">
+        and p_time = #{planName}
+      </if>
+      <if test="pIntroduce != null and pIntroduce != ''">
+        and p_introduce = #{pIntroduce}
+      </if>
+      <if test="createPeople != null and createPeople != ''">
+        and create_people = #{createPeople}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and create_time = #{createTime}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from serve_nurse_project
     where id = #{id,jdbcType=INTEGER}

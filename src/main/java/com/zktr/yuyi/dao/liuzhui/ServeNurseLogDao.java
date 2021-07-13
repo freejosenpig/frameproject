@@ -18,6 +18,8 @@ public interface ServeNurseLogDao {
 
     List<NurseLog> selectAll();
 
+    List<NurseLog> selectAllByNurse(NurseLog nurseLog);
+
     int updateByPrimaryKeySelective(NurseLog record);
 
     int updateByPrimaryKey(NurseLog record);

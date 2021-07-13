@@ -1,5 +1,6 @@
 package com.zktr.yuyi.service.liuzhui;
 
+import com.zktr.yuyi.entity.liuzhui.NurseLog;
 import com.zktr.yuyi.entity.liuzhui.ServeNurseProject;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public interface NurseProjectService {
         查询所有
      */
     List<ServeNurseProject> queryAll();
+    /**
+     * 多条件查询
+     */
+    List<ServeNurseProject> queryAllByUser(ServeNurseProject serveNurseProject);
     /*
         通过id，删除
      */

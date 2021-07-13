@@ -9,6 +9,8 @@ import java.util.List;
 public interface ServiceNurseDao {
     int deleteByPrimaryKey(Integer id);
 
+    int deleteNurse(Integer id);
+
     int insert(ServiceNurse record);
 
     int insertSelective(ServiceNurse record);
