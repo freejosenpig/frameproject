@@ -9,6 +9,7 @@
     <result column="entryfees_time" jdbcType="TIMESTAMP" property="entryfeesTime" />
     <result column="entryfees_opId" jdbcType="INTEGER" property="entryfeesOpid" />
     <result column="entryfees_TimeLiness" jdbcType="INTEGER" property="entryfeesTimeliness" />
+    <result column="entryfees_status" jdbcType="INTEGER" property="entryfeesstatus"/>
 
     <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
       <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
@@ -44,7 +45,7 @@
 
   <sql id="Base_Column_List">
     entry.entryfees_Id, entry.oldpeople_Id, entry.entryfees_money, entry.entryfees_explain, entry.entryfees_time, entry.entryfees_opId,
-    entry.entryfees_TimeLiness
+    entry.entryfees_TimeLiness ,entry.entryfees_status
   </sql>
 
   <sql id="oldpeople">
@@ -155,8 +156,9 @@
       <if test="entryfeesTimeliness != null">
         entryfees_TimeLiness = #{entryfeesTimeliness,jdbcType=INTEGER},
       </if>
+      entryfees_status=1
     </set>
-    where entryfees_Id = #{entryfeesId,jdbcType=INTEGER}
+    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
   </update>
 
 
