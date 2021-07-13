@@ -13,7 +13,10 @@ import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.service.hedangren.SysRoleService;
 import com.zktr.yuyi.service.hedangren.SysUserService;
 import com.zktr.yuyi.vo.AjaxResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -26,6 +29,8 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("sysRole")
+@EnableSwagger2
+@Api(description = "角色Api")
 public class SysRoleController {
     /**
      * 服务对象
@@ -42,6 +47,7 @@ public class SysRoleController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
+    @ApiOperation(value = "查询单个角色",produces = "application/json")
     public SysRole selectOne(Integer id) {
         return this.sysRoleService.queryById(id);
     }
@@ -50,6 +56,7 @@ public class SysRoleController {
      * 用户管理 查询用户所有的角色
      * @return 菜单信息
      */
+    @ApiOperation(value = "查询用户所有的角色",produces = "application/json")
     @PostMapping("/findallroles")
     public AjaxResponse findallroles(){
         //查询所有角色
@@ -62,6 +69,7 @@ public class SysRoleController {
      * @param conditionpage 查询条件
      * @return 菜单信息
      */
+    @ApiOperation(value = "条件分页查询角色信息",produces = "application/json")
     @PostMapping("/conditionpagerole")
     public AjaxResponse conditionpagerole(@RequestBody String conditionpage){
         JSONObject jsonObject = JSONObject.parseObject(conditionpage);
@@ -82,6 +90,7 @@ public class SysRoleController {
      * @param add json对象
      * @return vo
      */
+    @ApiOperation(value = "添加角色",produces = "application/json")
     @PostMapping("/addnewrole")
     public AjaxResponse addnewrole(@RequestBody String add){
         JSONObject jsonObject = JSONObject.parseObject(add);
