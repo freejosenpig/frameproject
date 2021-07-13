@@ -28,7 +28,7 @@ public class JdOldpeopleController {
         return AjaxResponse.success(jdOldpeople);
     }
 
-    @GetMapping("/selectAllOldpeople")
+    @GetMapping("/selectAllOldpeoplePageInfo")
     public AjaxResponse selectAllOldpeople(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
         PageHelper.startPage(currentPage, pagesize);
         List<JdOldpeople> oldpeople=oldpeopleService.selectAllOldpeople();
