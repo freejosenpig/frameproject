@@ -44,6 +44,8 @@ public class JdOn implements Serializable {
     /**
      * 入住床位
      */
+    private ABad bad;
+    private ARoom room;
     private Integer onBed;
 
     /**

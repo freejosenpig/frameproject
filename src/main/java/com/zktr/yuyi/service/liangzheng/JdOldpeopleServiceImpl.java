@@ -70,4 +70,9 @@ public class JdOldpeopleServiceImpl implements JdOldpeopleService {
         oldpeopleDao.updateAccount(jdOldpeople);
         return jdOldpeople;
     }
+
+    @Override
+    public JdOldpeople selectByPrimaryKey(Integer oldpeopleId) {
+        return oldpeopleDao.selectByPrimaryKey(oldpeopleId);
+    }
 }
