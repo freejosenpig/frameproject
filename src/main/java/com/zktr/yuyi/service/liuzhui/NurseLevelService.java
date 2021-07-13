@@ -1,5 +1,6 @@
 package com.zktr.yuyi.service.liuzhui;
 
+import com.zktr.yuyi.entity.liuzhui.NurseLog;
 import com.zktr.yuyi.entity.liuzhui.ServeNurseLevel;
 import com.zktr.yuyi.entity.liuzhui.ServeNurseLevel;
 
@@ -16,6 +17,10 @@ public interface NurseLevelService {
         查询所有
      */
     List<ServeNurseLevel> queryAll();
+    /**
+     * 多条件查询
+     */
+    List<ServeNurseLevel> queryAllByUser(ServeNurseLevel serveNurseLevel);
     /*
         通过id，删除
      */

@@ -14,6 +14,7 @@ public interface ServeNurseLevelDao {
 
     ServeNurseLevel selectByPrimaryKey(Integer id);
     List<ServeNurseLevel> selectAll();
+    List<ServeNurseLevel> selectAllByNurse(ServeNurseLevel serveNurseLevel);
     int updateByPrimaryKeySelective(ServeNurseLevel record);
 
     int updateByPrimaryKey(ServeNurseLevel record);

@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.liuzhui;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -21,6 +23,7 @@ public class ServeNurseLevel implements Serializable {
 
     private Integer lMoney;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date lDate;
 
     /**
