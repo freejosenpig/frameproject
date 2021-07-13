@@ -24,4 +24,6 @@ public interface CostPrestoreDao {
 
     //查询所有预存信息
     List<CostPrestore> selectAll();
+
+    int updateById(CostPrestore costPrestore);
 }

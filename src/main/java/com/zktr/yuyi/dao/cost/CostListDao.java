@@ -25,4 +25,7 @@ public interface CostListDao {
     //查询所有流水信息
     List<CostList> selectAll();
 
+    //模糊查询
+    List<CostList> selectBycontion(String oldpeopleName);
+
 }

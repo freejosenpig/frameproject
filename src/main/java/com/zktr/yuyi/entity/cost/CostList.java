@@ -52,7 +52,7 @@ public class CostList implements Serializable {
     /**
      * 时效性
      */
-    private  int timeLiness;
+    private  int listtimeLiness;
 
 
     private JdOldpeople jdOldpeople;

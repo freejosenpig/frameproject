@@ -1,6 +1,7 @@
 package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -32,7 +33,7 @@ public class CostPrestore implements Serializable {
     /**
      * 预存金额
      */
-    private Long prestoreMoney;
+    private BigDecimal prestoreMoney;
 
     /**
      * 预存操作人

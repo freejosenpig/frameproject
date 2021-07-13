@@ -1,6 +1,9 @@
 package com.zktr.yuyi.controller.cost;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zktr.yuyi.dao.liangzheng.JdOldpeopleDao;
+import com.zktr.yuyi.entity.cost.CostList;
 import com.zktr.yuyi.entity.cost.CostPrestore;
 import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import com.zktr.yuyi.service.cost.costprestoreService;
@@ -26,6 +29,7 @@ public class CostprestoreController {
     //    新增预存
     @PostMapping("/insertprestore")
     public AjaxResponse insertprestore(@RequestBody CostPrestore costPrestore){
+        System.out.println(costPrestore.toString());
         costprestoreService.insertprestore(costPrestore);
         return AjaxResponse.success(costPrestore);
     }
@@ -46,12 +50,21 @@ public class CostprestoreController {
 
     //查询所有预存信息
     @GetMapping("/selectPreAll")
-    public List<CostPrestore> selectAll(){
-        return costprestoreService.selectAll();
+    public PageInfo<CostPrestore> selectAll(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        PageHelper.startPage(currentPage, pagesize);
+        List<CostPrestore> entityPage=costprestoreService.selectAll();
+        PageInfo<CostPrestore> entryfeesPageInfo=new PageInfo<>(entityPage);
+        return entryfeesPageInfo;
     }
 
     @GetMapping("/selectAllOldpeople")
     public AjaxResponse selectAllOldpeople(){
         return AjaxResponse.success(oldpeopleService.selectAllOldpeople());
+    }
+
+
+    @PutMapping("/updateById")
+    public AjaxResponse updateById(@RequestBody CostPrestore costPrestore){
+        return AjaxResponse.success(costprestoreService.updateById(costPrestore));
     }
 }
