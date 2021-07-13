@@ -60,6 +60,13 @@
     b.entry_money, b.out_money, b.back_TimeLiness
   </sql>
 
+  <!--  修改退住结算（未结算修改未已结算）-->
+  <update id="updateisback">
+    update cost_back set istoback=1
+    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+  </update>
+
+
   <!--  多条件查询-->
   <select id="selectBycontion" resultMap="BaseResultMap">
     select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_back b
@@ -72,17 +79,20 @@
     ORDER BY b.back_Id
   </select>
 
+
   <!--根据老人编号查询退住信息-->
   <select id="selectByoldId" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_back b
     inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
-    where old.oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
+    where old.oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER} and istoback=0
+    ORDER BY b.back_Id
   </select>
 
   <!--查询所有退住信息-->
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="oldpeople"/>,<include refid="Base_Column_List"/> from cost_back b
     inner join jd_oldpeople old on old.oldpeople_id=b.oldpeople_Id
+    ORDER BY b.back_Id
   </select>
 
 
@@ -178,9 +188,6 @@
       <if test="oldpeopleId != null">
         oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER},
       </if>
-      <if test="istoback != null">
-        istoback = #{istoback,jdbcType=INTEGER},
-      </if>
       <if test="backMoney != null">
         back_money = #{backMoney,jdbcType=DECIMAL},
       </if>
@@ -202,8 +209,9 @@
       <if test="backTimeliness != null">
         back_TimeLiness = #{backTimeliness,jdbcType=INTEGER},
       </if>
+      istoback = 1,
     </set>
-    where back_Id = #{backId,jdbcType=INTEGER}
+    where oldpeople_Id = #{oldpeopleId,jdbcType=INTEGER}
   </update>
 
 

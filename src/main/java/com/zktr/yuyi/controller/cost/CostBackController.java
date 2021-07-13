@@ -23,16 +23,15 @@ public class CostBackController {
     }
 
     //根据编号修改退住结算
-    @PostMapping("/updateBackByKey")
+    @PutMapping("/updateBackByKey")
     public AjaxResponse updateBackByKey(@RequestBody CostBack costBack){
-        costBackService.updateByKey(costBack);
-        return AjaxResponse.success("修改退住结算");
+        return AjaxResponse.success(costBackService.updateByKey(costBack));
     }
 
     //编号根据老人编号查询退住信息
     @GetMapping("/selectBackByoldId/{oldId}")
-    public AjaxResponse selectByoldId(@PathVariable("oldId") int oldId){
-        return AjaxResponse.success(costBackService.selectByoldId(oldId));
+    public CostBack selectByoldId(@PathVariable("oldId") int oldId){
+        return costBackService.selectByoldId(oldId);
     }
 
     //查询所有退住信息
@@ -46,8 +45,14 @@ public class CostBackController {
     public List<CostBack> selectAll(){
         return costBackService.selectAll();
     }
+    //根据老人姓名模糊查询
     @GetMapping("/selectBycontion/{backname}")
     public List<CostBack> selectBycontion(@PathVariable("backname") String backname){
         return costBackService.selectBycontion(backname);
     }
+//    //根据老人编号修改退住结算
+//    @PutMapping("/updateisback/{oldId}")
+//    public CostBack updateisback(@PathVariable("oldId") Integer oldId){
+//        return costBackService.updateisback(oldId);
+//    }
 }

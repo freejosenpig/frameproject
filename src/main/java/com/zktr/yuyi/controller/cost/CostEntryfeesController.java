@@ -33,10 +33,19 @@ public class CostEntryfeesController {
           costEntryfeesService.selectByoldId(oldId);
         return AjaxResponse.success("查询成功");
     }
+
+    
     //查询所有缴费信息
+//    @GetMapping("/selectEntryAll")
+//    public AjaxResponse selectAll(){
+//        costEntryfeesService.selectAll();
+//        return AjaxResponse.success("查询成功");
+//    }
+
+
+//    查询所有缴费信息
     @GetMapping("/selectEntryAll")
-    public AjaxResponse selectAll(){
-        costEntryfeesService.selectAll();
-        return AjaxResponse.success("查询成功");
+    public List<CostEntryfees> selectAll(){
+        return  costEntryfeesService.selectAll();
     }
 }
