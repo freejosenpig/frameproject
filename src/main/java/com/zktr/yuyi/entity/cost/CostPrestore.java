@@ -3,6 +3,7 @@ package com.zktr.yuyi.entity.cost;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class CostPrestore implements Serializable {
     /**
      * 预存时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date prestoreTime;
 
     /**

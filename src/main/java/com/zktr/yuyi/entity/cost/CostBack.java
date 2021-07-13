@@ -3,6 +3,7 @@ package com.zktr.yuyi.entity.cost;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
@@ -44,6 +45,7 @@ public class CostBack implements Serializable {
     /**
      * 退住时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date backTime;
 
     /**

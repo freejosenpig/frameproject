@@ -35,7 +35,6 @@ public class CostOutController {
     //    修改欠费信息
     @PutMapping("/updateOutByKey")
     public AjaxResponse updateOutByKey(@RequestBody CostOutstanding costOutstanding){
-        costOutstandingService.updateByKey(costOutstanding);
-        return AjaxResponse.success("修改成功");
+        return AjaxResponse.success(costOutstandingService.updateByKey(costOutstanding));
     }
 }

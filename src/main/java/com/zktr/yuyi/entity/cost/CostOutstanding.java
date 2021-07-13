@@ -2,6 +2,8 @@ package com.zktr.yuyi.entity.cost;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -43,6 +45,7 @@ public class CostOutstanding implements Serializable {
     /**
      * 欠费补缴时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date outstandingTime;
 
     /**

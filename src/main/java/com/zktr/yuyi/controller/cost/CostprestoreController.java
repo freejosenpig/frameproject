@@ -40,7 +40,7 @@ public class CostprestoreController {
 
     //查询所有预存信息
     @GetMapping("/selectPreAll")
-    public AjaxResponse selectAll(){
-        return AjaxResponse.success( costprestoreService.selectAll());
+    public List<CostPrestore> selectAll(){
+        return costprestoreService.selectAll();
     }
 }

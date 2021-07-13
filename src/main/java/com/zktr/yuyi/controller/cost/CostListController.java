@@ -29,13 +29,11 @@ public class CostListController {
     //根据老人编号查询流水信息
     @GetMapping("/selectByOldId")
     public AjaxResponse selectByOldId(@PathVariable Integer oldId){
-        costListService.selectByOldId(oldId);
-        return AjaxResponse.success("查询成功");
+        return AjaxResponse.success( costListService.selectByOldId(oldId));
     }
     //根据老人编号查询流水信息
     @GetMapping("/selectAll")
     public AjaxResponse selectAll(){
-        costListService.selectAll();
-        return AjaxResponse.success("查询成功");
+        return AjaxResponse.success(costListService.selectAll());
     }
 }
