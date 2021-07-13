@@ -2,8 +2,10 @@ package com.zktr.yuyi.service.ipml.hedangren;
 
 import com.zktr.yuyi.dao.hedangren.SysMenuDao;
 import com.zktr.yuyi.dao.hedangren.SysUserDao;
+import com.zktr.yuyi.dao.hedangren.SysUserRoleDao;
 import com.zktr.yuyi.entity.hedangren.SysMenu;
 import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.hedangren.SysUserRole;
 import com.zktr.yuyi.service.hedangren.SysUserService;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserDao sysUserDao;
     @Resource
     private SysMenuDao menuDao;
+    @Resource
+    private SysUserRoleDao userRoleDao;
 
     /**
      * 通过ID查询单条数据
@@ -51,8 +55,8 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public SysUser insert(SysUser sysUser) {
-        this.sysUserDao.insert(sysUser);
-        return sysUser;
+        int i = this.sysUserDao.insert(sysUser);
+        return i>0?sysUser:null;
     }
 
     /**
@@ -91,5 +95,34 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUser> queryAllByUser(SysUser user) {
         return this.sysUserDao.queryAllByUser(user);
+    }
+
+    /**
+     * 根据用户id删除用户角色
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean deleteroles(Integer id) {
+        return userRoleDao.deleteById(id)>0?true:false;
+    }
+
+    /**
+     * 批量新增用户角色
+     * @param lists
+     * @return
+     */
+    @Override
+    public boolean insertBatch(List<SysUserRole> lists) {
+        return this.userRoleDao.insertBatch(lists)>0?true:false;
+    }
+
+    /**
+     * 查询最大的id
+     * @return
+     */
+    @Override
+    public int selectmaxid() {
+        return this.sysUserDao.selectmaxid();
     }
 }

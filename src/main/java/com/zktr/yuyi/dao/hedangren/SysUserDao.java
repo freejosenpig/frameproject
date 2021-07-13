@@ -39,4 +39,6 @@ public interface SysUserDao {
      * @return
      */
     List<SysUser> queryAllByUser(SysUser user);
+
+    int selectmaxid();
 }

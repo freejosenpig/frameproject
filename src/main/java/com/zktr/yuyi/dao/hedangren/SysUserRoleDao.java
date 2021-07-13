@@ -78,7 +78,7 @@ public interface SysUserRoleDao {
      *
      * @return 影响行数
      */
-    int deleteById();
+    int deleteById(int id);
 
     List<SysUserRole> findtfhasuser(Integer id);
 }

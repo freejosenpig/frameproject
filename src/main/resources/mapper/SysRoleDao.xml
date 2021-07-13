@@ -65,6 +65,13 @@
         </where>
     </select>
 
+    <select id="userhasrole" resultMap="SysRoleMap" >
+        select c.* from sys_user a
+        INNER JOIN sys_user_role b on a.id=b.user_id
+        INNER JOIN sys_role c on c.id=b.role_id
+        WHERE a.id=#{id}
+    </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into jdboot.sys_role(role_name, create_people, create_date, delete_flag, update_people, update_date)

@@ -70,4 +70,6 @@ public interface SysRoleService {
     List<SysUserRole> findtfhasuser(Integer id);
 
     boolean deletemenus(Integer id);
+
+    List<SysRole> userhasrole(Integer id);
 }

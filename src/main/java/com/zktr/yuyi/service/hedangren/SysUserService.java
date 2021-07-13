@@ -2,6 +2,7 @@ package com.zktr.yuyi.service.hedangren;
 
 import com.zktr.yuyi.entity.hedangren.SysMenu;
 import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.hedangren.SysUserRole;
 
 import java.util.List;
 
@@ -69,4 +70,16 @@ public interface SysUserService {
      * @return
      */
     List<SysUser> queryAllByUser(SysUser user);
+
+    boolean deleteroles(Integer id);
+
+
+    /**
+     * 批量新增用户角色
+     * @param lists
+     * @return
+     */
+    boolean insertBatch(List<SysUserRole> lists);
+
+    int selectmaxid();
 }
