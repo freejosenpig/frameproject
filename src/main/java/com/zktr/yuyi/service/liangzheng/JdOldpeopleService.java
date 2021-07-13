@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface JdOldpeopleService {
 
-    JdOldpeople insert(String addname,JdOldpeople record);
+    JdOldpeople insert(String addname, JdOldpeople record);
 
     List<JdOldpeople> selectAllOldpeople();
 

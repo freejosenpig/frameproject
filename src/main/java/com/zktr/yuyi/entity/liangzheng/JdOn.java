@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class JdOn implements Serializable {
     /**
      * 入住时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date onTime;
 
     /**
@@ -39,6 +41,7 @@ public class JdOn implements Serializable {
     /**
      * 入住档案创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date onAddtime;
 
     /**
@@ -57,6 +60,7 @@ public class JdOn implements Serializable {
     /**
      * 入住档案登记时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date onRtime;
 
     /**
@@ -68,6 +72,7 @@ public class JdOn implements Serializable {
     /**
      * 经办时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date onOptime;
 
     /**
