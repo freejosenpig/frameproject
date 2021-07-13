@@ -1,7 +1,11 @@
 package com.zktr.yuyi.dao.liangzheng;
 
 import com.zktr.yuyi.entity.liangzheng.JdOn;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.*;
+
+@Mapper
 public interface JdOnDao {
     int deleteByPrimaryKey(Integer onId);
 
@@ -14,4 +18,10 @@ public interface JdOnDao {
     int updateByPrimaryKeySelective(JdOn record);
 
     int updateByPrimaryKey(JdOn record);
+
+    List<JdOn> selectAllON();
+
+    int deleteOn(JdOn jdOn);
+
+    int updateOn(JdOn jdOn);
 }

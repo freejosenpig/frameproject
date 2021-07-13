@@ -36,7 +36,7 @@
     <include refid="Base_Column_rt" />
     from a_bed b
     inner join a_room r on b.bed_room = r.room_id
-    inner join a_roontype rt on r.room_type = rt.roomtype_id
+    inner join a_roomtype rt on r.room_type = rt.roomtype_id
     where b.bed_status = 0
   </select>
   <sql id="Base_Column_List">

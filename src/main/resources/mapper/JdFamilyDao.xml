@@ -13,11 +13,66 @@
     <result column="family_registrant" jdbcType="INTEGER" property="familyRegistrant" />
     <result column="family_rtime" jdbcType="TIMESTAMP" property="familyRtime" />
     <result column="family_note" jdbcType="VARCHAR" property="familyNote" />
+    <result column="timeliness" jdbcType="INTEGER" property="timeliness"/>
+    <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="n_name" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="sysUser" javaType="com.zktr.yuyi.entity.hedangren.SysUser">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
+    <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+      <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+      <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     family_id, family_name, family_phone, family_address, family_ordid, family_relation, 
     family_addname, family_addtime, family_registrant, family_rtime, family_note
   </sql>
+  <sql id="Base_Column_f">
+    f.family_id, f.family_name, f.family_phone, f.family_address, f.family_ordid, f.family_relation,
+    f.family_addname, f.family_addtime, f.family_registrant, f.family_rtime, f.family_note, f.timeliness
+  </sql>
+  <sql id="Base_Column_o">
+    o.oldpeople_id, o.oldpeople_name
+  </sql>
+  <sql id="Base_Column_su">
+    su.id,  su.user_name
+  </sql>
+  <sql id="Base_Column_sn">
+    sn.id, sn.n_name
+  </sql>
+  <update id="updateFamily" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily">
+    update jd_family
+    set family_name = #{familyName,jdbcType=VARCHAR},
+      family_phone = #{familyPhone,jdbcType=VARCHAR},
+      family_address = #{familyAddress,jdbcType=VARCHAR},
+      family_relation = #{familyRelation,jdbcType=VARCHAR},
+      family_registrant = #{familyRegistrant,jdbcType=INTEGER},
+      family_rtime = #{familyRtime,jdbcType=TIMESTAMP},
+      family_note = #{familyNote,jdbcType=VARCHAR}
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteFamily" parameterType="com.zktr.yuyi.entity.liangzheng.JdFamily">
+    update jd_family
+    set timeliness = 1
+    where family_id = #{familyId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllFamily" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_su" />,
+    <include refid="Base_Column_sn" />,
+    <include refid="Base_Column_f" />,
+    <include refid="Base_Column_o" />
+    from jd_family f
+    inner join service_nurse sn on f.family_registrant = sn.id
+    inner join sys_user su on f.family_addname = su.id
+    inner join jd_oldpeople o on f.family_ordid = o.oldpeople_id
+    where f.timeliness = 0
+    order by f.family_id desc
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
