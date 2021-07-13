@@ -37,6 +37,73 @@
     *
     from service_nurse
   </select>
+  <select id="selectAllByNurse"  resultMap="BaseResultMap">
+    select
+     id, n_name, n_sex, n_age, n_nation, n_phone, n_card, n_address, n_ephone, n_work,
+    n_type, n_dept, n_img, n_work_date, n_money, n_ann, create_people, create_time, team_id
+    from service_nurse
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="nName != null and nName != ''">
+        and n_name like CONCAT('%',#{nName},'%')
+      </if>
+      <if test="nSex != null and nSex != ''">
+        and n_sex = #{nSex}
+      </if>
+      <if test="nAge != null and nAge != ''">
+        and n_age = #{nAge}
+      </if>
+      <if test="nNation != null and nNation !=''">
+        and n_nation = #{nNation}
+      </if>
+      <if test="nPhone != null and nPhone != ''">
+        and n_phone = #{nPhone}
+      </if>
+      <if test="nCard != null and nCard != ''">
+        and n_card = #{nCard}
+      </if>
+      <if test="nAddress != null">
+        and n_address = #{nAddress}
+      </if>
+      <if test="nEphone != null">
+        and n_ephone = #{nEphone},
+      </if>
+      <if test="nWork != null">
+        and n_work = #{nWork},
+      </if>
+      <if test="nType != null">
+        and n_type = #{nType},
+      </if>
+      <if test="nDept != null">
+        and n_dept = #{nDept},
+      </if>
+      <if test="nImg != null">
+        and n_img = #{nImg},
+      </if>
+      <if test="nWorkDate != null">
+        and n_work_date = #{nWorkDate},
+      </if>
+      <if test="nMoney != null">
+        and n_money = #{nMoney},
+      </if>
+      <if test="nAnn != null">
+        and n_ann = #{nAnn},
+      </if>
+      <if test="createPeople != null">
+        and create_people = #{createPeople},
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime},
+      </if>
+      <if test="teamId != null">
+        and team_id = #{teamId},
+      </if>
+
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service_nurse
     where id = #{id,jdbcType=INTEGER}

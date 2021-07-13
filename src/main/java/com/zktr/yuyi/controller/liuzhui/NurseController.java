@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zktr.yuyi.annotation.Log;
 import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.liangzheng.JdConsulting;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import com.zktr.yuyi.exception.CustomError;
 import com.zktr.yuyi.service.liuzhui.NurseService;
@@ -38,12 +40,23 @@ public class NurseController {
 
     @Log("查询所有护工")
     @GetMapping("/selectAll")
-    public List<ServiceNurse> selectAll(){
+    public PageInfo<ServiceNurse> selectAll(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        PageHelper.startPage(currentPage, pagesize);
         List<ServiceNurse> list =  this.nurseService.queryAll();
+        PageInfo<ServiceNurse> consultingPageInfo=new PageInfo<>(list);
         System.out.println(this.nurseService.queryAll());
-        return list;
+        return consultingPageInfo;
     }
 
+    /*
+    @GetMapping("/selectAllConsulting")
+    public PageInfo<JdConsulting> selectAllConsulting(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        PageHelper.startPage(currentPage, pagesize);
+        List<JdConsulting> consultings=consultingService.selectAllConsulting();
+        PageInfo<JdConsulting> consultingPageInfo=new PageInfo<>(consultings);
+        return consultingPageInfo;
+    }
+     */
     @Log("根据id删除护工")
     @GetMapping("/delete/{uid}")
     public AjaxResponse deleteById(@PathVariable(value = "uid") int uid){
@@ -52,7 +65,7 @@ public class NurseController {
     }
 
     @Log("根据id修改数据")
-    @PostMapping(value = "/updateNurse")
+    @PutMapping(value = "/updateNurse")
     public ServiceNurse updateById(@RequestBody ServiceNurse serviceNurse){
         nurseService.update(serviceNurse);
         return serviceNurse;
@@ -68,21 +81,20 @@ public class NurseController {
 
     /**
      * 条件分页查询用户信息
-     * @param conditionpage 查询条件
-     * @return 菜单信息
      */
-//    @PostMapping("/conditionpageuser")
-//    public AjaxResponse conditionpageuser(@RequestBody String conditionpage){
-//        JSONObject jsonObject = JSONObject.parseObject(conditionpage);
-//        String condition = jsonObject.getString("condition");//查询条件
-//        ServiceNurse user = JSON.parseObject(condition, ServiceNurse.class);
-//        int currentPage = Integer.parseInt(jsonObject.getString("currentPage"));
-//        int pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
-//        Map<String,Object> map=new HashMap<>();
-//        Page<Object> page= PageHelper.startPage(currentPage,pageSize);
-//        List<ServiceNurse> users=sysUserService.queryAllByUser(user);
-//        map.put("total",page.getTotal());
-//        map.put("rows",users);
-//        return AjaxResponse.success(map);
-//    }
+    @Log("分页查询用户信息")
+    @PostMapping("/conditionpageuser")
+    public AjaxResponse conditionpageuser(@RequestBody String conditionpage){
+        JSONObject jsonObject = JSONObject.parseObject(conditionpage);
+        String condition = jsonObject.getString("condition");//查询条件
+        ServiceNurse user = JSON.parseObject(condition, ServiceNurse.class);
+        int currentPage = Integer.parseInt(jsonObject.getString("currentPage"));
+        int pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+        Map<String,Object> map=new HashMap<>();
+        Page<Object> page= PageHelper.startPage(currentPage,pageSize);
+        List<ServiceNurse> users = nurseService.queryAllByUser(user);
+        map.put("total",page.getTotal());
+        map.put("rows",users);
+        return AjaxResponse.success(map);
+    }
 }

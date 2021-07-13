@@ -1,5 +1,6 @@
 package com.zktr.yuyi.dao.liuzhui;
 
+import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,6 +16,11 @@ public interface ServiceNurseDao {
     ServiceNurse selectByPrimaryKey(Integer id);
 
     List<ServiceNurse> selectAll();
+
+    /**
+     * 多条件查询
+     */
+    List<ServiceNurse> selectAllByNurse(ServiceNurse serviceNurse);
 
     int updateByPrimaryKeySelective(ServiceNurse record);
 
