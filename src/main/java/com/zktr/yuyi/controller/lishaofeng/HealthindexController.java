@@ -7,15 +7,13 @@ import com.zktr.yuyi.service.lishaofeng.ipml.HealindexServiceImp;
 import com.zktr.yuyi.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @Slf4j
+@RequestMapping("service")
 public class HealthindexController {
     @Autowired
     private HealindexServiceImp healindexServiceImp;
@@ -30,5 +28,10 @@ public class HealthindexController {
         log.info(String.valueOf(page));
         PageInfo<HealthindexResult> healthindexResultPageInfo = healindexServiceImp.selectHealthbypersonpage(page, size);
         return  AjaxResponse.success(healthindexResultPageInfo);
+    }
+    @RequestMapping(value = "/Healindexdelectbyid/{id}",method = RequestMethod.DELETE)
+    public AjaxResponse delectbypage(@PathVariable("id") int id) {
+        int i = healindexServiceImp.deleteByPrimaryKey(id);
+        return AjaxResponse.success(i);
     }
 }

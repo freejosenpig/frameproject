@@ -29,7 +29,6 @@
     <result column="oldpeople_registrant" jdbcType="INTEGER" property="oldpeopleRegistrant" />
     <result column="oldpeople_rtime" jdbcType="TIMESTAMP" property="oldpeopleRtime" />
     <result column="oldpeople_note" jdbcType="VARCHAR" property="oldpeopleNote" />
-    <result column="timeliness" jdbcType="INTEGER" property="timeliness"/>
     <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
       <id column="id" jdbcType="INTEGER" property="id" />
       <result column="n_name" jdbcType="VARCHAR" property="nName" />
@@ -54,12 +53,12 @@
     o.oldpeople_rtime, o.oldpeople_note, o.timeliness
   </sql>
   <sql id="Base_Column_List">
-    oldpeople_id, oldpeople_name, oldpeople_sex, oldpeople_idcard, oldpeople_birthday, 
-    oldpeople_phone, oldpeople_marriage, oldpeople_national, oldpeople_political, oldpeople_job, 
-    oldpeople_address, oldpeople_hobby, oldpeople_character, oldpeople_likefood, oldpeople_culture, 
-    oldpeople_ability, oldpeople_medical, oldpeople_medicalid, oldpeople_number, oldpeople_addname, 
-    oldpeople_addtime, oldpeople_account, oldpeople_age, oldpeople_status, oldpeople_registrant, 
-    oldpeople_rtime, oldpeople_note, timeliness
+    oldpeople_id, oldpeople_name, oldpeople_sex, oldpeople_idcard, oldpeople_birthday,
+    oldpeople_phone, oldpeople_marriage, oldpeople_national, oldpeople_political, oldpeople_job,
+    oldpeople_address, oldpeople_hobby, oldpeople_character, oldpeople_likefood, oldpeople_culture,
+    oldpeople_ability, oldpeople_medical, oldpeople_medicalid, oldpeople_number, oldpeople_addname,
+    oldpeople_addtime, oldpeople_account, oldpeople_age, oldpeople_status, oldpeople_registrant,
+    oldpeople_rtime, oldpeople_note
   </sql>
   <update id="updateOldpeople" parameterType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
     update jd_oldpeople
@@ -80,7 +79,6 @@
       oldpeople_ability = #{oldpeopleAbility,jdbcType=VARCHAR},
       oldpeople_medical = #{oldpeopleMedical,jdbcType=VARCHAR},
       oldpeople_medicalid = #{oldpeopleMedicalid,jdbcType=VARCHAR},
-      oldpeople_account = #{oldpeopleAccount,jdbcType=DECIMAL},
       oldpeople_age = #{oldpeopleAge,jdbcType=INTEGER},
       oldpeople_registrant = #{oldpeopleRegistrant,jdbcType=INTEGER},
       oldpeople_rtime = #{oldpeopleRtime,jdbcType=TIMESTAMP},
@@ -109,7 +107,7 @@
     order by o.oldpeople_id desc
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from jd_oldpeople
     where oldpeople_id = #{oldpeopleId,jdbcType=INTEGER}

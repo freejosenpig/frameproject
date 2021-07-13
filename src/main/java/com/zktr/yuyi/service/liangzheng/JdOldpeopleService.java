@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface JdOldpeopleService {
 
-    JdOldpeople insert(String addname,JdOldpeople record);
+    JdOldpeople insert(String addname, JdOldpeople record);
 
     List<JdOldpeople> selectAllOldpeople();
 
@@ -15,4 +15,6 @@ public interface JdOldpeopleService {
     JdOldpeople updateOldpeople(JdOldpeople jdOldpeople);
 
     JdOldpeople updateAccount(JdOldpeople jdOldpeople);
+
+    JdOldpeople selectByPrimaryKey(Integer oldpeopleId);
 }

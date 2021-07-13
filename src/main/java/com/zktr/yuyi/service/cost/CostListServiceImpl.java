@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +26,8 @@ public class CostListServiceImpl implements CostListService {
     @Transactional
     @Override
     public CostList insertLCostist(CostList costList) {
+        costList.setLiatOpid(1);
+        costList.setListTime(new Date());
         costListDao.insert(costList);
         return costList;
     }
@@ -39,6 +42,11 @@ public class CostListServiceImpl implements CostListService {
     @Override
     public List<CostList> selectAll() {
         return costListDao.selectAll();
+    }
+
+    @Override
+    public List<CostList> selectBycontion(String oldpeopleName) {
+        return  costListDao.selectBycontion(oldpeopleName);
     }
 
 

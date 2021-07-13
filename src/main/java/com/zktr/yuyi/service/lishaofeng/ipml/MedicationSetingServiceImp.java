@@ -18,6 +18,12 @@ public class MedicationSetingServiceImp  implements MedicationSetingService {
     @Resource
     @Autowired
     private MedicationSetingDao medicationSetingDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer msId) {
+        return medicationSetingDao.deleteByPrimaryKey(msId);
+    }
+
     @Override
     public List<MedicationSetingsResult> selectMedSetingbyperson() {
         return medicationSetingDao.selectMedSetingbyperson();

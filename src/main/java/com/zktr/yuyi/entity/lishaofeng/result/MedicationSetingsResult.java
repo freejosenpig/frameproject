@@ -8,7 +8,7 @@ public class MedicationSetingsResult {
     /**
      * 用药设置id
      */
-    private Integer msId;
+    private Integer ms_Id;
 
     /**
      * 老人id
@@ -25,8 +25,8 @@ public class MedicationSetingsResult {
      */
     private String diseasetype;
 
-    private Date createTime;
+    private Date create_Time;
 
     private static final long serialVersionUID = 1L;
-    private String oldpeopleName;
+    private String oldpeople_Name;
 }

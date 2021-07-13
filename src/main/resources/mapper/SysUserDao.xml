@@ -35,7 +35,7 @@
     from sys_user
     <where>
       <if test="id != null">
-        and id = #{id}
+         id = #{id}
       </if>
       <if test="userName != null and userName != ''">
         and user_name like CONCAT('%',#{userName},'%')
@@ -68,17 +68,21 @@
     </where>
 
   </select>
+  <select id="selectmaxid" resultType="java.lang.Integer">
+    select id from sys_user order by id desc limit 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteById"></delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zktr.yuyi.entity.hedangren.SysUser" useGeneratedKeys="true">
-    insert into sys_user (user_name, user_pass, user_icon, 
+    insert into sys_user (id,user_name, user_pass, user_icon,
       user_phone, user_sex, user_state, 
       user_flag, create_date, update_date
       )
-    values (#{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, #{userIcon,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, #{userIcon,jdbcType=VARCHAR},
       #{userPhone,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, #{userState,jdbcType=INTEGER}, 
       #{userFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
@@ -190,5 +194,37 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <update id="update"></update>
+    <update id="update">
+      update sys_user
+      <set>
+        <if test="userName != null and userName != ''">
+          user_name = #{userName},
+        </if>
+        <if test="userPass != null and userPass != ''">
+          user_pass = #{userPass},
+        </if>
+        <if test="userIcon != null and userIcon != ''">
+          user_icon = #{userIcon},
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+          user_phone = #{userPhone},
+        </if>
+        <if test="userSex != null and userSex != ''">
+          user_sex = #{userSex},
+        </if>
+        <if test="userState != null">
+          user_state = #{userState},
+        </if>
+        <if test="createDate != null">
+          create_date = #{createDate},
+        </if>
+        <if test="updateDate != null">
+          update_date = #{updateDate},
+        </if>
+        <if test="userFlag != null">
+          user_flag = #{userFlag},
+        </if>
+      </set>
+      where id = #{id}
+    </update>
 </mapper>

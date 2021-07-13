@@ -3,6 +3,7 @@ package com.zktr.yuyi.entity.liangzheng;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.hedangren.SysUser;
 import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
@@ -54,6 +55,7 @@ public class JdHealth implements Serializable {
     /**
      * 健康评估档案创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date healthAddtime;
 
     /**
@@ -65,6 +67,7 @@ public class JdHealth implements Serializable {
     /**
      * 健康档案登记时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date healthRtime;
 
     /**

@@ -31,7 +31,22 @@
       <id column="id" jdbcType="INTEGER" property="id" />
       <result column="user_name" jdbcType="VARCHAR" property="userName" />
     </association>
+    <association property="bad" javaType="com.zktr.yuyi.entity.liangzheng.ABad">
+      <id column="bed_id" jdbcType="INTEGER" property="bedId" />
+      <result column="bed_number" jdbcType="VARCHAR" property="bedNumber" />
+      <result column="bed_room" jdbcType="INTEGER" property="bedRoom" />
+    </association>
+    <association property="room" javaType="com.zktr.yuyi.entity.liangzheng.ARoom">
+      <id column="room_id" jdbcType="INTEGER" property="roomId" />
+      <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
+    </association>
   </resultMap>
+  <sql id="Base_Column_r">
+    r.room_id, r.room_number, r.room_type, r.room_floor, r.room_building, r.room_status
+  </sql>
+  <sql id="Base_Column_b">
+    b.bed_id, b.bed_number, b.bed_room
+  </sql>
   <sql id="Base_Column_List">
     on_id, on_oldid, on_time, on_addname, on_addtime, on_bed, on_registrant, on_rtime, 
     on_operator, on_note
@@ -41,7 +56,7 @@
   </sql>
   <sql id="Base_Column_on">
     onx.on_id, onx.on_oldid, onx.on_time, onx.on_addname, onx.on_addtime, onx.on_bed, onx.on_registrant, onx.on_rtime,
-    onx.on_operator, onx.on_note, onx.onOpTime
+    onx.on_operator, onx.on_note, onx.on_OpTime
   </sql>
   <sql id="Base_Column_su">
     su.id,  su.user_name
@@ -74,12 +89,16 @@
     <include refid="Base_Column_su" />,
     <include refid="Base_Column_sn" />,
     <include refid="Base_Column_sn2" />,
-    <include refid="Base_Column_o" />
+    <include refid="Base_Column_o" />,
+    <include refid="Base_Column_b" />,
+    <include refid="Base_Column_r" />
     from jd_on onx
     inner join jd_oldpeople o on onx.on_oldid = o.oldpeople_id
     inner join service_nurse sn on onx.on_registrant = sn.id
     inner join sys_user su on onx.on_addname = su.id
     inner join service_nurse sn2 on onx.on_operator = sn2.id
+    inner join a_bed b on onx.on_bed = b.bed_id
+    inner join a_room r on b.bed_room = r.room_id
     where onx.timeliness = 0
     order by onx.on_id desc
   </select>

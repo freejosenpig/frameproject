@@ -2,15 +2,20 @@ package com.zktr.yuyi.controller.hedangren;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zktr.yuyi.entity.hedangren.SysMenu;
+import com.zktr.yuyi.entity.hedangren.SysRole;
 import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.hedangren.SysUserRole;
+import com.zktr.yuyi.service.hedangren.SysRoleService;
 import com.zktr.yuyi.service.hedangren.SysUserRoleService;
 import com.zktr.yuyi.service.hedangren.SysUserService;
 import com.zktr.yuyi.vo.AjaxResponse;
 import com.zktr.yuyi.vo.UserVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -30,6 +35,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("sysUser")
 @EnableSwagger2
+@Api(description = "用户Api")
 public class SysUserController {
     /**
      * 服务对象
@@ -38,6 +44,8 @@ public class SysUserController {
     private SysUserService sysUserService;
     @Resource
     private SysUserRoleService sysUserRoleService;
+    @Resource
+    private SysRoleService roleService;
 
     /**
      * 通过主键查询单条数据
@@ -46,6 +54,7 @@ public class SysUserController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
+    @ApiOperation(value = "查询单个用户",produces = "application/json")
     public SysUser selectOne(Integer id) {
         return this.sysUserService.queryById(id);
     }
@@ -86,6 +95,7 @@ public class SysUserController {
      * @param conditionpage 查询条件
      * @return 菜单信息
      */
+    @ApiOperation(value = "条件分页查询用户信息",produces = "application/json")
     @PostMapping("/conditionpageuser")
     public AjaxResponse conditionpageuser(@RequestBody String conditionpage){
         JSONObject jsonObject = JSONObject.parseObject(conditionpage);
@@ -100,6 +110,89 @@ public class SysUserController {
         map.put("rows",users);
         return AjaxResponse.success(map);
     }
+
+
+    /**
+     * 用户管理 修改用户数据
+     * @param change json对象
+     * @return 是否成功
+     */
+    @ApiOperation(value = "修改用户信息",produces = "application/json")
+    @PostMapping("/changeuesr")
+    public AjaxResponse changeuesr(@RequestBody String change) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        JSONObject jsonObject = JSONObject.parseObject(change);
+        String one = jsonObject.getString("user");//用户
+        SysUser user=JSON.parseObject(one, SysUser.class);
+        String roles = jsonObject.getString("roles");//角色
+        List<SysRole> sysRole = JSONArray.parseArray(roles, SysRole.class);
+        user.setUpdateDate(new Date());
+        System.out.println(user);
+        //修改用户
+        if(sysRole.size()==0){
+            return AjaxResponse.success(sysUserService.update(user));
+        }else {
+            //修改用户角色
+            sysUserService.deleteroles(user.getId());//先删除原有的数据
+            List<SysUserRole> lists=new ArrayList<>();
+            for (int i=0;i<sysRole.size();i++){
+                SysUserRole sysUserRole=new SysUserRole();
+                sysUserRole.setUserId(user.getId());
+                sysUserRole.setRoleId(sysRole.get(i).getId());
+                lists.add(sysUserRole);
+            }
+            sysUserService.insertBatch(lists);
+            return AjaxResponse.success(sysUserService.update(user));
+        }
+    }
+
+
+    /**
+     * 用户管理 查询某个用户所具有的角色
+     * @return 菜单信息
+     */
+    @ApiOperation(value = "查询某个用户所拥有的角色",produces = "application/json")
+    @PostMapping("/findroles")
+    public AjaxResponse findroles(String username){
+        SysUser loginuser = sysUserService.login(username);
+        //查询用户具有的角色
+        List<SysRole> roles=roleService.userhasrole(loginuser.getId());
+        return AjaxResponse.success(roles);
+    }
+
+
+    /**
+     * 用户管理 添加用户
+     * @param add json对象
+     * @return vo
+     */
+    //@Log("添加用户")
+    @ApiOperation(value = "用户添加",produces = "application/json")
+    @PostMapping("/addnewuser")
+    public AjaxResponse addnewuser(@RequestBody String add) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        JSONObject jsonObject = JSONObject.parseObject(add);
+        String one = jsonObject.getString("user");//用户
+        SysUser user=JSON.parseObject(one, SysUser.class);
+        String roles = jsonObject.getString("roles");//角色
+        List<SysRole> sysRole = JSONArray.parseArray(roles, SysRole.class);
+        user.setCreateDate(new Date());
+        user.setUserFlag(0);
+        int maxid = sysUserService.selectmaxid();
+        user.setId(maxid+1);
+        //新增用户
+        sysUserService.insert(user);
+
+        List<SysUserRole> lists=new ArrayList<>();
+        for (int i=0;i<sysRole.size();i++){
+            SysUserRole sysUserRole=new SysUserRole();
+            sysUserRole.setUserId(user.getId());
+            sysUserRole.setRoleId(sysRole.get(i).getId());
+            lists.add(sysUserRole);
+        }
+        return AjaxResponse.success(sysUserService.insertBatch(lists));
+    }
+
+
+
 
 
     /**

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zktr.yuyi.dao.liangzheng.JdOffDao">
+  <resultMap id="BaseResultMap" type="com.zktr.yuyi.entity.liangzheng.JdOff">
+    <id column="off_id" jdbcType="INTEGER" property="offId" />
+    <result column="off_backid" jdbcType="INTEGER" property="offBackid" />
+    <result column="off_addname" jdbcType="INTEGER" property="offAddname" />
+    <result column="off_addtime" jdbcType="TIMESTAMP" property="offAddtime" />
+    <result column="off_registrant" jdbcType="INTEGER" property="offRegistrant" />
+    <result column="off_rtime" jdbcType="TIMESTAMP" property="offRtime" />
+    <result column="off_ordid" jdbcType="INTEGER" property="offOrdid" />
+    <result column="off_reason" jdbcType="VARCHAR" property="offReason" />
+    <result column="off_note" jdbcType="VARCHAR" property="offNote" />
+    <result column="off_time" jdbcType="TIMESTAMP" property="offTime"/>
+    <result column="off_operator" jdbcType="INTEGER" property="offoperator"/>
+    <result column="off_optime" jdbcType="TIMESTAMP" property="offoptime"/>
+    <result column="timeliness" jdbcType="INTEGER" property="timeliness"/>
+    <association property="jdOldpeople" javaType="com.zktr.yuyi.entity.liangzheng.JdOldpeople">
+      <id column="oldpeople_id" jdbcType="INTEGER" property="oldpeopleId" />
+      <result column="oldpeople_name" jdbcType="VARCHAR" property="oldpeopleName" />
+    </association>
+    <association property="serviceNurse" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="n_name" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="serviceNurse2" javaType="com.zktr.yuyi.entity.liuzhui.ServiceNurse">
+      <id column="id2" jdbcType="INTEGER" property="id" />
+      <result column="n_name2" jdbcType="VARCHAR" property="nName" />
+    </association>
+    <association property="sysUser" javaType="com.zktr.yuyi.entity.hedangren.SysUser">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_o">
+    o.oldpeople_id, o.oldpeople_name
+  </sql>
+  <sql id="Base_Column_su">
+    su.id,  su.user_name
+  </sql>
+  <sql id="Base_Column_sn">
+    sn.id, sn.n_name
+  </sql>
+  <sql id="Base_Column_sn2">
+    sn2.id id2, sn2.n_name n_name2
+  </sql>
+  <sql id="Base_Column_off">
+    ox.off_id, ox.off_backid, ox.off_addname, ox.off_addtime, ox.off_registrant, ox.off_rtime, ox.off_ordid,
+    ox.off_reason, ox.off_note, ox.off_time, ox.off_operator, ox.off_optime
+  </sql>
+  <sql id="Base_Column_List">
+    off_id, off_backid, off_addname, off_addtime, off_registrant, off_rtime, off_ordid, 
+    off_reason, off_note
+  </sql>
+  <update id="updateOff" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff">
+    update jd_off
+    set
+      off_registrant = #{offRegistrant,jdbcType=INTEGER},
+      off_rtime = #{offRtime,jdbcType=TIMESTAMP},
+      off_reason = #{offReason,jdbcType=VARCHAR},
+      off_note = #{offNote,jdbcType=VARCHAR},
+      off_operator = #{offoperator,jdbcType=INTEGER},
+      off_optime = #{offoptime,jdbcType=TIMESTAMP}
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteOff" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff">
+    update jd_off
+    set
+    ox.timeliness = 1
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllOff" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_su" />,
+    <include refid="Base_Column_sn" />,
+    <include refid="Base_Column_sn2" />,
+    <include refid="Base_Column_o" />,
+    <include refid="Base_Column_off" />
+    from jd_off ox
+    inner join jd_oldpeople o on ox.off_ordid = o.oldpeople_id
+    inner join service_nurse sn on ox.off_registrant = sn.id
+    inner join sys_user su on ox.off_addname = su.id
+    inner join service_nurse sn2 on ox.off_operator = sn2.id
+    where ox.timeliness = 0
+    order by ox.off_id desc
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jd_off
+    where off_id = #{offId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jd_off
+    where off_id = #{offId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="off_id" keyProperty="offId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff" useGeneratedKeys="true">
+    insert into jd_off (off_backid, off_addname, off_addtime, 
+      off_registrant, off_rtime, off_ordid, 
+      off_reason, off_note, off_operator, off_optime, off_time)
+    values (#{offBackid,jdbcType=INTEGER}, #{offAddname,jdbcType=INTEGER}, #{offAddtime,jdbcType=TIMESTAMP}, 
+      #{offRegistrant,jdbcType=INTEGER}, #{offRtime,jdbcType=TIMESTAMP}, #{offOrdid,jdbcType=INTEGER}, 
+      #{offReason,jdbcType=VARCHAR}, #{offNote,jdbcType=VARCHAR}, #{offoperator,jdbcType=INTEGER}, #{offoptime,jdbcType=TIMESTAMP}, #{offTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="off_id" keyProperty="offId" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff" useGeneratedKeys="true">
+    insert into jd_off
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="offBackid != null">
+        off_backid,
+      </if>
+      <if test="offAddname != null">
+        off_addname,
+      </if>
+      <if test="offAddtime != null">
+        off_addtime,
+      </if>
+      <if test="offRegistrant != null">
+        off_registrant,
+      </if>
+      <if test="offRtime != null">
+        off_rtime,
+      </if>
+      <if test="offOrdid != null">
+        off_ordid,
+      </if>
+      <if test="offReason != null">
+        off_reason,
+      </if>
+      <if test="offNote != null">
+        off_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="offBackid != null">
+        #{offBackid,jdbcType=INTEGER},
+      </if>
+      <if test="offAddname != null">
+        #{offAddname,jdbcType=INTEGER},
+      </if>
+      <if test="offAddtime != null">
+        #{offAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offRegistrant != null">
+        #{offRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="offRtime != null">
+        #{offRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offOrdid != null">
+        #{offOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="offReason != null">
+        #{offReason,jdbcType=VARCHAR},
+      </if>
+      <if test="offNote != null">
+        #{offNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff">
+    update jd_off
+    <set>
+      <if test="offBackid != null">
+        off_backid = #{offBackid,jdbcType=INTEGER},
+      </if>
+      <if test="offAddname != null">
+        off_addname = #{offAddname,jdbcType=INTEGER},
+      </if>
+      <if test="offAddtime != null">
+        off_addtime = #{offAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offRegistrant != null">
+        off_registrant = #{offRegistrant,jdbcType=INTEGER},
+      </if>
+      <if test="offRtime != null">
+        off_rtime = #{offRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offOrdid != null">
+        off_ordid = #{offOrdid,jdbcType=INTEGER},
+      </if>
+      <if test="offReason != null">
+        off_reason = #{offReason,jdbcType=VARCHAR},
+      </if>
+      <if test="offNote != null">
+        off_note = #{offNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zktr.yuyi.entity.liangzheng.JdOff">
+    update jd_off
+    set off_backid = #{offBackid,jdbcType=INTEGER},
+      off_addname = #{offAddname,jdbcType=INTEGER},
+      off_addtime = #{offAddtime,jdbcType=TIMESTAMP},
+      off_registrant = #{offRegistrant,jdbcType=INTEGER},
+      off_rtime = #{offRtime,jdbcType=TIMESTAMP},
+      off_ordid = #{offOrdid,jdbcType=INTEGER},
+      off_reason = #{offReason,jdbcType=VARCHAR},
+      off_note = #{offNote,jdbcType=VARCHAR}
+    where off_id = #{offId,jdbcType=INTEGER}
+  </update>
+</mapper>

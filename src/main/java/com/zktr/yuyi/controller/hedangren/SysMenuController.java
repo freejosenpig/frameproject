@@ -12,7 +12,10 @@ import com.zktr.yuyi.service.hedangren.SysRoleService;
 import com.zktr.yuyi.service.hedangren.SysUserService;
 import com.zktr.yuyi.vo.AjaxResponse;
 import com.zktr.yuyi.vo.SystemRoleMenuVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("sysMenu")
+@EnableSwagger2
+@Api(description = "权限菜单Api")
 public class SysMenuController {
     /**
      * 服务对象
@@ -47,6 +52,7 @@ public class SysMenuController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
+    @ApiOperation(value = "查询单个权限",produces = "application/json")
     public SysMenu selectOne(Integer id) {
         return this.sysMenuService.queryById(id);
     }
@@ -55,6 +61,7 @@ public class SysMenuController {
      * 菜单管理查询所有菜单
      * @return 菜单信息
      */
+    @ApiOperation(value = "权限菜单管理查询所有菜单",produces = "application/json")
     @PostMapping("/findmenulist")
     public AjaxResponse findmenulist(){
         List<SysMenu> menulist=sysMenuService.usermenu(0);
@@ -73,6 +80,7 @@ public class SysMenuController {
      * @param username  用户名
      * @return 菜单信息
      */
+    @ApiOperation(value = "通过菜单实体类修改菜单",produces = "application/json")
     @PostMapping("/changemenu/{username}")
     public AjaxResponse change(@RequestBody SysMenu sysMenu, @PathVariable("username")String username){
         boolean tf=sysMenuService.update(sysMenu);
@@ -99,6 +107,7 @@ public class SysMenuController {
      * @param change  json对象
      * @return vo
      */
+    @ApiOperation(value = "通过实体类修改角色菜单",produces = "application/json")
     @PostMapping("/changerolemenu")
     public AjaxResponse changerolemenu(@RequestBody String change){
         JSONObject jsonObject = JSONObject.parseObject(change);
@@ -142,6 +151,7 @@ public class SysMenuController {
      * @param roleId  角色id
      * @return vo
      */
+    @ApiOperation(value = "查询角色所有的菜单及某个角色所具有菜单",produces = "application/json")
     @PostMapping("/findmenus")
     public AjaxResponse findmenus(Integer roleId){
         System.out.println(roleId);

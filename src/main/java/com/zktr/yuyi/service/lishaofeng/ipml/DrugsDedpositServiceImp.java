@@ -17,6 +17,12 @@ public class DrugsDedpositServiceImp  implements DrugsDedpositService {
     @Resource
     @Autowired
     private DrugsDepositDao drugsDepositDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer ddId) {
+        return drugsDepositDao.deleteByPrimaryKey(ddId);
+    }
+
     @Override
     public List<DrugsDepositResult> selectDepositbyperson() {
         return drugsDepositDao.selectDepositbyperson();
@@ -33,5 +39,6 @@ public class DrugsDedpositServiceImp  implements DrugsDedpositService {
         PageInfo<DrugsDepositResult> pageInfo = new PageInfo<>(drugsDepositResults);
         return pageInfo;
     }
+
 
 }
