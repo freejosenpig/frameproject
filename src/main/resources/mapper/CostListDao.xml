@@ -61,6 +61,7 @@
     select <include refid="Base_Column_List"/>,<include refid="oldpeople"/> from cost_list list
     inner join jd_oldpeople old on old.oldpeople_id=list.oldpeople_Id
     where list_timeLiness=0
+    order by list.list_Id desc
   </select>
 
   <select id="selectBycontion" resultMap="BaseResultMap">

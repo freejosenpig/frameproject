@@ -63,8 +63,8 @@ public class CostprestoreController {
     }
 
 
-    @PutMapping("/updateById")
-    public AjaxResponse updateById(@RequestBody CostPrestore costPrestore){
-        return AjaxResponse.success(costprestoreService.updateById(costPrestore));
-    }
+//    @PutMapping("/updateById")
+//    public AjaxResponse updateById(@RequestBody CostPrestore costPrestore){
+//        return AjaxResponse.success(costprestoreService.updateById(costPrestore));
+//    }
 }

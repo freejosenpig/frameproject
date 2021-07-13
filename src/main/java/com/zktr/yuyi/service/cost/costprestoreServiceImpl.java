@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +23,7 @@ public class costprestoreServiceImpl implements costprestoreService {
     @Override
     public CostPrestore insertprestore(CostPrestore costPrestore) {
         costPrestore.setPrestoreOpid(1);
+        costPrestore.setPrestoreTime(new Date());
        costPrestoreDao.insert(costPrestore);
        return costPrestore;
     }
@@ -44,9 +46,9 @@ public class costprestoreServiceImpl implements costprestoreService {
         return costPrestoreDao.selectAll();
     }
 
-    @Override
-    public CostPrestore updateById(CostPrestore costPrestore) {
-        costPrestoreDao.updateById(costPrestore);
-        return costPrestore;
-    }
+//    @Override
+//    public CostPrestore updateById(CostPrestore costPrestore) {
+//        costPrestoreDao.updateById(costPrestore);
+//        return costPrestore;
+//    }
 }

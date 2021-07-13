@@ -18,5 +18,5 @@ public interface costprestoreService {
     List<CostPrestore> selectAll();
 
 
-    CostPrestore updateById(CostPrestore costPrestore);
+//    CostPrestore updateById(CostPrestore costPrestore);
 }
