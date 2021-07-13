@@ -17,8 +17,8 @@ public class CostOutController {
 
     //    查询所有
     @GetMapping("/seletcOutAll")
-    public AjaxResponse selectAll(){
-        return AjaxResponse.success( costOutstandingService.selectAll());
+    public List<CostOutstanding> selectAll(){
+        return  costOutstandingService.selectAll();
     }
     //    根据老人编号查询欠费信息
     @GetMapping("/selectOutByOldId")
@@ -35,7 +35,6 @@ public class CostOutController {
     //    修改欠费信息
     @PutMapping("/updateOutByKey")
     public AjaxResponse updateOutByKey(@RequestBody CostOutstanding costOutstanding){
-        costOutstandingService.updateByKey(costOutstanding);
-        return AjaxResponse.success("修改成功");
+        return AjaxResponse.success(costOutstandingService.updateByKey(costOutstanding));
     }
 }

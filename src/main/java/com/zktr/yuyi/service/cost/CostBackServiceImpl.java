@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,12 +29,13 @@ public class CostBackServiceImpl implements CostBackService  {
     @Transactional
     @Override
     public CostBack updateByKey(CostBack costBack) {
+        costBack.setBackTime(new Date());
         costBackdao.updateByKey(costBack);
         return costBack;
     }
     //编号根据老人编号查询退住信息
     @Override
-    public List<CostBack> selectByoldId(Integer oldId) {
+    public CostBack selectByoldId(Integer oldId) {
         return costBackdao.selectByoldId(oldId);
     }
 
@@ -46,4 +48,10 @@ public class CostBackServiceImpl implements CostBackService  {
     public List<CostBack> selectBycontion(String backname) {
         return costBackdao.selectBycontion(backname);
     }
+    //根据老人编号修改退住结算
+//    @Transactional
+//    @Override
+//    public CostBack updateisback(Integer oldId) {
+//        return costBackdao.updateisback(oldId);
+//    }
 }

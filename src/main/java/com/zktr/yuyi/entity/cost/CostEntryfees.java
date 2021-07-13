@@ -51,5 +51,8 @@ public class CostEntryfees implements Serializable {
     //老人信息
     private JdOldpeople jdOldpeople;
 
+
+    //缴费状态
+    private Integer entryfeesstatus;
     private static final long serialVersionUID = 1L;
 }

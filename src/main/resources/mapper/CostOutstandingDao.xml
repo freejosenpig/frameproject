@@ -10,6 +10,8 @@
     <result column="outstanding_opId" jdbcType="INTEGER" property="outstandingOpid" />
     <result column="outstanding_time" jdbcType="TIMESTAMP" property="outstandingTime" />
     <result column="outstanding_TimeLiness" jdbcType="INTEGER" property="outstandingTimeliness" />
+    <result column="outstanding_status" jdbcType="TIMESTAMP" property="outstandingstatus" />
+    <result column="outstanding_remark" jdbcType="INTEGER" property="outstandingremark" />
   </resultMap>
 
 
@@ -44,10 +46,9 @@
 
   <!--  新增欠费信息-->
   <insert id="insert" keyColumn="outstanding_Id" keyProperty="outstandingId" parameterType="com.zktr.yuyi.entity.cost.CostOutstanding" useGeneratedKeys="true">
-    insert into cost_outstanding (oldpeople_Id, outstanding_money, out_prestore_money, 
-      out_entryfees_money, outstanding_opId)
-    values (#{oldpeopleId,jdbcType=INTEGER}, #{outstandingMoney,jdbcType=DECIMAL}, #{outPrestoreMoney,jdbcType=DECIMAL}, 
-      #{outEntryfeesMoney,jdbcType=DECIMAL}, #{outstandingOpid,jdbcType=INTEGER})
+    insert into cost_outstanding (oldpeople_Id, outstanding_money, outstanding_opId,outstanding_time)
+    values (#{oldpeopleId,jdbcType=INTEGER}, #{outstandingMoney,jdbcType=DECIMAL}, #{outstandingOpid,jdbcType=INTEGER},
+    #{outstandingTime,jdbcType=TIMESTAMP})
   </insert>
 
 

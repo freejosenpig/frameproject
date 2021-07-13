@@ -3,6 +3,7 @@ package com.zktr.yuyi.entity.cost;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zktr.yuyi.entity.liangzheng.JdOldpeople;
 import lombok.Data;
 
@@ -35,6 +36,7 @@ public class CostList implements Serializable {
     /**
      * 消费时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date listTime;
 
     /**
@@ -50,7 +52,7 @@ public class CostList implements Serializable {
     /**
      * 时效性
      */
-    private  int timeLiness;
+    private  int listtimeLiness;
 
 
     private JdOldpeople jdOldpeople;

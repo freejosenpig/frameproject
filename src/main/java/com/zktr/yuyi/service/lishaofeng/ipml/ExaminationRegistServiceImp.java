@@ -17,6 +17,12 @@ public class ExaminationRegistServiceImp implements ExaminationRegistService {
     @Resource
     @Autowired
     private ExaminationRegisterDao examinationRegisterDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer erId) {
+        return examinationRegisterDao.deleteByPrimaryKey(erId);
+    }
+
     @Override
     public List<ExaminationRegistResult> selectExRegistbyperson() {
         return examinationRegisterDao.selectExRegistbyperson();

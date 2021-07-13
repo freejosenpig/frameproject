@@ -91,6 +91,7 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zktr.yuyi.entity.lishaofeng.DrugsDeposit">
     update drugs_deposit
     <set>
+
       <if test="id != null">
         id = #{id,jdbcType=INTEGER},
       </if>

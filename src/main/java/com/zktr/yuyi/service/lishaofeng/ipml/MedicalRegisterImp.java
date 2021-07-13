@@ -17,6 +17,12 @@ public class MedicalRegisterImp  implements MedicalRegisterService {
     @Resource
     @Autowired
     private MedicalRegistrationDao medicalRegistrationDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer mrId) {
+        return medicalRegistrationDao.deleteByPrimaryKey(mrId);
+    }
+
     @Override
     public List<MedicalRegisterResult> selectMedicalbyperson() {
         return medicalRegistrationDao.selectMedicalbyperson();

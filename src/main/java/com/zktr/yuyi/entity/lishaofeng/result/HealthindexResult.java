@@ -8,7 +8,7 @@ public class HealthindexResult {
     /**
      * 健康指数id
      */
-    private Integer hrId;
+    private Integer hr_Id;
 
     /**
      * 老人id
@@ -100,6 +100,6 @@ public class HealthindexResult {
      */
     private String datasources;
 
-    private Date createTime;
-    private String oldpeopleName;
+    private Date create_Time;
+    private String oldpeople_Name;
 }

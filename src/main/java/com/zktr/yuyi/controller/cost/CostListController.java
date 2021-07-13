@@ -1,5 +1,7 @@
 package com.zktr.yuyi.controller.cost;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zktr.yuyi.entity.cost.CostList;
 import com.zktr.yuyi.service.cost.CostListService;
 import com.zktr.yuyi.vo.AjaxResponse;
@@ -7,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -29,13 +33,28 @@ public class CostListController {
     //根据老人编号查询流水信息
     @GetMapping("/selectByOldId")
     public AjaxResponse selectByOldId(@PathVariable Integer oldId){
-        costListService.selectByOldId(oldId);
-        return AjaxResponse.success("查询成功");
+        return AjaxResponse.success( costListService.selectByOldId(oldId));
     }
-    //根据老人编号查询流水信息
+    //查询流所有流水信息
     @GetMapping("/selectAll")
-    public AjaxResponse selectAll(){
-        costListService.selectAll();
-        return AjaxResponse.success("查询成功");
+//    public List<CostList> selectAll(){
+//        return costListService.selectAll();
+//    }
+    public PageInfo<CostList> findEntryFees(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+        PageHelper.startPage(currentPage, pagesize);
+        List<CostList> entityPage=costListService.selectAll();
+        PageInfo<CostList> entryfeesPageInfo=new PageInfo<>(entityPage);
+        return entryfeesPageInfo;
+    }
+    //模糊查询流所有流水信息
+    @GetMapping("/selectBycontion")
+//    public List<CostList> selectAll(){
+//        return costListService.selectAll();
+//    }
+    public PageInfo<CostList> selectBycontion(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize,@PathVariable("oldpeopleName") String oldpeopleName){
+        PageHelper.startPage(currentPage, pagesize);
+        List<CostList> entityPage=costListService.selectBycontion(oldpeopleName);
+        PageInfo<CostList> entryfeesPageInfo=new PageInfo<>(entityPage);
+        return entryfeesPageInfo;
     }
 }

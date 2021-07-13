@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,8 @@ public class CostOutstandingServiceImpl implements CostOutstandingService {
     @Transactional
     @Override
     public CostOutstanding insert(CostOutstanding costOutstanding) {
+        costOutstanding.setOutstandingOpid(1);
+        costOutstanding.setOutstandingTime(new Date());
         costOutstandingDao.insert(costOutstanding);
         return costOutstanding;
     }

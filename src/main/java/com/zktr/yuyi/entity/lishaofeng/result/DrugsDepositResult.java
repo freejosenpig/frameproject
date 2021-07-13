@@ -8,7 +8,7 @@ public class DrugsDepositResult {
     /**
      * 药品缴存id
      */
-    private Integer ddId;
+    private Integer dd_Id;
 
     /**
      * 老人id
@@ -47,6 +47,6 @@ public class DrugsDepositResult {
      */
     private String rname;
 
-    private Date creatTime;
-    private String oldpeopleName;
+    private Date creat_Time;
+    private String oldpeople_Name;
 }

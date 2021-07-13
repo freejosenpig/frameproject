@@ -17,6 +17,12 @@ public class HealindexServiceImp  implements HealindexService {
     @Resource
     @Autowired
     private HealthIndexDao healthIndexDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer hrId) {
+        return healthIndexDao.deleteByPrimaryKey(hrId);
+    }
+
     @Override
     public List<HealthindexResult> selectHealthbyperson() {
         return healthIndexDao.selectHealthbyperson();
