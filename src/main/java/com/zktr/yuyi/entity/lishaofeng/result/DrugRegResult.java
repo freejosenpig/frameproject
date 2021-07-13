@@ -9,7 +9,7 @@ public class DrugRegResult {
     /**
      * 用药登记id
      */
-    private Integer msgId;
+    private Integer msg_Id;
 
     /**
      * 老人id
@@ -34,6 +34,6 @@ public class DrugRegResult {
     /**
      * 创建时间
      */
-    private Date createTime;
-    private String oldpeopleName;
+    private Date create_Time;
+    private String oldpeople_Name;
 }

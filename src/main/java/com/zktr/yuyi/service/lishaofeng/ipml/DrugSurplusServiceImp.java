@@ -17,6 +17,12 @@ public class DrugSurplusServiceImp implements DrugSurplusService {
     @Resource
     @Autowired
         private DrugSurplusDao drugSurplusDao;
+
+    @Override
+    public int deleteByPrimaryKey(Integer mesId) {
+        return drugSurplusDao.deleteByPrimaryKey(mesId);
+    }
+
     @Override
     public List<DrugSuplusResult> selectSurplusbyperson() {
         return drugSurplusDao.selectSurplusbyperson();
