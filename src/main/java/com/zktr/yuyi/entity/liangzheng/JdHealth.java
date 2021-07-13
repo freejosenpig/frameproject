@@ -2,6 +2,9 @@ package com.zktr.yuyi.entity.liangzheng;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
 
 /**
@@ -18,11 +21,13 @@ public class JdHealth implements Serializable {
     /**
      * 健康评估对象
      */
+    private JdOldpeople jdOldpeople;
     private Integer healthOrdid;
 
     /**
      * 健康评估人
      */
+    private ServiceNurse serviceNurse2;
     private Integer healthEvaluator;
 
     /**
@@ -43,6 +48,7 @@ public class JdHealth implements Serializable {
     /**
      * 健康评估档案创建人
      */
+    private SysUser sysUser;
     private Integer healthAddname;
 
     /**
@@ -53,6 +59,7 @@ public class JdHealth implements Serializable {
     /**
      * 健康评估档案登记人
      */
+    private ServiceNurse serviceNurse;
     private Integer healthRegistrant;
 
     /**
@@ -64,6 +71,11 @@ public class JdHealth implements Serializable {
      * 健康档案备注
      */
     private String healthNote;
+
+    /**
+     * 时效性
+     */
+    private Integer timeliness;
 
     private static final long serialVersionUID = 1L;
 }

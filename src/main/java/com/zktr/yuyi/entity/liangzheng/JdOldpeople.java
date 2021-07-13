@@ -2,6 +2,9 @@ package com.zktr.yuyi.entity.liangzheng;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zktr.yuyi.entity.hedangren.SysUser;
+import com.zktr.yuyi.entity.liuzhui.ServiceNurse;
 import lombok.Data;
 
 /**
@@ -108,6 +111,7 @@ public class JdOldpeople implements Serializable {
     /**
      * 老人档案创建人
      */
+    private SysUser sysUser;
     private Integer oldpeopleAddname;
 
     /**
@@ -133,6 +137,7 @@ public class JdOldpeople implements Serializable {
     /**
      * 老人档案登记人
      */
+    private ServiceNurse serviceNurse;
     private Integer oldpeopleRegistrant;
 
     /**

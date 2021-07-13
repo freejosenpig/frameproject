@@ -18,11 +18,11 @@ public class JdConsultingController {
     private JdConsultingService consultingService;
 
     @GetMapping("/selectAllConsulting")
-    public PageInfo<JdConsulting> selectAllConsulting(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+    public AjaxResponse selectAllConsulting(@RequestParam("a") int currentPage, @RequestParam("b") int pagesize){
         PageHelper.startPage(currentPage, pagesize);
         List<JdConsulting> consultings=consultingService.selectAllConsulting();
         PageInfo<JdConsulting> consultingPageInfo=new PageInfo<>(consultings);
-        return consultingPageInfo;
+        return AjaxResponse.success(consultingPageInfo);
     }
 
     @GetMapping("/selectConsulting")
@@ -35,9 +35,9 @@ public class JdConsultingController {
         return consultingService.selectConsultingById(id);
     }
 
-    @PostMapping("/insertConsulting")
-    public AjaxResponse insertConsulting(@RequestBody JdConsulting jdConsulting){
-        consultingService.insertConsulting(jdConsulting);
+    @PostMapping("/insertConsulting/{addname}")
+    public AjaxResponse insertConsulting(@PathVariable("addname") String addname,@RequestBody JdConsulting jdConsulting){
+        consultingService.insertConsulting(addname,jdConsulting);
         return AjaxResponse.success("新增成功");
     }
 

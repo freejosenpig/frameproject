@@ -73,10 +73,10 @@
         </set>
     </update>
 
-    <!--通过主键删除-->
     <delete id="deleteById">
         delete
         from jdboot.sys_role_menu
+        where role_id=#{id}
     </delete>
 
 </mapper>

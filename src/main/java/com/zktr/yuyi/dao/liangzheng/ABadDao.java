@@ -1,9 +1,10 @@
 package com.zktr.yuyi.dao.liangzheng;
 
 import com.zktr.yuyi.entity.liangzheng.ABad;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
-
+@Mapper
 public interface ABadDao {
     int deleteByPrimaryKey(Integer badId);
 
