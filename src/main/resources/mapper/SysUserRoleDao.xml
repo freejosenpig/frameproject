@@ -35,6 +35,9 @@
             </if>
         </where>
     </select>
+    <select id="findtfhasuser" resultMap="SysUserRoleMap" >
+        select * from sys_user_role where role_id=#{roleId}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="" useGeneratedKeys="true">

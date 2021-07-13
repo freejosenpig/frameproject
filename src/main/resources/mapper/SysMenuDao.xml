@@ -120,9 +120,9 @@
         </if>
         <if test="roleId != null and roleId != 0">
             select c.* from sys_role a
-            inner join sys_role_menu b on a.role_id=b.role_id
-            inner join sys_menu c on c.menu_id=b.menu_id
-            WHERE a.role_id=#{roleId}
+            inner join sys_role_menu b on a.id=b.role_id
+            inner join sys_menu c on c.id=b.menu_id
+            WHERE a.id=#{roleId}
         </if>
     </select>
 

@@ -2,8 +2,10 @@ package com.zktr.yuyi.service.ipml.hedangren;
 
 import com.zktr.yuyi.dao.hedangren.SysRoleDao;
 import com.zktr.yuyi.dao.hedangren.SysRoleMenuDao;
+import com.zktr.yuyi.dao.hedangren.SysUserRoleDao;
 import com.zktr.yuyi.entity.hedangren.SysRole;
 import com.zktr.yuyi.entity.hedangren.SysRoleMenu;
+import com.zktr.yuyi.entity.hedangren.SysUserRole;
 import com.zktr.yuyi.service.hedangren.SysRoleService;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleDao sysRoleDao;
     @Resource
     private SysRoleMenuDao roleMenuDao;
+    @Resource
+    private SysUserRoleDao userRoleDao;
 
     /**
      * 通过ID查询单条数据
@@ -65,9 +69,8 @@ public class SysRoleServiceImpl implements SysRoleService {
      * @return 实例对象
      */
     @Override
-    public SysRole update(SysRole sysRole) {
-        this.sysRoleDao.update(sysRole);
-        return this.queryById(sysRole.getId());
+    public boolean update(SysRole sysRole) {
+        return this.sysRoleDao.update(sysRole)>0?true:false;
     }
 
     /**
@@ -98,5 +101,15 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     public boolean insertBatch(List<SysRoleMenu> lists) {
         return this.roleMenuDao.insertBatch(lists)>0?true:false;
+    }
+
+    @Override
+    public List<SysUserRole> findtfhasuser(Integer id) {
+        return this.userRoleDao.findtfhasuser(id);
+    }
+
+    @Override
+    public boolean deletemenus(Integer id) {
+        return this.roleMenuDao.deleteById(id)>0;
     }
 }

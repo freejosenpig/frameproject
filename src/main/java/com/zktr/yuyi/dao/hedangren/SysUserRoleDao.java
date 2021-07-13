@@ -18,7 +18,7 @@ public interface SysUserRoleDao {
     /**
      * 通过ID查询单条数据
      *
-     * @param 主键
+     * @param
      * @return 实例对象
      */
     SysUserRole queryById();
@@ -80,5 +80,6 @@ public interface SysUserRoleDao {
      */
     int deleteById();
 
+    List<SysUserRole> findtfhasuser(Integer id);
 }
 
