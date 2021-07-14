@@ -10,6 +10,9 @@ import com.zktr.yuyi.service.lishaofeng.MedicationSetingService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,6 +23,7 @@ public class MedicationSetingServiceImp  implements MedicationSetingService {
     private MedicationSetingDao medicationSetingDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int deleteByPrimaryKey(Integer msId) {
         return medicationSetingDao.deleteByPrimaryKey(msId);
     }
@@ -30,6 +34,7 @@ public class MedicationSetingServiceImp  implements MedicationSetingService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int updateByPrimaryKeySelective(MedicationSeting record) {
         return medicationSetingDao.updateByPrimaryKeySelective(record);
     }

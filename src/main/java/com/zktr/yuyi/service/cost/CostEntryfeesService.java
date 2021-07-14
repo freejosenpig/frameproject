@@ -10,7 +10,7 @@ public interface CostEntryfeesService {
     //    根据编号修改缴费
     CostEntryfees updateByKey(CostEntryfees costEntryfees);
     //根据老人编号查询缴费信息
-    List<CostEntryfees> selectByoldId(Integer oldId);
+    CostEntryfees selectByoldId(Integer oldId);
     //查询所有缴费信息
     List<CostEntryfees> selectAll();
 }

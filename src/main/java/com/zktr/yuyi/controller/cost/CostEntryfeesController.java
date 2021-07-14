@@ -30,8 +30,8 @@ public class CostEntryfeesController {
     //    根据老人编号查询缴费信息
     @GetMapping("/selectEntryByoldId")
     public AjaxResponse selectByoldId(@PathVariable Integer oldId){
-          costEntryfeesService.selectByoldId(oldId);
-        return AjaxResponse.success("查询成功");
+        CostEntryfees costEntryfees= costEntryfeesService.selectByoldId(oldId);
+        return AjaxResponse.success(costEntryfees);
     }
 
     
@@ -45,7 +45,8 @@ public class CostEntryfeesController {
 
 //    查询所有缴费信息
     @GetMapping("/selectEntryAll")
-    public List<CostEntryfees> selectAll(){
-        return  costEntryfeesService.selectAll();
+    public AjaxResponse  selectAll(){
+        List<CostEntryfees> costEntryfees= costEntryfeesService.selectAll();
+        return AjaxResponse.success(costEntryfees);
     }
 }

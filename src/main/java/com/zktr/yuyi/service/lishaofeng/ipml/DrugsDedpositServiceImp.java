@@ -9,6 +9,9 @@ import com.zktr.yuyi.entity.lishaofeng.result.DrugsDepositResult;
 import com.zktr.yuyi.service.lishaofeng.DrugsDedpositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,6 +22,7 @@ public class DrugsDedpositServiceImp  implements DrugsDedpositService {
     private DrugsDepositDao drugsDepositDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int deleteByPrimaryKey(Integer ddId) {
         return drugsDepositDao.deleteByPrimaryKey(ddId);
     }
@@ -29,6 +33,7 @@ public class DrugsDedpositServiceImp  implements DrugsDedpositService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int updateByPrimaryKeySelective(DrugsDeposit record) {
         return drugsDepositDao.updateByPrimaryKeySelective(record);
     }

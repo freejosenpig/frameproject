@@ -40,6 +40,7 @@ public class JdOldpeopleServiceImpl implements JdOldpeopleService {
         record.setOldpeopleNumber(s);
         record.setOldpeopleAddtime(new Date());
         record.setOldpeopleStatus(0);
+        record.setOldpeopleAccount(0L);
         oldpeopleDao.insert(record);
         return record;
     }

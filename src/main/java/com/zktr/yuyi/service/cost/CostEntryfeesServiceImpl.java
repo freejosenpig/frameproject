@@ -33,7 +33,7 @@ public class CostEntryfeesServiceImpl implements CostEntryfeesService {
     }
     //根据老人编号查询缴费信息
     @Override
-    public List<CostEntryfees> selectByoldId(Integer oldId) {
+    public CostEntryfees selectByoldId(Integer oldId) {
         return costEntryfeesDao.selectByoldId(oldId);
     }
     //查询所有缴费信息

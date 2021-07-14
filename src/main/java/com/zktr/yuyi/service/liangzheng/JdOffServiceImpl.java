@@ -48,6 +48,7 @@ public class JdOffServiceImpl implements JdOffService {
             costBack.setBackEntryfeesMoney(money4);
         }
         costBack.setBackTime(record.getOffTime());
+        costBack.setIstoback(0);
         costBackService.insertcostback(costBack);
         record.setOffBackid(costBack.getBackId());
         record.setOffAddname(sysUser.getId());

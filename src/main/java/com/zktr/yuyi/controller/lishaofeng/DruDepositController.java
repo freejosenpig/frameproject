@@ -22,21 +22,21 @@ import java.util.Map;
 public class DruDepositController {
     @Autowired
     private DrugsDedpositServiceImp drugsDedpositServiceImp;
-
+    //查询
     @RequestMapping(value = "/DrugDedposit",method = RequestMethod.GET)
     public AjaxResponse findallDrugRestration(){
         List<DrugsDepositResult> drugsDepositResults = drugsDedpositServiceImp.selectDepositbyperson();
         return  AjaxResponse.success(drugsDepositResults);
     }
+    //分页
     @RequestMapping(value = "/DrugDedpositByPage/{page}/{size}",method = RequestMethod.GET)
-
     public AjaxResponse findallDrugDedpositByPage(@PathVariable("page") int page, @PathVariable("size") int size){
         log.info(String.valueOf(page));
         PageInfo<DrugsDepositResult> depositResultPageInfo = drugsDedpositServiceImp.selectlinkbyperson(page, size);
         return  AjaxResponse.success(depositResultPageInfo);
     }
+    //分页查询
     @RequestMapping(value = "/DrugDedpositByPage/",method = RequestMethod.POST)
-
     public AjaxResponse findallDrugDedpositByPageandName(@RequestBody Map map){
         Object page = map.get("page");
         Object size = map.get("size");
@@ -47,11 +47,13 @@ public class DruDepositController {
         PageInfo<DrugsDepositResult> depositResultPageInfo = drugsDedpositServiceImp.selectlinkbyperson(page1,size1);
         return  AjaxResponse.success(depositResultPageInfo);
     }
+    //根据id删除
     @RequestMapping(value = "/DrugDedpositdelectbyid/{id}",method = RequestMethod.DELETE)
     public AjaxResponse delectbypage(@PathVariable("id") int id) {
         int i = drugsDedpositServiceImp.deleteByPrimaryKey(id);
         return AjaxResponse.success(i);
     }
+    //修改
     @RequestMapping(value = "/DrugDedpositupdate",method = RequestMethod.POST)
     public AjaxResponse delectbypage(@RequestBody DrugsDeposit drugsDeposit) {
 

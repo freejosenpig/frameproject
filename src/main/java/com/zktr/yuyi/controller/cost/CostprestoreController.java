@@ -50,11 +50,11 @@ public class CostprestoreController {
 
     //查询所有预存信息
     @GetMapping("/selectPreAll")
-    public PageInfo<CostPrestore> selectAll(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+    public AjaxResponse selectAll(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
         PageHelper.startPage(currentPage, pagesize);
         List<CostPrestore> entityPage=costprestoreService.selectAll();
         PageInfo<CostPrestore> entryfeesPageInfo=new PageInfo<>(entityPage);
-        return entryfeesPageInfo;
+        return AjaxResponse.success(entryfeesPageInfo);
     }
 
     @GetMapping("/selectAllOldpeople")

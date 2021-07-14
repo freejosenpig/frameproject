@@ -40,21 +40,21 @@ public class CostListController {
 //    public List<CostList> selectAll(){
 //        return costListService.selectAll();
 //    }
-    public PageInfo<CostList> findEntryFees(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
+    public AjaxResponse findEntryFees(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
         PageHelper.startPage(currentPage, pagesize);
         List<CostList> entityPage=costListService.selectAll();
         PageInfo<CostList> entryfeesPageInfo=new PageInfo<>(entityPage);
-        return entryfeesPageInfo;
+        return AjaxResponse.success(entryfeesPageInfo);
     }
     //模糊查询流所有流水信息
     @GetMapping("/selectBycontion")
 //    public List<CostList> selectAll(){
 //        return costListService.selectAll();
 //    }
-    public PageInfo<CostList> selectBycontion(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize,@PathVariable("oldpeopleName") String oldpeopleName){
+    public AjaxResponse selectBycontion(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize,@PathVariable("oldpeopleName") String oldpeopleName){
         PageHelper.startPage(currentPage, pagesize);
         List<CostList> entityPage=costListService.selectBycontion(oldpeopleName);
         PageInfo<CostList> entryfeesPageInfo=new PageInfo<>(entityPage);
-        return entryfeesPageInfo;
+        return AjaxResponse.success(entryfeesPageInfo);
     }
 }

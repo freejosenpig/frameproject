@@ -36,8 +36,9 @@ public class CostBackController {
 
     //编号根据老人编号查询退住信息
     @GetMapping("/selectBackByoldId/{oldId}")
-    public CostBack selectByoldId(@PathVariable("oldId") int oldId){
-        return costBackService.selectByoldId(oldId);
+    public AjaxResponse selectByoldId(@PathVariable("oldId") int oldId){
+        CostBack costBack=costBackService.selectByoldId(oldId);
+        return AjaxResponse.success(costBack);
     }
 
     //查询所有退住信息
@@ -48,8 +49,9 @@ public class CostBackController {
 //    }
     //查询所有退住信息
     @GetMapping("/selectBackAll")
-    public List<CostBack> selectAll(){
-        return costBackService.selectAll();
+    public AjaxResponse selectAll(){
+        List<CostBack> costBacks=costBackService.selectAll();
+        return AjaxResponse.success(costBacks);
     }
     //根据老人姓名模糊查询
     @GetMapping("/selectBycontion/{backname}")

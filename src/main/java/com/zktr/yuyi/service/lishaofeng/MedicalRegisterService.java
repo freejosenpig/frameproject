@@ -9,5 +9,6 @@ public interface MedicalRegisterService {
     int deleteByPrimaryKey(Integer mrId);
     List<MedicalRegisterResult> selectMedicalbyperson();
     int updateByPrimaryKeySelective(MedicalRegistration record);
+    int insertSelective(MedicalRegistration record);
 
 }

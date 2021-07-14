@@ -19,7 +19,7 @@ public interface CostEntryfeesDao {
 
     int updateByPrimaryKey(CostEntryfees record);
     //根据老人编号查询缴费信息
-    List<CostEntryfees> selectByoldId(Integer oldId);
+    CostEntryfees selectByoldId(Integer oldId);
 
     //查询所有缴费信息
     List<CostEntryfees> selectAll();

@@ -8,6 +8,9 @@ import com.zktr.yuyi.entity.lishaofeng.result.MedicationSetingsResult;
 import com.zktr.yuyi.service.lishaofeng.MedicineDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,16 +27,19 @@ public class MedicineDictionaryServiceImp implements MedicineDictionaryService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int insertSelective(MedicineDictionary record) {
         return dictionaryDao.insertSelective(record);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int updateByPrimaryKeySelective(MedicineDictionary record) {
         return dictionaryDao.updateByPrimaryKeySelective(record);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int deleteByPrimaryKey(Integer mdId) {
         return dictionaryDao.deleteByPrimaryKey(mdId);
     }

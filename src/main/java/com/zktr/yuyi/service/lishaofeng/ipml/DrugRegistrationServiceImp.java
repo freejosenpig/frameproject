@@ -8,6 +8,9 @@ import com.zktr.yuyi.entity.lishaofeng.result.DrugRegResult;
 import com.zktr.yuyi.service.lishaofeng.DrugRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,6 +21,7 @@ public class DrugRegistrationServiceImp implements DrugRegistrationService {
    private DrugRegistrationDao drugRegistrationDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int deleteByPrimaryKey(Integer msgId) {
         return drugRegistrationDao.deleteByPrimaryKey(msgId);
     }
@@ -28,6 +32,8 @@ public class DrugRegistrationServiceImp implements DrugRegistrationService {
     }
 
     @Override
+
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public int updateByPrimaryKeySelective(DrugRegistration record) {
         return drugRegistrationDao.updateByPrimaryKeySelective(record);
     }
